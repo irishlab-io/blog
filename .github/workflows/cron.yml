@@ -1,0 +1,26 @@
+---
+name: Schedule - Main
+
+on: # yamllint disable-line rule:truthy
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+
+  pre-commit:
+    name: Call Pre-Commit run
+    uses: irishlab-io/.github/.github/workflows/reusable-pre-commit.yml@main
+
+  secret:
+    needs:
+      - pre-commit
+    name: Call Secret Scanning
+    uses: irishlab-io/.github/.github/workflows/reusable-secret.yml@main
+
+    secrets:
+      GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}

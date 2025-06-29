@@ -1,0 +1,23 @@
+languageCode = "en"
+languageName = "English"
+weight = 1
+title = "irishlab.io"
+
+[params]
+  displayName = "English"
+  isoCode = "en"
+  rtl = false
+  dateFormat = "2006 January 2 15:04"
+  description = "A powerful, lightweight theme for Hugo."
+
+[params.author]
+  name = "Simon Harvey"
+  email = "admin@irishlab.io"
+  image = "https://avatars.githubusercontent.com/u/13018674?v=4"
+  headline = "A powerful, lightweight theme for Hugo."
+  bio = "A powerful, lightweight theme for Hugo."
+  links = [
+    { github = "https://github.com/irish1986" },
+    { linkedin = "https://www.linkedin.com/in/simon-harvey-a0305029/" },
+    { website = "https://irishlab.io" }
+  ]

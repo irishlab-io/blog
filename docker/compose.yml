@@ -1,0 +1,27 @@
+---
+name: irishlab-io
+
+networks: # docker network create proxy
+  proxy:
+    name: proxy
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: proxy
+    external: true
+
+services:
+  irishlab-io:
+    container_name: irishlab-io
+    image: ghcr.io/irishlab-io/blog:latest
+    restart: unless-stopped
+    networks:
+      - proxy
+    # ports:
+    #   - "8080:8080"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.irishlab-io.entrypoints=https"
+      - "traefik.http.routers.irishlab-io.rule=Host(`irishlab-io.local.irishlab.io`)"
+      - "traefik.http.routers.irishlab-io.service=irishlab-io"
+      - "traefik.http.routers.irishlab-io.tls=true"
+      - "traefik.http.services.irishlab-io.loadbalancer.server.port=8080"
