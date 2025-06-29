@@ -1,0 +1,31 @@
+[[main]]
+  name = "DevSecOps"
+  pageRef = "devsecops"
+  weight = 10
+
+[[main]]
+  name = "Homelab"
+  pageRef = "homelab"
+  weight = 15
+
+[[main]]
+  name = "Random"
+  pageRef = "random"
+  weight = 50
+
+[[main]]
+  name = "Me"
+  pageRef = "me"
+  weight = 100
+
+[[main]]
+  identifier = "github"
+  pre = "github"
+  url = "https://github.com/irish1986"
+  weight = 400
+
+
+ [[footer]]
+   name = "Tags"
+   pageRef = "tags"
+   weight = 10

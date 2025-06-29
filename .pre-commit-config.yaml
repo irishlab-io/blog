@@ -22,13 +22,13 @@ repos:
         args: [--maxkb=2048]
       - id: check-case-conflict
       - id: check-json
+      - id: check-toml
       - id: check-merge-conflict
       - id: check-vcs-permalinks
       - id: check-yaml
         files: /.(yaml|yml)$
       - id: end-of-file-fixer
-      - id: forbid-new-submodules
-      - id: forbid-submodules
+      # - id: forbid-new-submodules
       - id: mixed-line-ending
         args:
           - --fix=lf

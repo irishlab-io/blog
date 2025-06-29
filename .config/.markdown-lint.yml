@@ -7,7 +7,7 @@ MD007:
   start_indented: false
 MD013:
   code_block_line_length: 80
-  heading_line_length: 40
+  heading_line_length: 99
   line_length: 1600
   code_blocks: false
   headings: true
@@ -20,7 +20,7 @@ MD025:
 MD033:
   allowed_elements: [a, br, p, img]
 MD041:
-  level: 1
+  level: 2
   front_matter_title: ""
 MD044:
   names:
