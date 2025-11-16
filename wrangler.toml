@@ -1,0 +1,30 @@
+name = "irishlab-blog"
+compatibility_date = "2024-11-16"
+
+# Cloudflare Pages configuration for static site
+pages_build_output_dir = "docs/public"
+
+# Routes configuration
+# The site will be deployed to www.irishlab.io
+routes = [
+  { pattern = "www.irishlab.io/*", zone_name = "irishlab.io" }
+]
+
+# Assets configuration for static files
+[site]
+bucket = "docs/public"
+
+# Build configuration
+[build]
+command = ""
+cwd = ""
+watch_dirs = []
+
+# Environment variables (optional)
+[vars]
+
+# KV Namespaces (optional - can be used for caching)
+# [[kv_namespaces]]
+# binding = "CACHE"
+# id = ""
+# preview_id = ""

@@ -1,0 +1,46 @@
+---
+name: Deploy to Cloudflare Workers
+
+on: # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+      - '.github/**'
+      - '!.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Build and Deploy to Cloudflare
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.139.3'
+          extended: true
+
+      - name: Build Hugo site
+        run: |
+          cd docs
+          hugo --minify --destination public
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy docs/public --project-name=irishlab-blog
