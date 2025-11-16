@@ -1,4 +1,4 @@
-# Cloudflare Pages Deployment Setup Guide
+c# Cloudflare Pages Deployment Setup Guide
 
 This guide walks you through setting up automated deployment of the Hugo blog to Cloudflare Pages.
 
