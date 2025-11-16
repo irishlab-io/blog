@@ -7,16 +7,16 @@ ci:
     - ggshield
 repos:
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.8.3
+    rev: v4.10.0
     hooks:
       - id: commitizen
   - repo: https://github.com/gitguardian/ggshield
-    rev: v1.41.0
+    rev: v1.45.0
     hooks:
       - id: ggshield
         language_version: python3
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
         args: [--maxkb=2048]
@@ -41,7 +41,7 @@ repos:
       - id: remove-crlf
       - id: remove-tabs
   - repo: https://github.com/sirosen/texthooks
-    rev: 0.6.8
+    rev: 0.7.1
     hooks:
       - id: alphabetize-codeowners
       - id: fix-ligatures
