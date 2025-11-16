@@ -19,6 +19,8 @@ jobs:
   deploy:
     name: Build and Deploy to Cloudflare
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     steps:
       - name: Checkout repository
