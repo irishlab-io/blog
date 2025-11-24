@@ -20,13 +20,9 @@ MD025:
 MD033:
   allowed_elements: [a, br, p, img]
 MD041:
-  level: 2
+  level: 1
   front_matter_title: ""
 MD044:
-  names:
-    - DevOps
-    - DevSecOps
-    - Git
   code_blocks: false
 MD046:
   style: fenced
