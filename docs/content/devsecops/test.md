@@ -1,7 +1,7 @@
 ---
 title: "Test"
-layout: "simple"
 description: "Lorem Ipsum"
+layout: "simple"
 categories: ["init"]
 tags: ["first steps", "hello world"]
 draft: false
