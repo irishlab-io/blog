@@ -1,62 +1,85 @@
 ---
-fail_fast: false
-default_install_hook_types:
+# pre-commit install --allow-missing-config
+# pre-commit autoupdate
+# pre-commit run --all-files --color auto
+exclude: |
+  (?x)^(
+    \.pre-commit-config\.yaml$
+  )
+fail_fast: true
+default_stages:
   - pre-commit
-ci:
-  skip:
-    - ggshield
+default_install_hook_types:
+  - commit-msg
+  - pre-commit
 repos:
+  - repo: meta
+    hooks:
+      - id: identity
+        name: "meta | pre-commit hooks"
+        stages:
+          - manual
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.9.1
+    rev: v4.10.0
     hooks:
       - id: commitizen
-  - repo: https://github.com/gitguardian/ggshield
-    rev: v1.43.0
-    hooks:
-      - id: ggshield
-        language_version: python3
+        name: "commitizen | validate commit messages"
+        stages:
+          - commit-msg
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
       - id: check-added-large-files
+        name: "git | block large files"
         args: [--maxkb=2048]
-      - id: check-case-conflict
       - id: check-json
+        name: "general | check JSON files"
       - id: check-toml
-      - id: check-merge-conflict
-      - id: check-vcs-permalinks
-      - id: check-yaml
-        files: /.(yaml|yml)$
+        name: "general | check TOML files"
       - id: end-of-file-fixer
-      # - id: forbid-new-submodules
+        name: "general | fix end of file"
       - id: mixed-line-ending
+        name: "general | fix line ending"
         args:
-          - --fix=lf
+          - --fix=auto
       - id: trailing-whitespace
+        name: "general | remove trailing whitespace"
+      - id: pretty-format-json
+        name: "general | prettify JSON files"
         args:
-          - --markdown-linebreak-ext=md
-  - repo: https://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.5.5
-    hooks:
-      - id: remove-crlf
-      - id: remove-tabs
-  - repo: https://github.com/sirosen/texthooks
-    rev: 0.7.1
-    hooks:
-      - id: alphabetize-codeowners
-      - id: fix-ligatures
-      - id: fix-smartquotes
+          - --autofix
+          - --no-ensure-ascii
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.46.0
     hooks:
       - id: markdownlint
+        name: "md | lint: run markdownlint-cli"
         args:
           - --config
           - .config/.markdown-lint.yml
+        exclude: |
+          (?x)
+          ^.github/instructions/.*|
+          ^CHANGELOG.md|
+          ^README.md
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.37.1
     hooks:
       - id: yamllint
+        name: "yaml | lint: run yamllint"
         args:
           - -c
           - .config/.yaml-lint.yml
+  - repo: local
+    hooks:
+      - id: pin-github-action
+        name: "security | gh-action: pinned sha"
+        verbose: true
+        files: ^\.github/workflows/[^/]+\.ya?ml$
+        entry: "pin-github-action ."
+        args:
+          - --allow
+          - "irishlab-io/*"
+        language: node
+        additional_dependencies:
+          - pin-github-action@3.4.0
