@@ -1,23 +1,30 @@
+disabled = false
 languageCode = "en"
 languageName = "English"
 weight = 1
 title = "irishlab.io"
 
 [params]
-  displayName = "English"
+  displayName = "EN"
   isoCode = "en"
   rtl = false
-  dateFormat = "2006 January 2 15:04"
-  description = "A powerful, lightweight theme for Hugo."
+  dateFormat = "2 January 2006"
+  logo = "../assets/img/logo.png"
+  # secondaryLogo = "../assets/img/logo.png"
+  # description = "My awesome website"
+  # copyright = "Copy, _right?_ :thinking_face:"
 
 [params.author]
-  name = "Simon Harvey"
-  email = "admin@irishlab.io"
-  image = "https://avatars.githubusercontent.com/u/13018674?v=4"
-  headline = "A powerful, lightweight theme for Hugo."
-  bio = "A powerful, lightweight theme for Hugo."
+  name = "Simon HARVEY"
+  email = "me@irishlab.io"
+  # image = "img/blowfish_logo.png"
+  # imageQuality = 96
+  headline = "DevSecOps & Cloud Security"
+  bio = "DevSecOps & Cloud Security"
   links = [
+    { email = "mailto:me@irishlab.io" },
     { github = "https://github.com/irish1986" },
-    { linkedin = "https://www.linkedin.com/in/simon-harvey-a0305029/" },
-    { website = "https://irishlab.io" }
+    { linkedin = "https://linkedin.com/in/simon-harvey-a0305029" },
+    { medium = "https://medium.com/simon.harvey.86" },
+    { reddit = "https://reddit.com/user/irish1986" },
   ]
