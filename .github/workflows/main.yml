@@ -21,15 +21,6 @@ jobs:
     name: Call Pre-Commit run
     uses: irishlab-io/.github/.github/workflows/reusable-pre-commit.yml@main
 
-  # secret:
-  #   needs:
-  #     - pre-commit
-  #   name: Call Secret Scanning
-  #   uses: irishlab-io/.github/.github/workflows/reusable-secret.yml@main
-
-  #   secrets:
-  #     GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
-
   build-deploy:
     needs:
       - pre-commit
@@ -39,10 +30,6 @@ jobs:
 
     permissions:
       contents: write
-
-    defaults:
-      run:
-        working-directory: ./docs
 
     steps:
       - name: Checkout
@@ -58,6 +45,7 @@ jobs:
 
       - name: Build
         run: |
+          cd docs/
           hugo --minify
         shell: bash
 
