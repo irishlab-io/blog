@@ -1,5 +1,5 @@
 ---
-title: "Lorem Ipsum"
+title: "Lorem Ipsum1"
 date: 2025-11-01
 draft: false
 description: "Lorem Ipsum"
