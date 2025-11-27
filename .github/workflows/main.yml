@@ -7,13 +7,13 @@ on: # yamllint disable-line rule:truthy
       - main
     paths-ignore:
       - 'README.md'
+  schedule:
+    - cron: "22 22 * * *"
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
-
-permissions:
-  contents: write
 
 jobs:
 
@@ -36,6 +36,9 @@ jobs:
     name: GH Pages Build and Deploy
     runs-on: ubuntu-24.04
     timeout-minutes: 5
+
+    permissions:
+      contents: write
 
     defaults:
       run:
