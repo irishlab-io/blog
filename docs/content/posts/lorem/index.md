@@ -1,7 +1,7 @@
 ---
-title: "Lorem Ipsum1"
+title: "Lorem Ipsum"
 date: 2025-11-01
-draft: false
+draft: true
 description: "Lorem Ipsum"
 summary: "Lorem markdownum cursu, centum est iamdudum cest tre"
 tags: ["example", "tag"]
