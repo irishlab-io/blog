@@ -1,9 +1,13 @@
 {
-  "name": "Simon HARVEY",
-  "image": "img/simon_harvey.jpg",
   "bio": "DevSecOps",
+  "image": "img/simon_harvey.jpg",
+  "name": "Simon HARVEY",
   "social": [
-    { "linkedin": "https://linkedin.com/in/simon-harvey-a0305029" },
-    { "github": "https://github.com/irish1986" }
+    {
+      "linkedin": "https://linkedin.com/in/simon-harvey-a0305029"
+    },
+    {
+      "github": "https://github.com/irish1986"
+    }
   ]
 }

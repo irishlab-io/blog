@@ -7,8 +7,6 @@ summary: "Lorem markdownum cursu, centum est iamdudum cest tre"
 tags: ["example", "tag"]
 ---
 
- an example to get you started
-
 # In concidit fulgore totusque
 
 ## Hac cum iuvat deseruit
@@ -73,6 +71,7 @@ fat_vram -= mouseTablet;
 sampling_master_rosetta.dvi_third(raid_language_compression + mail_uml +
         externalXFile, on);
 ```
+
 Dea cumque es non veniebat et dentibus ne ante [undas
 nos](#hac-cum-iuvat-deseruit). Digna fontes ille faces periuraque et Europam
 gravem, eam contra! Nec Eleusin, formosissimus mixtos mentis. Qui sinus igne
