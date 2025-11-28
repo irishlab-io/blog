@@ -55,6 +55,7 @@ jobs:
   build-deploy:
     needs:
       - pre-commit
+      - secret
     name: GH Pages Build and Deploy
     runs-on: ubuntu-24.04
     timeout-minutes: 5
