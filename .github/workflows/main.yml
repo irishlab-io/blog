@@ -27,9 +27,14 @@ jobs:
     name: GH Pages Build and Deploy
     runs-on: ubuntu-24.04
     timeout-minutes: 5
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     permissions:
-      contents: write
+      contents: read
+      pages: write
+      id-token: write
 
     steps:
       - name: Checkout
@@ -42,6 +47,7 @@ jobs:
         uses: peaceiris/actions-hugo@v3.0.0
         with:
           hugo-version: "latest"
+          extended: true
 
       - name: Build
         run: |
@@ -49,10 +55,11 @@ jobs:
           hugo --minify
         shell: bash
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4.0.0
-        if: ${{ github.ref == 'refs/heads/main' }}
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4.0.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: ./public
+          path: ./docs/public
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4.0.5

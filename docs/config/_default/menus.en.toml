@@ -5,4 +5,9 @@
  pageRef = "posts"
  weight = 10
 
+[[main]]
+ name = "Projects"
+ pageRef = "projects"
+ weight = 20
+
 # -- Footer Menu --

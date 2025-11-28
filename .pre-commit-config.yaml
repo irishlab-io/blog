@@ -5,7 +5,6 @@
 exclude: |
   (?x)^(
     \.pre-commit-config\.yaml$|
-    \docs/themes.*|
   )
 fail_fast: true
 default_stages:
@@ -18,8 +17,6 @@ repos:
     hooks:
       - id: identity
         name: "meta | pre-commit hooks"
-        stages:
-          - manual
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v4.10.0
     hooks:
