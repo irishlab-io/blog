@@ -24,7 +24,5 @@ title = "irishlab.io"
   links = [
     { email = "mailto:me@irishlab.io" },
     { github = "https://github.com/irish1986" },
-    { linkedin = "https://linkedin.com/in/simon-harvey-a0305029" },
-    { medium = "https://medium.com/simon.harvey.86" },
-    { reddit = "https://reddit.com/user/irish1986" },
+    { linkedin = "https://linkedin.com/in/simon-harvey-a0305029" }
   ]
