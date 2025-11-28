@@ -4,7 +4,7 @@
 # pre-commit run --all-files --color auto
 exclude: |
   (?x)^(
-    \.pre-commit-config\.yaml$|
+    \.pre-commit-config\.yaml$
   )
 fail_fast: true
 default_stages:
@@ -24,6 +24,11 @@ repos:
         name: "commitizen | validate commit messages"
         stages:
           - commit-msg
+  - repo: https://github.com/gitguardian/ggshield
+    rev: v1.45.0
+    hooks:
+      - id: ggshield
+        name: "security | scan for secrets"
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
