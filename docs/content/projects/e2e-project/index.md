@@ -1,5 +1,5 @@
 ---
-title: "Lorem Ipsum"
+title: "End to end Project"
 date: 2025-11-01
 draft: true
 description: "Lorem Ipsum"
