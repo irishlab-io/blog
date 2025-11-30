@@ -1,7 +1,7 @@
 import qrcode
 
 
-def generate_qr_code(url, output_filename):
+def generate_qr_code(url: str, output_filename: str) -> None:
     print(f"Generating QR code for: {url}")
 
     qr = qrcode.QRCode(
@@ -14,8 +14,9 @@ def generate_qr_code(url, output_filename):
     qr.make(fit=True)
 
 
-    img = qr.make_image(fill_color="#1e293b", back_color="transparent")
-    img.save(output_filename)
+    img = qr.make_image(fill_color="white", back_color="transparent")
+    with open(output_filename, "wb") as f:
+        img.save(f)
     print(f"Successfully saved QR code to {output_filename}")
 
 

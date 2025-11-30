@@ -1,6 +1,5 @@
 import os
 import sys
-import pytest
 
 from main import generate_qr_code
 
