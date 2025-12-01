@@ -7,77 +7,28 @@ summary: "Lorem markdownum cursu, centum est iamdudum cest tre"
 tags: ["example", "tag"]
 ---
 
-# In concidit fulgore totusque
+# Overview
 
-## Hac cum iuvat deseruit
+**Project**: End-to-End DevSecOps Project (Movies Finder)
 
-### Obliquis tibi invenit pleni
+Overview While the visible application is a React-based Movie Finder (consuming TMDB API), this project serves as a comprehensive proof-of-concept for a production-grade DevSecOps lifecycle. It demonstrates the automated delivery of a secure, tested, and monitored web application onto a baremetal Kubernetes cluster using GitOps principles.
 
-Lorem markdownum cursu, centum est iamdudum adfusaeque et digitos vitiantur
-unguibus `infotainment_ip_e` turbamque tinxit ad Cecropis veluti flaventi.
-Senatus gemuit obviaque, dubium, attonitoque scit vocavit honore vale undis frui
-suisque secabant en callida aetherias meque. Opus Perseus abest placebimus
-velle, timor fui tum: mora caper. Tellus vetare ademit qualis Lethaei, hanc
-atria mortes est comminus, tabent genuumque et factis captum.
+Goal To architect a "Zero-Touch" delivery pipeline that automates the build, testing, security scanning, and deployment processes, ensuring that only high-quality, secure code reaches production without manual intervention.
 
-```text
-sql += mediaWave(market, tftp_windows_search, petaflops_media_sram + 5);
-consoleLogic.file -= app_ssd(pinterest, thickAddress.cookieClass(boot, bit)
-        - touchscreen, teraflopsSkyscraperDtd + 5 * 2);
-var flood = gibibyte - clipboard_camera * algorithm_view_maximize;
-if (2 + bloatware_website) {
-    favicon(disk, file_motherboard_rw(5, scrollRomNet));
-    upnp_xp = dot_alignment;
-    desktop += mode_footer_rosetta.minimize_hexadecimal_disk.bus(on,
-            floppyIpadClient) + logic;
-} else {
-    command -= maximize_multimedia_ddr * 5;
-    net_meta_disk.sla -= playRdfStatus;
-}
-```
+## Tech Stack & Tools
 
-### Esse quamvis
+- Infrastructure: Homelab, Proxmox, Talos
+- GitOps: Kubernetes, Docker, Helm, ArgoCD, Sealed-Secrets
+- Code: Python, Django, FastAPI
+- CI/CD: GitHub Action, Commitizen, Prek
+- TestingA: Pytest, Playwright (E2E)
+- Security: Bandit, GitGuardian, Snyk, Syft, Grype, Trivy, OWASP ZAP
+- Observability Stack: OpenTelemetry, Prometheus, Grafana, Alloy, Alertmanager, Slack
+- Security (DevSecOps): , Gitleaks, , Syft (SBOM)
 
-Me ad taedae monendo glaebam maxima iteratque ex auroque vetat eripuit adest.
-Cum **exul** serpentis praebet: solantia flavescit illis porrexerat retentas,
-est cum Herse, hostem. Rotato citharae patrio labefactaque hinc effodit. Puer
-sic Cytherea sustinet precibusque `lpi_install` carina sanguineam dumque! Et
-miranti quodque tradit.
+## Key Results & Achievements
 
-### Dixi tellusAndros torquere
-
-Nec inde femina secum tali in donis turget, obice diversa. In lunam et ante
-Tantalus, deum freta: protinus.
-
-## Vix enim natos palmis
-
-Illi potitus, acto et verba Ismenides vidisse fila est [sidera
-cumque](#dixi-tellusandros-torquere). Onus utque Minturnaeque aequus mihi
-fetibus moris in **potest contra**, noctis. Ipso sanguine, longis mitte
-*celebrare* Hyanteo nec discedunt visa legeret? Silentia in lingua retracto
-circum *et* inquit quondam `worm` cernit sine **deum** ipse **receptus** ea
-nostro: una fugiunt. Inde nec, ereptus quid hoc parentis egregius, me laeta.
-
-```text
-pdf.lifo.statusWhiteDisk(array(optical, -1, winsock) - 1, ospfSystray(
-        cellCable, sql) * load);
-if (91 == file_jumper_mca) {
-    gigabit(1, zip + 1, pcmciaDay + udp_newsgroup_interlaced);
-    impression(markup_ram);
-    flashBingToslink = newlineChipsetName + dashboard_drive_remote;
-}
-interpreterCloneRequirements += scriptNewbieBatch(3, 100);
-fat_vram -= mouseTablet;
-sampling_master_rosetta.dvi_third(raid_language_compression + mail_uml +
-        externalXFile, on);
-```
-
-Dea cumque es non veniebat et dentibus ne ante [undas
-nos](#hac-cum-iuvat-deseruit). Digna fontes ille faces periuraque et Europam
-gravem, eam contra! Nec Eleusin, formosissimus mixtos mentis. Qui sinus igne
-[avellit](#in-concidit-fulgore-totusque), prius violave nymphis mandate.
-
-1. Silvas duo sitim placuit quique silentia
-2. Loca unum obprobrium nato fugientibus maculat muta
-3. Ferro tenet
-4. Monstrum meo
+- Optimized Release Cycle: Automated the entire delivery chain, reducing deployment turnaround time by 50% (from 40m to 20m) while adding comprehensive testing and security stages.
+360° Observability: Implemented the "Grafana Alloy" & OpenTelemetry stack to correlate metrics and logs, providing real-time performance monitoring and instant Slack alerts for node resource exhaustion.
+- Automated Compliance Gates: Shifted security left by integrating Trivy (container scanning) and Dependency Checkinto the CI pipeline, automatically blocking builds with critical CVEs.
+- Zero-Downtime Deployment: Leveraged ArgoCD to manage state drift and ensure seamless application updates via GitOps.
