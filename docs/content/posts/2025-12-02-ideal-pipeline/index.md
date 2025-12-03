@@ -1,10 +1,10 @@
 ---
-title: "Hello World"
-date: 2025-12-02
+title: "The ideal CI-CD pipeline"
+date: 2025-12-01
 draft: true
-description: "First post"
+description: "Ideal pipeline"
 summary: "Hello world, this blog is live"
-tags: ["example", "tag"]
+tags: ["ci", "pipeline"]
 ---
 
 # Welcome
