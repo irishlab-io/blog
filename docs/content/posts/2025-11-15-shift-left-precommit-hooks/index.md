@@ -11,7 +11,7 @@ series_order: 1
 
 # Automating Developer Quality Checks: The Pre-Commit Hook Journey
 
-Last month, I had the opportunity to share my experiences with implementing quality automation in development workflows at Desjardins, where I work in Application Security. Having spent years in aerospace at companies like Pratt & Whitney Canada and Bombardier, I've seen firsthand how early defect detection saves exponentially more time and money than late-stage fixes.
+Last month, I had the opportunity to share my experiences with implementing quality automation in development workflows. I work in Application Security at Desjardins, following years in aerospace at companies like Pratt & Whitney Canada and Bombardier. Across these industries, one truth stands out: early defect detection saves exponentially more time and money than late-stage fixes.
 
 ## The Developer's Dilemma
 
