@@ -277,7 +277,6 @@ bootstrap:
   pg_hba:
     - host replication replicator 192.168.1.0/24 md5
     - host all all 192.168.1.0/24 md5
-    - host all all 0.0.0.0/0 md5
 
   users:
     admin:
@@ -315,6 +314,8 @@ EOF
 ```
 
 **Important**: Change the passwords in the configuration above!
+
+**⚠️ IMPORTANT SECURITY NOTE**: The configuration above contains placeholder passwords (`admin_password`, `replicator_password`, `postgres_password`). You MUST change these to strong, unique passwords before deploying to production!
 
 For **replica nodes**, create similar configurations but adjust:
 - `name`: pg-replica1 or pg-replica2
@@ -646,9 +647,12 @@ For production, enable SSL:
    ssl_ca_file: '/etc/ssl/certs/ca.crt'
    ```
 
-3. **Update pg_hba.conf** to require SSL:
+3. **Update pg_hba.conf** to require SSL (restrict to your specific network):
    ```
-   hostssl all all 0.0.0.0/0 md5
+   # Only allow SSL connections from your network
+   hostssl all all 192.168.1.0/24 md5
+   # For VPN or specific remote access, add specific IP ranges
+   # hostssl all all 10.0.0.0/8 md5
    ```
 
 ## Performance Tuning
