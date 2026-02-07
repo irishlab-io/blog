@@ -118,6 +118,7 @@ docker-compose up -d
 ```
 
 Wait a few minutes for SonarQube to start, then access it at `http://your-server:9000`. The default credentials are:
+
 - Username: `admin`
 - Password: `admin`
 
@@ -188,6 +189,7 @@ The best way to integrate SonarQube with GitHub is using a GitHub App. This prov
 3. Fill in the following details:
 
 **Basic Information:**
+
 - **GitHub App name**: `SonarQube Code Analysis` (or your preferred name)
 - **Homepage URL**: `https://sonar.yourdomain.com` (your SonarQube URL)
 - **Webhook URL**: `https://sonar.yourdomain.com/github-webhook/` (note the trailing slash)
@@ -196,6 +198,7 @@ The best way to integrate SonarQube with GitHub is using a GitHub App. This prov
 **Permissions:**
 
 Repository permissions:
+
 - **Checks**: Read & write (for PR decoration)
 - **Contents**: Read (for accessing code)
 - **Metadata**: Read (required)
@@ -203,15 +206,17 @@ Repository permissions:
 - **Commit statuses**: Read & write (for status checks)
 
 Organization permissions:
+
 - **Members**: Read (for user mapping)
 
 **Subscribe to events:**
+
 - Pull request
 - Push
 
-4. Click **Create GitHub App**
-5. Generate a private key (save the downloaded `.pem` file securely)
-6. Note the **App ID** (you'll need this)
+1. Click **Create GitHub App**
+2. Generate a private key (save the downloaded `.pem` file securely)
+3. Note the **App ID** (you'll need this)
 
 ### Install the GitHub App
 
@@ -249,6 +254,7 @@ Now let's configure SonarQube to use the GitHub App:
 5. Click **Set Up**
 
 SonarQube will:
+
 - Create the project
 - Configure the quality gate
 - Set up PR decoration
@@ -338,7 +344,7 @@ Quality Gates determine whether your code meets your quality standards:
 
 Example custom quality gate conditions:
 
-```
+```text
 Coverage on New Code >= 80%
 Duplicated Lines on New Code <= 3%
 Maintainability Rating on New Code = A
@@ -357,6 +363,7 @@ PR decoration allows SonarQube to comment directly on pull requests with analysi
 4. Enable **Decorate Pull Requests**
 
 Now when you create a pull request, SonarQube will:
+
 - Add inline comments on issues found in the changed code
 - Post a summary comment with the quality gate status
 - Update the PR status check
@@ -598,6 +605,7 @@ docker-compose logs -f sonarqube
 ### Issue: "Elasticsearch: Max virtual memory areas vm.max_map_count is too low"
 
 **Solution:**
+
 ```bash
 sudo sysctl -w vm.max_map_count=524288
 echo "vm.max_map_count=524288" | sudo tee -a /etc/sysctl.conf
@@ -606,6 +614,7 @@ echo "vm.max_map_count=524288" | sudo tee -a /etc/sysctl.conf
 ### Issue: GitHub PR decoration not working
 
 **Checklist:**
+
 1. Verify GitHub App permissions are correct
 2. Check webhook secret matches
 3. Ensure GitHub App is installed on the repository
@@ -615,12 +624,14 @@ echo "vm.max_map_count=524288" | sudo tee -a /etc/sysctl.conf
 ### Issue: Analysis failing in GitHub Actions
 
 **Common causes:**
+
 1. Missing or incorrect `SONAR_TOKEN`
 2. Invalid `SONAR_HOST_URL`
 3. Network issues accessing SonarQube
 4. Quality gate timeout
 
 **Debug steps:**
+
 ```yaml
 - name: Debug SonarQube connection
   run: |
@@ -630,6 +641,7 @@ echo "vm.max_map_count=524288" | sudo tee -a /etc/sysctl.conf
 ### Issue: High memory usage
 
 **Solutions:**
+
 1. Increase container memory limits
 2. Optimize analysis scope (exclude unnecessary files)
 3. Reduce concurrent analyses
