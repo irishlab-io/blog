@@ -80,8 +80,6 @@ services:
       nofile:
         soft: 65536
         hard: 65536
-    sysctls:
-      - vm.max_map_count=524288
 
   db:
     image: postgres:15-alpine
@@ -184,39 +182,41 @@ The best way to integrate SonarQube with GitHub is using a GitHub App. This prov
 
 ### Create the GitHub App
 
+Follow these steps to create a GitHub App:
+
 1. Go to your GitHub organization settings
 2. Navigate to **Settings** → **Developer settings** → **GitHub Apps** → **New GitHub App**
 3. Fill in the following details:
 
-**Basic Information:**
+   **Basic Information:**
 
-- **GitHub App name**: `SonarQube Code Analysis` (or your preferred name)
-- **Homepage URL**: `https://sonar.yourdomain.com` (your SonarQube URL)
-- **Webhook URL**: `https://sonar.yourdomain.com/github-webhook/` (note the trailing slash)
-- **Webhook secret**: Generate a random string (save this for later)
+   - **GitHub App name**: `SonarQube Code Analysis` (or your preferred name)
+   - **Homepage URL**: `https://sonar.yourdomain.com` (your SonarQube URL)
+   - **Webhook URL**: `https://sonar.yourdomain.com/github-webhook/` (note the trailing slash)
+   - **Webhook secret**: Generate a random string (save this for later)
 
-**Permissions:**
+   **Permissions:**
 
-Repository permissions:
+   Repository permissions:
 
-- **Checks**: Read & write (for PR decoration)
-- **Contents**: Read (for accessing code)
-- **Metadata**: Read (required)
-- **Pull requests**: Read & write (for PR comments)
-- **Commit statuses**: Read & write (for status checks)
+   - **Checks**: Read & write (for PR decoration)
+   - **Contents**: Read (for accessing code)
+   - **Metadata**: Read (required)
+   - **Pull requests**: Read & write (for PR comments)
+   - **Commit statuses**: Read & write (for status checks)
 
-Organization permissions:
+   Organization permissions:
 
-- **Members**: Read (for user mapping)
+   - **Members**: Read (for user mapping)
 
-**Subscribe to events:**
+   **Subscribe to events:**
 
-- Pull request
-- Push
+   - Pull request
+   - Push
 
-1. Click **Create GitHub App**
-2. Generate a private key (save the downloaded `.pem` file securely)
-3. Note the **App ID** (you'll need this)
+4. Click **Create GitHub App**
+5. Generate a private key (save the downloaded `.pem` file securely)
+6. Note the **App ID** (you'll need this)
 
 ### Install the GitHub App
 
@@ -590,7 +590,7 @@ To upgrade to a newer version:
 ./backup-sonarqube.sh
 
 # Update docker-compose.yml with new version
-# For example: sonarqube:community -> sonarqube:9.9-community
+# For example: sonarqube:community -> sonarqube:10.8-community
 
 # Pull new image and restart
 docker-compose pull
