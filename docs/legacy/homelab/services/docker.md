@@ -30,7 +30,7 @@ Here's a more detailed breakdown:
 
 ```bash
 cd /tmp
-curl -fsSL https://get.docker.com -o /get-docker.sh
+curl -fsSL https://get.docker.com -o ./get-docker.sh
 sudo sh ./get-docker.sh --dry-run
 sudo sh ./get-docker.sh
 ```
