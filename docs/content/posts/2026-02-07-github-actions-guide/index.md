@@ -1,5 +1,5 @@
 ---
-title: "Mastering GitHub Actions: Reusable Workflows, Composite Actions, and Avoiding Workflow Drift"
+title: "Mastering GitHub Actions"
 date: 2026-02-07
 draft: true
 description: "A comprehensive guide to GitHub Actions covering reusable workflows, composite actions, and strategies to prevent workflow drift across multiple repositories"
@@ -9,29 +9,19 @@ series: ["CI|CD"]
 series_order: 2
 ---
 
-# Mastering GitHub Actions: Reusable Workflows, Composite Actions, and Avoiding Workflow Drift
+# Mastering GitHub Actions
 
 Managing CI/CD pipelines across multiple repositories can become a maintenance nightmare without proper organization. As organizations scale, keeping workflows consistent, up-to-date, and maintainable becomes increasingly challenging. This guide explores GitHub Actions best practices, focusing on reusable workflows, composite actions, and strategies to prevent workflow drift across your repository ecosystem.
 
-## Understanding GitHub Actions Components
+## GitHub Actions Components
 
 Before diving into reusability patterns, let's clarify the key components of GitHub Actions:
 
-### Workflows
-
-Workflows are YAML files stored in `.github/workflows/` that define automated processes. They contain one or more jobs that run based on specific triggers (push, pull request, schedule, etc.).
-
-### Jobs
-
-Jobs are collections of steps that execute on the same runner. By default, jobs run in parallel, but you can configure dependencies between them.
-
-### Steps
-
-Steps are individual tasks within a job. Each step can run commands or use actions.
-
-### Actions
-
-Actions are reusable units of code that can be referenced in workflow steps. They can be created by GitHub, the community, or your organization.
+- **Runners:** are #TODO
+- **Workflows:** are YAML files stored in `.github/workflows/` that define automated processes. They contain one or more jobs that run based on specific triggers such as push, pull request, schedule, etc...
+- **Jobs:** are collections of steps that execute on the same runner. By default, jobs run in parallel, but you can configure dependencies between them.
+- **Steps:** are individual tasks within a job. Each step can run commands or use actions.
+- **Actions:** are reusable units of code that can be referenced in workflow steps. They can be created by GitHub, the community, or your organization.
 
 ## Reusable Workflows: The Foundation of Scalability
 
@@ -232,18 +222,18 @@ Workflow drift occurs when similar workflows across repositories diverge over ti
 
 Create a dedicated `.github` repository in your organization to host all shared workflows:
 
-```
-my-org/.github/
+```text
+irishlab-io/.github/
 ├── .github/
-│   └── workflows/
-│       ├── reusable-node-ci.yml
-│       ├── reusable-python-ci.yml
-│       ├── reusable-security-scan.yml
-│       └── reusable-docker-build.yml
-├── actions/
-│   ├── setup-node-app/
-│   ├── setup-python-app/
-│   └── security-scan/
+│   ├── workflows/
+│   │   ├── reusable-node-ci.yml
+│   │   ├── reusable-python-ci.yml
+│   │   ├── reusable-security-scan.yml
+│   │   └── reusable-docker-build.yml
+|   └ actions/
+│       ├── setup-node-app/
+│       ├── setup-python-app/
+│       └── security-scan/
 └── README.md
 ```
 
@@ -489,9 +479,8 @@ Effective use of GitHub Actions, reusable workflows, and composite actions can d
 
 Remember that the key to success is starting simple and iterating based on your organization's needs. Begin with one or two reusable workflows, gather feedback, and gradually expand your shared workflow library.
 
-## Additional Resources
+---
 
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [Reusing Workflows Guide](https://docs.github.com/en/actions/using-workflows/reusing-workflows)
-- [Creating Composite Actions](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action)
-- [GitHub Actions Best Practices](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions)
+## References
+
+- [GitHub Actions Docs](https://docs.github.com/en/actions)
