@@ -1,9 +1,10 @@
-# Dockerfile
 # Hidden files
 .dockerignore
 .git
+.gitmodules
 .DS_Store
 .vscode
+.github
 
 # Local settings
 .env
@@ -12,3 +13,12 @@
 .env.test
 .env.production
 local.properties
+
+# Build artifacts & non-essential directories
+docs/public/
+docs/resources/
+scripts/
+Makefile
+README.md
+*.md
+!docs/**/*.md
