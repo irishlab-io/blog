@@ -1,58 +1,40 @@
 ---
-title: "Automating Developer Quality Checks: The Pre-Commit Hook Journey"
+title: "Shifting Left with Pre-Commit"
 date: 2025-11-15
-draft: true
+draft: false
 description: "Exploring how automated quality gates at commit time can transform your development workflow"
-summary: "A practical guide to implementing automated quality checks that catch issues before they enter your codebase, reducing friction and improving security."
+summary: "Last month, I had the opportunity to share my experiences with implementing quality automation in development workflows. Across any industries where software development occurs, one truth stands out: early defect detection saves exponentially more time and money than late-stage fixes."
 tags: ["devsecops", "security", "git", "automation", "development-workflow"]
 series: ["DevSecOps"]
 series_order: 1
 ---
 
-# Automating Developer Quality Checks: The Pre-Commit Hook Journey
+# Shifting Left with Pre-Commit
 
-Last month, I had the opportunity to share my experiences with implementing quality automation in development workflows. I work in Application Security at Desjardins, following years in aerospace at companies like Pratt & Whitney Canada and Bombardier. Across these industries, one truth stands out: early defect detection saves exponentially more time and money than late-stage fixes.
+The Developer's Dilemma in a simple scenario: Your team lead is asking for a slew of check on every commit and **then** the Security team just announced new requirements for every code commit. It is an neverending pile up on your developper mental load.
 
-## The Developer's Dilemma
+```text
+1. Execute unit tests before pushing
+2. Check for accidentally committed secrets
+3. Format code according to team standards
+4. Verify dependencies are properly pinned
+5. Run static analysis tools
+```
 
-Picture this scenario: Your security team just announced five new requirements for every code commit:
+Each requirement individually seems reasonable, but collectively they create **checklist fatigue**. Developers now have a mental burden of remembering and manually executing multiple steps before every commit. This isn't sustainable, and it's not fair to expect perfect adherence. Developers aren't resistant to quality; they're resistant to manual, repetitive tasks.
 
-- Execute unit tests before pushing
-- Check for accidentally committed secrets
-- Format code according to team standards
-- Verify dependencies are properly pinned
-- Run static analysis tools
-
-Each requirement individually seems reasonable, but collectively they create what I call "checklist fatigue." Developers now have a mental burden of remembering and manually executing multiple steps before every commit. This isn't sustainable, and it's not fair to expect perfect adherence.
-
-**The truth is: developers aren't resistant to quality—they're resistant to manual, repetitive tasks.**
-
-## Why Early Detection Matters
-
-Research consistently shows that bugs found during development cost a fraction of bugs discovered in production. Some studies suggest the multiplier can be 100x or more. This isn't just about money—it's about:
-
-- **Developer context**: Fixing something you just wrote is easier than revisiting code weeks later
-- **Clean history**: Preventing bad commits keeps your repository clean
-- **Faster iteration**: Catching issues locally means no waiting for CI to fail
-- **Team confidence**: Everyone knows the baseline quality is maintained
-
-The challenge becomes: how do we enforce quality without adding friction?
+Research consistently shows that bugs found during development cost a fraction of bugs discovered in production. Some studies suggest the multiplier can be **640x or more**.  The challenge becomes: how do we enforce quality without adding friction?
 
 ## Git Hooks: The Hidden Automation Layer
 
-Most developers know git has hooks—those sample files sitting in `.git/hooks` that rarely get touched. These hooks are essentially event listeners that run scripts at key moments in the git lifecycle.
+Most developers know git has hooks sample files sitting in `.git/hooks` that rarely get touched. These hooks are essentially event listeners that run scripts at key moments in the git lifecycle.
 
 The beauty of hooks is they're automatic. When configured, they execute without any conscious effort from the developer. But native git hooks have problems:
 
-**The Git Hook Paradox:**
-
-- They're powerful automation tools
-- But they're not tracked by version control
+- Are not tracked in version control
 - Distribution requires manual setup
 - Updates are a coordination nightmare
 - Multi-repo management is painful
-
-This paradox led to an entire ecosystem of hook management tools.
 
 ## Modern Hook Management Solutions
 
@@ -64,202 +46,114 @@ Several frameworks emerged to solve the git hook distribution problem. Here's wh
 4. **Cross-language support** - Works with any programming language
 5. **Hook composition** - Multiple tools can run in sequence
 
-Popular options include Pre-Commit (Python-based), Husky (JavaScript ecosystem), Lefthook (Go-based and fast), and several others. They all solve similar problems with slightly different philosophies.
+Popular options include:
+
+- [Pre-Commit](https://pre-commit.com) written in Python
+- [Husky](https://typicode.github.io/husky) written in JavaScript
+- [Lefthook](https://github.com/evilmartians/lefthook) written in Go
+- and several others
+
+They all solve similar problems with slightly different philosophies.  My go to tool is [Pre-Commit](https://pre-commit.com) given my programming language of choice is typically Python.  Although Pre-Commit is not limited to the Python-ecosystem and can be use in context of others language.
 
 ## Building Your Hook Strategy
 
 Rather than showing generic examples, let me share the progression I recommend based on real implementation experience:
 
-### Phase 1: Start with Quick Wins (Week 1)
+**Phase 1: Start with Quick Wins:**
 
-Begin with non-controversial, fast hooks that everyone agrees add value:
+Begin with non-controversial linting that are almost universally accepted.  These run in under a second and catch common accidents without disrupting flow.
 
+```text
 - Remove trailing whitespace
 - Ensure files end with newlines
-- Check YAML/JSON syntax
+- Check MD/JSON/TOML/YAML syntax
 - Prevent large file commits
+```
 
-These run in under a second and catch common accidents without disrupting flow.
-
-### Phase 2: Add Security Scanning (Week 2-3)
+**Phase 2: Add Secret Scanning:**
 
 Once the team is comfortable with the concept, add secret detection. This is where real value starts showing:
 
-Tools like TruffleHog, Gitleaks, or detect-secrets scan commit content for patterns matching API keys, passwords, tokens, and other credentials. A secret caught locally never enters your repository history—that's invaluable.
+```text
+- Include a secret scanning tool
+```
 
-**Implementation tip:** Configure these tools with your organization's custom patterns. Generic scanners miss internal secret formats.
+Secret scanning tool are the ideal first security usage of pre-commit hooks.  Tools such as [GitGuardian](https://www.gitguardian.com/), [Trufflehog](https://trufflesecurity.com/trufflehog) and [Gitleaks](https://github.com/gitleaks/gitleaks) can scan commit for patterns matching API keys, passwords, tokens, and other credentials. A secret caught locally has fewwer changes to never enters the repository commit history therefore remediation is much easier and less impactful.
 
-### Phase 3: Language-Specific Quality (Week 4+)
+**Phase 3: Language-Specific Quality:**
 
-Now integrate tools specific to your tech stack:
+At this point in time, the team should start to use the associated pre-commit hooks regularly with limited impact while generating better quality.  The next fcous should be about improving code quality:
 
-- Python: black, isort, flake8, mypy
-- JavaScript: eslint, prettier
-- Go: gofmt, golint
-- Java: checkstyle, spotbugs
+```text
+- Include minimal unit testing steps
+- Standardize commits message
+- Restrict git worklows to certain agreed conventions
+```
 
-Start with auto-fixers (like formatters) that correct issues automatically. Developers love tools that improve code without requiring manual changes.
+**Phase 4: The Heavy Hitters:**
 
-### Phase 4: The Heavy Hitters (Month 2+)
+Finally, consider adding longer and more complexe steps once the pre-commit hooks adoption is fairly high.
 
-Finally, add more intensive checks:
-
-- Run test suites (but only affected tests)
-- Security linters (bandit, semgrep)
+```text
+- Larger and onger test suites
+- Opinionated security toolchain
+- Serious SAST tool for code quality
 - Dependency vulnerability scans
 - License compliance checks
+```
 
-These might take longer, so consider making them:
-
-- Run only on changed files
-- Execute via manual trigger rather than every commit
-- Run in CI rather than locally for very large codebases
+These might take longer, so consider making run only on changed files, have manual trigger instead of every commit and be considerate of large codebases.
 
 ## The CI Safety Net
 
-Here's a critical principle: **Local hooks are developer helpers, not enforcers.**
+A critical principle is taht **hooks are developer helpers, not enforcers.**  Developers can always bypass hooks with `git commit --no-verify`. That's by design since given some type of emergencies might require quick commits against agreed upon convention.
 
-Developers can always bypass hooks with `git commit --no-verify`. That's by design—sometimes emergencies require quick commits. Your CI pipeline should run identical checks to catch anything that bypassed local validation.
-
-This creates a healthy dynamic:
+That where the CI pipeline comes into play trying to catch anything that was bypassed during local validation.  This creates a healthy dynamic:
 
 - Hooks catch 95% of issues locally (fast feedback)
 - CI catches the remaining 5% (enforcement)
 - Developers learn from CI failures what hooks prevented
 - The value of local hooks becomes self-evident
 
-## Structuring CI Integration
-
-Your CI workflow should mirror your local hooks but with additional context:
-
-```yaml
-# Run the same quality checks
-# Fail the build if checks fail
-# Comment on PRs with specific issues
-# Block merging until resolved
-```
-
-Documentation is equally important. Create clear guidance in your repository:
-
-- **CONTRIBUTING.md**: Explain how to install and use hooks
-- **Pull request templates**: Remind developers about quality standards
-- **README**: Make hook installation part of setup instructions
-
-## Handling Resistance and Edge Cases
+## Developper Resistance
 
 Real talk: some developers will resist. Common objections and responses:
 
-**"It slows me down"**
+**"It slows me down":**
 
 - Profile your hooks—keep total time under 5 seconds
-- Use faster alternatives (Rust-based tools are emerging)
+- Use faster framework alternatives
 - Make expensive checks manual or CI-only
 
-**"I need to commit work in progress"**
+**"I need to commit work in progress":**
 
 - That's what `--no-verify` is for
 - Consider allowing WIP commits on feature branches
 - CI still catches issues before merging
 
-**"The linter is wrong"**
+**"The linter is wrong":**
 
 - Configuration files let you customize rules
 - Some checks can be suppressed with inline comments
 - Regularly review rules with the team
+- Allow team member to suggest rules changes
 
-**"This breaks my workflow"**
+**"This breaks my workflow":**
 
-- Listen and adapt—your goal is enablement, not obstruction
+- Listen and adapt; the goal is enablement, not obstruction
 - Different hooks for different branches
 - Allow team-specific configurations
+- Somtimes workflow breakage is mandatory
 
 ## Measuring Success
 
-How do you know if your hook implementation is working? Track:
+How do you know if your hook implementation is working? In order to improve monitoring and tracking is required.  Consider measuring and monitoring the following:
 
 - **Reduction in CI failures** - Fewer builds broken by preventable issues
 - **Time saved** - Less context switching from CI feedback
 - **Developer adoption** - How many devs install hooks voluntarily
 - **False positive rate** - Are hooks annoying or helpful?
 - **Security incidents** - Decline in committed secrets
-
-The best indicator is when developers start requesting new hooks because they see the value.
-
-## Advanced Patterns
-
-Once your basic implementation is solid, consider:
-
-### Conditional Execution
-
-Run different hooks based on file types changed:
-
-- Only run Python linters if Python files changed
-- Skip expensive checks for documentation-only changes
-
-### Hook Caching
-
-Modern frameworks cache results to avoid re-checking unchanged files. This dramatically improves performance on large repositories.
-
-### Progressive Enhancement
-
-As new tools emerge, add them incrementally:
-
-- Try in CI first
-- Gather feedback
-- Roll out locally once proven valuable
-
-### Custom Hooks
-
-Write organization-specific hooks for your unique needs:
-
-- Enforce internal coding standards
-- Check internal dependency versions
-- Validate configuration file formats
-- Ensure documentation updates
-
-## The Cultural Component
-
-Technical implementation is only half the battle. The cultural shift matters more:
-
-**Positioning**: Frame hooks as productivity tools, not police. They catch mistakes so developers don't have to remember everything.
-
-**Transparency**: Show metrics proving hooks save time. Developers respond to data.
-
-**Empowerment**: Give teams autonomy to configure their hooks. Top-down mandates create resistance.
-
-**Support**: When hooks cause friction, fix the hooks—don't blame developers for bypassing them.
-
-## Practical Recommendations
-
-Based on implementing this across multiple teams:
-
-**Do:**
-
-- Start simple and iterate
-- Measure impact before expanding
-- Make installation dead simple
-- Provide clear bypass mechanisms
-- Mirror checks in CI
-- Document everything
-
-**Don't:**
-
-- Add all checks at once (overwhelming)
-- Make hooks mandatory without proving value
-- Ignore performance concerns
-- Treat bypasses as failures
-- Forget to maintain hooks as tools evolve
-
-## Looking Forward
-
-The ecosystem around development quality automation continues evolving. Emerging trends:
-
-- **Faster implementations**: Rust-based tools providing sub-second execution
-- **AI-assisted checks**: Tools using LLMs to provide contextual suggestions
-- **Cloud-based validation**: Offloading heavy checks to remote services
-- **IDE integration**: Bringing hook functionality directly into editors
-
-The core principle remains: catch issues as early as possible with minimal developer effort.
 
 ## Wrapping Up
 
@@ -271,13 +165,8 @@ Most importantly, remember that hooks are means to an end. The goal isn't runnin
 
 ---
 
-*This post draws from experiences implementing quality automation across aerospace and financial services organizations. For a hands-on demonstration of these concepts, check out the [pyquiz repository](https://github.com/irishlab-io/pyquiz) which provides practical examples of hook implementation.*
-
 ## Additional Resources
 
-- Pre-Commit framework documentation
-- Secret scanning tools comparison
-- Git hooks lifecycle diagrams
-- CI/CD integration patterns
+*This post draws from experiences implementing quality automation across aerospace and financial services organizations. For a hands-on demonstration of these concepts, check out the [pyquiz repository](https://github.com/irishlab-io/pyquiz) which provides practical examples of hook implementation.*
 
 *Have questions about implementing hooks in your organization? The concepts discussed here are language and framework agnostic—the principles apply universally.*
