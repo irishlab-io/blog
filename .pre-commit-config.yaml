@@ -74,16 +74,3 @@ repos:
         args:
           - -c
           - .config/.yaml-lint.yml
-  - repo: local
-    hooks:
-      - id: pin-github-action
-        name: "security | gh-action: pinned sha"
-        verbose: true
-        files: ^\.github/workflows/[^/]+\.ya?ml$
-        entry: "pin-github-action ."
-        args:
-          - --allow
-          - "irishlab-io/*"
-        language: node
-        additional_dependencies:
-          - pin-github-action@3.4.0
