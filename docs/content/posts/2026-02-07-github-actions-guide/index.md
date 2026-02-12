@@ -1,7 +1,7 @@
 ---
 title: "Mastering GitHub Actions: Reusable Workflows, Composite Actions, and Avoiding Workflow Drift"
 date: 2026-02-07
-draft: false
+draft: true
 description: "A comprehensive guide to GitHub Actions covering reusable workflows, composite actions, and strategies to prevent workflow drift across multiple repositories"
 summary: "Learn how to leverage GitHub Actions effectively with reusable workflows and composite actions, while maintaining consistency across multiple repositories"
 tags: ["ci", "cd", "github", "actions", "devops", "automation"]
@@ -248,6 +248,7 @@ my-org/.github/
 ```
 
 Benefits:
+
 - Single source of truth for organizational workflows
 - Easier to update and maintain
 - Clear versioning strategy
@@ -453,6 +454,7 @@ To keep your workflow ecosystem healthy:
 ### 1. Regular Audits
 
 Schedule quarterly reviews of your workflows to:
+
 - Identify unused or deprecated workflows
 - Check for security vulnerabilities
 - Update dependencies and actions
@@ -461,6 +463,7 @@ Schedule quarterly reviews of your workflows to:
 ### 2. Metrics and Insights
 
 Track workflow performance:
+
 - Execution time trends
 - Failure rates
 - Cost optimization opportunities
@@ -469,6 +472,7 @@ Track workflow performance:
 ### 3. Feedback Loop
 
 Establish a feedback mechanism:
+
 - Collect developer feedback on workflow usability
 - Identify pain points in the CI/CD process
 - Continuously improve based on team needs
