@@ -1,10 +1,17 @@
+---
 version: 2
 updates:
-- package-ecosystem: "github-actions"
-  directory: "/"
-  schedule:
-    interval: "daily"
-  labels:
-  - "CI/CD"
-  commit-message:
-    prefix: ci
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    groups:
+      major:
+        applies-to: version-updates
+        update-types:
+          - "major"
+      minors-and-patches:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
