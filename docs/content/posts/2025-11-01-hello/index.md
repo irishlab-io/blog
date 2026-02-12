@@ -1,6 +1,6 @@
 ---
 title: "Hello World"
-date: 2025-12-01
+date: 2025-11-01
 draft: false
 description: "First post"
 summary: "Hello world, this blog is live"
@@ -13,16 +13,17 @@ This is my blog, it's been a project of myself to write my own for a while.  Thi
 
 I plan to write here whenever I have time and feels it make sense.  I have a little backlog of idea and will see how these goes.
 
-## What I am planning to write about
+## What I am writing about
 
 Pretty easy:
 
-- devops
-- homelab
-- infrastracture
-- security
-- whatever I want
+- Dev(Sec)Ops
+- Homelab
+- Server and Infrastructures
+- Application Security
+- Cybersecurity
+- Whatever I feels like
 
 ## Who am I
 
-I am from Montréal (Canada) working in the Financial industry as an Application Security Senior Advisor.  Mostly working to improve DevSecOps and Security practices for my employer.
+I am from Montréal (Canada) working in the Financial industry as an DevSecOps & Application Security Senior Advisor.  Mostly working to improve DevSecOps and Security practices in a large scale organization.
