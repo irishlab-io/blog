@@ -34,7 +34,7 @@ jobs:
           image: docker.io/${{ matrix.target }}
           format: cyclonedx-json
           artifact-name: sbom.json
-          output-file: ${{ github.workspace }}/sbom.json
+          output-file: ${{ github.workspace }}/${{ matrix.target }}-sbom.json
 
       - name: Upload SBOM to Dependency-Track
         uses: DependencyTrack/gh-upload-sbom@48feab3080ff9e8f51f4d21861d9fc914eb744f5 # v3.1.0
@@ -44,5 +44,5 @@ jobs:
           parentname: ${{ github.repository }}
           projectname: ${{ matrix.target }}
           projectversion: "main"
-          bomfilename: ${{ github.workspace }}/sbom.json
+          bomfilename: ${{ github.workspace }}/${{ matrix.target }}-sbom.json
           autocreate: true
