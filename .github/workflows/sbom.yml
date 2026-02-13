@@ -33,7 +33,7 @@ jobs:
         with:
           image: docker.io/${{ matrix.target }}
           format: cyclonedx-json
-          artifact-name: sbom.json
+          artifact-name: ${{ matrix.target }}-sbom.json
           output-file: ${{ github.workspace }}/${{ matrix.target }}-sbom.json
 
       - name: Upload SBOM to Dependency-Track
