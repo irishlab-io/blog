@@ -13,6 +13,10 @@ jobs:
   sbom:
     name: Generate & Push SBOM
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        target: ["python:3.10.11-alpine3.18", "node:22-alpine3.20", "php:7.2.34-zts-alpine3.12", "ruby:3.2.2-alpine3.18"]
     timeout-minutes: 5
 
     steps:
@@ -27,7 +31,7 @@ jobs:
       - name: Generate SBOM with Syft
         uses: anchore/sbom-action@62ad5284b8ced813296287a0b63906cb364b73ee # v0.22.0
         with:
-          image: docker.io/python:3.10.11-alpine3.18
+          image: docker.io/${{ matrix.target }}
           format: cyclonedx-json
           artifact-name: sbom.json
           output-file: ${{ github.workspace }}/sbom.json
@@ -37,7 +41,8 @@ jobs:
         with:
           serverhostname: ${{ secrets.DEPENDENCYTRACK_HOST_URL }}
           apikey: ${{ secrets.DEPENDENCYTRACK_TOKEN }}
-          projectname: "blog"
+          parentname: ${{ github.repository }}
+          projectname: ${{ matrix.target }}
           projectversion: "main"
           bomfilename: ${{ github.workspace }}/sbom.json
           autocreate: true
