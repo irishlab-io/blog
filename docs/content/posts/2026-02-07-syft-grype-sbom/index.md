@@ -1,13 +1,11 @@
 ---
-title: "Integrating Syft and Grype in CI/CD for SBOM Generation and Vulnerability Scanning"
+title: "Dr. Strangelove or: How I Learned to Stop Worrying and Love the SBOM"
 date: 2026-02-07
-draft: true
+draft: false
 description: "A comprehensive guide to integrating Syft and Grype in your CI/CD pipeline to generate immutable SBOMs and upload them to your self-hosted OWASP Dependency Track instance"
 summary: "Learn how to leverage Syft for SBOM generation and Grype for vulnerability scanning, while integrating with OWASP Dependency Track for comprehensive supply chain security in your CI/CD pipeline"
 tags: ["security", "sbom", "devsecops", "ci-cd", "grype", "syft", "dependency-track", "owasp"]
 ---
-
-# Integrating Syft and Grype in CI/CD for SBOM Generation and Vulnerability Scanning
 
 Software Bill of Materials (SBOM) has become a critical component of modern software supply chain security. With increasing regulatory requirements and security concerns, organizations need to maintain accurate inventories of their software components. In this post, I'll walk you through integrating Syft and Grype into your CI/CD pipeline to generate immutable SBOMs and upload them to a self-hosted OWASP Dependency Track instance.
 
