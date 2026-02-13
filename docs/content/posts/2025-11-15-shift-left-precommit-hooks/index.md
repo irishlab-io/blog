@@ -9,8 +9,6 @@ series: ["DevSecOps"]
 series_order: 1
 ---
 
-# Shifting Left with Pre-Commit
-
 Picture this scenario:  Your team lead is asking for checks on every commit.  Then the Security team announces new requirements for every code commit.  What was supposed to be a simple workflow becomes an endless pile of manual tasks straining your mental load.
 
 ```text

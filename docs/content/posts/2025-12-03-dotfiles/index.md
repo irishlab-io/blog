@@ -7,8 +7,6 @@ summary: "A tour of my dotfiles repository: goals, structure, setup flow, and ho
 tags: ["ansible", "dotfiles", "linux", "wsl2", "automation", "devops"]
 ---
 
-# Dotfiles
-
 This post documents my dotfiles repository and how I use it to bootstrap and maintain Linux workstations with a strong emphasis on WSL2. The repo lives at [github.com/irish1986/dotfiles](https://github.com/irish1986/dotfiles) and focuses on repeatable, idempotent configuration using Ansible.
 
 The core goal is simple: I want a versioned, repeatable setup for Ubuntu that I can apply to multiple machines (personal and professional), including WSL2 on Windows 11. The playbooks are written to be idempotent so I can run them anytime to reconcile drift.
