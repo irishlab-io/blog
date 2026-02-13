@@ -1,7 +1,7 @@
 ---
 title: "Dr. Strangelove or: How I Learned to Stop Worrying and Love the SBOM"
 date: 2026-02-13
-draft: false
+draft: true
 description: "A comprehensive guide to integrating Syft and Grype in your CI/CD pipeline to generate immutable SBOMs and upload them to your self-hosted OWASP Dependency Track instance"
 summary: "Learn how to leverage Syft for SBOM generation and Grype for vulnerability scanning, while integrating with OWASP Dependency Track for comprehensive supply chain security in your CI/CD pipeline"
 tags: ["security", "sbom", "devsecops", "ci-cd", "grype", "syft", "dependency-track", "owasp"]
@@ -17,6 +17,12 @@ An SBOM is essentially an inventory of all components, libraries, and dependenci
 - **License Compliance**: Track open source licenses across your organization
 - **Supply Chain Security**: Understand your software's dependency tree
 - **Regulatory Compliance**: Meet requirements like the US Executive Order 14028, Canadian Bill C-26 and many industries standards & best practices
+
+The primary SBOM formats, recognized for ensuring software supply chain security and interoperability, are [CycloneDX](https://cyclonedx.org/), [SPDX](https://spdx.dev/), and [SWID Tags](https://csrc.nist.gov/projects/Software-Identification-SWID). These formats enable automated, machine-readable documentation of components, licenses, and vulnerabilities.
+
+- **CycloneDX (OWASP)**: A lightweight, modern format designed specifically for application security, vulnerability tracking, and supply chain security. It is highly versatile, supporting software, services, and hardware, and is often used within DevOps build pipelines.  CycloneDX tends to be more focused on security, vulnerability management, and ease of use in CI/CD pipelines.
+- **SPDX (Linux Foundation)**: An open international standard (ISO/IEC 5962:2021) that originated for tracking software licenses but has evolved to include detailed component tracking, copyright, and security metadata.  SPDX is often favored for detailed legal compliance and intellectual property management.
+- SWID Tags (ISO/IEC 19770-2): These are not full, comprehensive SBOM documents like CycloneDX or SPDX, but rather tags that provide identity and version information for software components.
 
 ## The Tools
 
@@ -63,9 +69,6 @@ and many more...
 ```
 
 Let's now generate an `sbom.json` file that we could store, analyze and evaluate for vulnerabilities using this command `syft scan docker.io/python:3.10.11-alpine3.18 -o cyclonedx-json=./sbom.json`.  Two (2) differents SBOM standards are commonly in used:
-
-- **CycloneDX (OWASP)**: A lightweight, modern format designed specifically for application security, vulnerability tracking, and supply chain security. It is highly versatile, supporting software, services, and hardware, and is often used within DevOps build pipelines.  CycloneDX tends to be more focused on security, vulnerability management, and ease of use in CI/CD pipelines.
-- **SPDX (Linux Foundation)**: An open international standard (ISO/IEC 5962:2021) that originated for tracking software licenses but has evolved to include detailed component tracking, copyright, and security metadata.  SPDX is often favored for detailed legal compliance and intellectual property management.
 
 **Grype:**
 

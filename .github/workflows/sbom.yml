@@ -1,0 +1,41 @@
+---
+name: Manual - SBOM
+
+on: # yamllint disable-line rule:truthy
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+
+  sbom:
+    name: Generate & Push SBOM
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    steps:
+      - name: Connect to Tailnet
+        uses: tailscale/github-action@53acf823325fe9ca47f4cdaa951f90b4b0de5bb9 # v4.1.1
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_CLIENT_SECRET }}
+          ping: ${{ secrets.DEPLOY_HOST }}
+          tags: "tag:ci"
+
+      - uses: anchore/sbom-action@62ad5284b8ced813296287a0b63906cb364b73ee # v0.22.0
+        with:
+          image: docker.io/python:3.10.11-alpine3.18
+          format: cyclonedx-json
+          artifact-name: sbom.cdx.json
+
+      - name: Upload SBOM to Dependency-Track
+        uses: DependencyTrack/gh-upload-sbom@48feab3080ff9e8f51f4d21861d9fc914eb744f5 # v3.1.0
+        with:
+          serverhostname: ${{ secrets.DEPENDENCYTRACK_HOST_URL }}
+          apikey: ${{ secrets.DEPENDENCYTRACK_TOKEN }}
+          projectname: "blog"
+          projectversion: "main"
+          bomfilename: "sbom.cdx.json"
+          autocreate: true
