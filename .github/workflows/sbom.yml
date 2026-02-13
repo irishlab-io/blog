@@ -37,7 +37,7 @@ jobs:
         with:
           serverhostname: ${{ secrets.DEPENDENCYTRACK_HOST_URL }}
           apikey: ${{ secrets.DEPENDENCYTRACK_TOKEN }}
-          parentname: ${{ github.repository }}
+          parentname: ${{ github.repository.name }}
           projectname: "python:3.10.11-alpine3.18"
           projectversion: "main"
           bomfilename: ${{ github.workspace }}/sbom.json
