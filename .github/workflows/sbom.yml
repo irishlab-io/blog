@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: ["python:3.10.11-alpine3.18", "node:22-alpine3.20", "php:7.2.34-zts-alpine3.12", "ruby:3.2.2-alpine3.18"]
+        target: ["3.10.11-alpine3.16", "3.10.11-alpine3.17", "3.10.11-alpine3.18"]
     timeout-minutes: 5
 
     steps:
@@ -31,7 +31,7 @@ jobs:
       - name: Generate SBOM with Syft
         uses: anchore/sbom-action@62ad5284b8ced813296287a0b63906cb364b73ee # v0.22.0
         with:
-          image: docker.io/${{ matrix.target }}
+          image: docker.io/python:${{ matrix.target }}
           format: cyclonedx-json
           artifact-name: ${{ matrix.target }}-sbom.json
           output-file: ${{ github.workspace }}/${{ matrix.target }}-sbom.json
