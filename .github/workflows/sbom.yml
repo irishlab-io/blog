@@ -30,7 +30,7 @@ jobs:
           image: docker.io/python:3.10.11-alpine3.18
           format: cyclonedx-json
           artifact-name: sbom.json
-          output-file: sbom.json
+          output-file: ${{ github.workspace }}/sbom.json
 
       - name: Upload SBOM to Dependency-Track
         uses: DependencyTrack/gh-upload-sbom@48feab3080ff9e8f51f4d21861d9fc914eb744f5 # v3.1.0
@@ -39,5 +39,5 @@ jobs:
           apikey: ${{ secrets.DEPENDENCYTRACK_TOKEN }}
           projectname: "blog"
           projectversion: "main"
-          bomfilename: sbom.json
+          bomfilename: ${{ github.workspace }}/sbom.json
           autocreate: true
