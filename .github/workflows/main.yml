@@ -7,9 +7,6 @@ on: # yamllint disable-line rule:truthy
       - main
     paths-ignore:
       - 'README.md'
-  schedule:
-    - cron: "22 22 * * *"
-  workflow_dispatch:
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
@@ -59,9 +56,13 @@ jobs:
     name: GH Pages Build and Deploy
     runs-on: ubuntu-24.04
     timeout-minutes: 5
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
+    env:
+      HUGO_CACHEDIR: /tmp/hugo_cache
 
     permissions:
       contents: read
@@ -76,12 +77,21 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Hugo
+        id: setup
         uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3.0.0
         with:
           hugo-version: "latest"
           extended: true
 
+      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: ${{ env.HUGO_CACHEDIR }} # <- Use the same env variable just right here
+          key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-hugomod-
+
       - name: Build
+        id: build
         run: |
           cd docs/
           hugo --minify
