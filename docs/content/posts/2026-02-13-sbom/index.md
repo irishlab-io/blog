@@ -1,7 +1,7 @@
 ---
 title: "Dr. Strangelove or: How I Learned to Stop Worrying and Love the SBOM"
 date: 2026-02-13
-draft: true
+draft: false
 description: "A comprehensive guide to integrating Syft and Grype in your CI/CD pipeline to generate immutable SBOMs and upload them to your self-hosted OWASP Dependency Track instance"
 summary: "Learn how to leverage Syft for SBOM generation and Grype for vulnerability scanning, while integrating with OWASP Dependency Track for comprehensive supply chain security in your CI/CD pipeline"
 tags: ["security", "sbom", "devsecops", "ci-cd", "grype", "syft", "dependency-track", "owasp"]
@@ -24,7 +24,7 @@ The primary SBOM formats, recognized for ensuring software supply chain security
 - **SPDX (Linux Foundation)**: An open international standard (ISO/IEC 5962:2021) that originated for tracking software licenses but has evolved to include detailed component tracking, copyright, and security metadata.  SPDX is often favored for detailed legal compliance and intellectual property management.
 - SWID Tags (ISO/IEC 19770-2): These are not full, comprehensive SBOM documents like CycloneDX or SPDX, but rather tags that provide identity and version information for software components.
 
-## The Tools
+## The Toolchain
 
 [Syft](https://github.com/anchore/syft) is a powerful CLI tool and library for generating SBOMs from container images and filesystems. It supports multiple formats including:
 [Grype](https://github.com/anchore/grype) is a vulnerability scanner that works hand-in-hand with Syft. It can scan container images, filesystems, and SBOMs to identify known vulnerabilities from multiple databases.
@@ -68,19 +68,42 @@ cli-64                  UNKNOWN           binary
 and many more...
 ```
 
-Let's now generate an `sbom.json` file that we could store, analyze and evaluate for vulnerabilities using this command `syft scan docker.io/python:3.10.11-alpine3.18 -o cyclonedx-json=./sbom.json`.  Two (2) differents SBOM standards are commonly in used:
+Generating a `sbom.json` is fun but as itself isn't that useful.  Many compliance framework will require some form of SBOM to be published as part as the software release but that is just one of the many actionnable intent of this.  [Anchore](https://anchore.com/), the company behind Syft is always producing [Grype](https://github.com/anchore/grype) a vulnerability scanner.  Essentially, it's a two steps process where it starts with 1) generating a `sbom.json`; 2) evaluating that `sbom.json` for vulnerabilities.
+
+Let's dive into our `sbom.json` file for vulnerabilities using this command `grype sbom:sbom.json`.  Cyclonedx is my prefered SBOM format but this will depends on your objectives.
 
 **Grype:**
 
-```yaml
-name: SBOM Generation and Vulnerability Scanning
-
-on:
+```text
+  ~ ❯ grype sbom:sbom.json
+ ✔ Scanned for vulnerabilities     [119 vulnerability matches]
+   ├── by severity: 11 critical, 33 high, 66 medium, 9 low, 0 negligible
+   └── by status:   107 fixed, 12 not-fixed, 0 ignored
+NAME           INSTALLED  FIXED IN                                TYPE    VULNERABILITY        SEVERITY  EPSS           RISK
+libcrypto3     3.1.0-r4   3.1.1-r0                                apk     CVE-2023-2650        Medium    92.0% (99th)   52.9
+libssl3        3.1.0-r4   3.1.1-r0                                apk     CVE-2023-2650        Medium    92.0% (99th)   52.9
+python         3.10.11    3.6.16, 3.8.17, 3.9.17, 3.10.12, ...    binary  CVE-2007-4559        Medium    90.6% (99th)   60.2
+libcrypto3     3.1.0-r4   3.1.7-r0                                apk     CVE-2024-6119        High      5.7% (90th)    4.3
+and many more...
+56 packages from EOL distro "alpine 3.18.0" - vulnerability data may be incomplete or outdated; consider upgrading to a supported version
 ```
+
+In the initial portion of its results output, Grype summarizes information on the scanned artifact and gives an overview of known vulnerabilities. In the case of a scanned image, the output includes the image digest, a unique hash of the image that can be used as an identifier.  Overview output includes the number of packages, files, and executables found in the artifact. Generally speaking, CVEs are detected against packages, but the number of executables detected can also give you an idea of the attack surface of the scanned image or filesystem.
+
+Finally, this portion gives a count of the number of CVEs detected by severity and fixed status. Severity categorization sorts CVEs into four categories based on the [Common Vulnerability Scoring System (CVSS)](https://www.first.org/cvss/v4.0/user-guide). CVSS scores correspond to four categories:
+
+```text
+1. Critical (9.0-10.0)
+2. High (7.0-8.9)
+3. Medium (4.0-6.9)
+4. Low (0.1-3.9)
+```
+
+Grype also counts the number of CVEs by fixed status. If a CVE is marked as fixed, it can be resolved by updating to a newer version of the package. Our output suggests that 107 packages have been fixed and can be remediated with updates:.  It also identified that `alpine 3.18.0` distro is end-of-life and should just be upgrade as a whole in this case.
 
 ## CI/CD Integration
 
-Now let's integrate Syft and Grype into your pipeline. I'll show examples for both GitHub Actions and GitLab CI.
+Now we have learn to generate and evaluate Software Bills of Material which, again, is fun but at scale this is tidious and might limited value.  Even using an army of free interns 24/7 the turn around pace at which new vulnerabilities are found and must be mitigated make this inconvinient to perform manully.  Therefore, automation it is...  Let's look at an exemple using GitHub Actions workflows to achieve this.
 
 ### GitHub Actions
 

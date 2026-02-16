@@ -10,39 +10,24 @@ concurrency:
 
 jobs:
 
-  sbom:
-    name: Generate & Push SBOM
+  sbom-anchore:
+    name: Generate & Scan SBOM
     runs-on: ubuntu-24.04
-    strategy:
-      fail-fast: false
-      matrix:
-        target: ["3.10.11-alpine3.16", "3.10.11-alpine3.17","3.10.11-alpine3.18"]
     timeout-minutes: 5
 
     steps:
-      - name: Connect to Tailnet
-        uses: tailscale/github-action@53acf823325fe9ca47f4cdaa951f90b4b0de5bb9 # v4.1.1
-        with:
-          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
-          oauth-secret: ${{ secrets.TS_OAUTH_CLIENT_SECRET }}
-          ping: ${{ secrets.DEPLOY_HOST }}
-          tags: "tag:ci"
 
       - name: Generate SBOM with Syft
         uses: anchore/sbom-action@62ad5284b8ced813296287a0b63906cb364b73ee # v0.22.0
         with:
-          image: docker.io/python:${{ matrix.target }}
+          image: docker.io/python:3.10.11-alpine3.16
           format: cyclonedx-json
-          artifact-name: ${{ matrix.target }}-sbom.json
-          output-file: ${{ github.workspace }}/${{ matrix.target }}-sbom.json
+          artifact-name: 3.10.11-alpine3.16-sbom.json
+          output-file: ${{ github.workspace }}/3.10.11-alpine3.16-sbom.json
 
-      - name: Upload SBOM to Dependency-Track
-        uses: DependencyTrack/gh-upload-sbom@48feab3080ff9e8f51f4d21861d9fc914eb744f5 # v3.1.0
+      - name: Scan SBOM with Grype
+        uses: anchore/scan-action@7037fa011853d5a11690026fb85feee79f4c946c # v7
         with:
-          serverhostname: ${{ secrets.DEPENDENCYTRACK_HOST_URL }}
-          apikey: ${{ secrets.DEPENDENCYTRACK_TOKEN }}
-          parentname: ${{ github.repository.name }}
-          projectname: "python:${{ matrix.target }}"
-          projectversion: "main"
-          bomfilename: ${{ github.workspace }}/${{ matrix.target }}-sbom.json
-          autocreate: true
+          sbom: "${{ github.workspace }}/3.10.11-alpine3.16-sbom.json"
+          fail-build: true
+          severity-cutoff: critical
