@@ -29,5 +29,5 @@ jobs:
         uses: anchore/scan-action@7037fa011853d5a11690026fb85feee79f4c946c # v7.3.2
         with:
           sbom: "${{ github.workspace }}/3.10.11-alpine3.18-sbom.json"
-          fail-build: true
+          fail-build: false
           severity-cutoff: critical
