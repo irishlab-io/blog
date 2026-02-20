@@ -2,7 +2,7 @@
 version: 2
 updates:
   - package-ecosystem: "docker"
-    directory: "/"
+    directory: "/src/docker"
     schedule:
       interval: "weekly"
       day: "sunday"
@@ -20,7 +20,7 @@ updates:
         update-types:
           - "version-update:semver-major"
   - package-ecosystem: "docker-compose"
-    directory: "/"
+    directory: "/src/docker"
     schedule:
       interval: "weekly"
       day: "sunday"
@@ -32,7 +32,7 @@ updates:
     commit-message:
       prefix: "build"
   - package-ecosystem: "pip"
-    directory: "/"
+    directory: "/src/packages"
     schedule:
       interval: "weekly"
       day: "sunday"
