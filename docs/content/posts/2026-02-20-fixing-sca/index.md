@@ -9,7 +9,7 @@ series: ["SBOM"]
 series_order: 3
 ---
 
-In the previous posts, we covered how to generate SBOMs with Syft, scan them with Grype, and feed them into Dependency-Track for continuous monitoring. That pipeline tells you *what's wrong*. But knowing about vulnerabilities and actually fixing them are two very different things. The dashboards are blinking red, the Dependency-Track policies are firing alerts and now someone has to go update all those dependencies. Manually or... not.
+In the previous posts, we covered how to generate SBOMs with Syft, scan them with Grype, and feed them into Dependency-Track for continuous monitoring. That pipeline tells you *what's wrong*. But knowing about vulnerabilities and actually fixing them are two very different things. The dashboards are blinking red, the Dependency-Track policies are firing alerts and now someone has to go update all those dependencies. Manually or not...
 
 ## Enter Dependabot
 
@@ -130,8 +130,5 @@ Your SBOMs tell you what's in your software. Dependency-Track tells you what's v
 ## Resources
 
 - [GitHub Dependabot Documentation](https://docs.github.com/en/code-security/dependabot)
-- [Dependabot Configuration Options Reference](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file)
-- [Dependabot Supported Ecosystems](https://docs.github.com/en/code-security/dependabot/ecosystems-supported-by-dependabot)
-- [Automating Dependabot with GitHub Actions](https://docs.github.com/en/code-security/dependabot/working-with-dependabot/automating-dependabot-with-github-actions)
 - [GitHub Advisory Database](https://github.com/advisories)
 - [dependabot/fetch-metadata Action](https://github.com/dependabot/fetch-metadata)
