@@ -90,6 +90,8 @@ curl -X "POST" "https://dtrack.example.com/api/v1/bom" \
   -F "bom=@sbom.json"
 ```
 
+There are others cli such as [dtrack-cli](https://github.com/fjbarrena/dtrack-cli) which can help to upload `sbom.json` files.
+
 **From CI pipeline**: The [Dependency-Track GitHub Action](https://github.com/marketplace/actions/upload-bom-to-dependency-track) provides a clean integration:
 
 {{< github-content
