@@ -31,7 +31,7 @@ The platform has an API-first design, making it ideal for CI/CD integration. Eve
 
 ## Deploy your own
 
-Dependency-Track licensed under Apache 2.0 which means free to use, modify, and distribute in a commercial setting without royalties.  It is a highly permissive, enterprise-friendly license that allows you to incorporate the code into proprietary, closed-source products, provided you include the original license, copyright notices, and documentation of significant changes.
+Dependency-Track licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) which means free to use, modify, and distribute in a commercial setting without royalties.  It is a highly permissive, enterprise-friendly license that allows you to incorporate the code into proprietary, closed-source products, provided you include the original license, copyright notices, and documentation of significant changes.
 
 The fastest way to stand up Dependency-Track is with Docker Compose.  For more details find the [official documentation here](https://docs.dependencytrack.org/) for alternative deployment.
 
