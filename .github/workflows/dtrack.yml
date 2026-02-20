@@ -18,7 +18,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: ["3.10.11-alpine3.16", "3.10.11-alpine3.17","3.10.11-alpine3.18"]
+        target:
+          - "3.10.11"
+          - "3.10.11-alpine"
+          - "3.10.11-alpine3.16"
+          - "3.10.11-alpine3.17"
+          - "3.10.11-alpine3.18"
+          - "3.10.11-bullseye"
+          - "3.10.11-buster"
+          - "3.10.11-slim-bullseye"
+          - "3.10.11-slim-buster"
+          - "3.10.11-slim"
+          - "3.10.11-windowsservercore-1809"
+          - "3.10.11-windowsservercore-ltsc2022"
+          - "3.10.11-windowsservercore"
     timeout-minutes: 5
 
     steps:
@@ -44,7 +57,7 @@ jobs:
           serverhostname: ${{ secrets.DEPENDENCYTRACK_HOST_URL }}
           apikey: ${{ secrets.DEPENDENCYTRACK_TOKEN }}
           parentname: ${{ github.repository.name }}
-          projectname: "python:${{ matrix.target }}"
-          projectversion: "main"
+          projectname: "python"
+          projectversion: "${{ matrix.target }}"
           bomfilename: ${{ github.workspace }}/${{ matrix.target }}-sbom.json
           autocreate: true
