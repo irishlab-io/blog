@@ -9,15 +9,15 @@ series: ["SBOM"]
 series_order: 2
 ---
 
-Previously in this series, we explored how to generate SBOMs with Syft and scan them for vulnerabilities with Grype. That workflow is a solid foundation, but it leaves a critical question unanswered: where do all those `sbom.json` files go, and how do you keep track of vulnerabilities as they evolve over time?  What are your options :
+Previously in this series, we explored how to generate SBOMs with Syft and scan them for vulnerabilities with Grype. That workflow is a solid foundation, but it leaves a critical question unanswered: where do all those `sbom.json` files go, and how do you keep track of vulnerabilities as they evolve over time?  What are your options:
 
-- Upload these to some form of storage like an S3 bucket ?
-- Append these to your packages in your artefact registry ?
-- Keep them left & right with your CI pipeline logs and outputs ?
+- Upload these to some form of storage like an S3 bucket?
+- Append these to your packages in your artefact registry?
+- Keep them left & right with your CI pipeline logs and outputs?
 
 ## Dependency-Track
 
-Enter [Dependency-Track](https://dependencytrack.org/) a Software Composition Analysis (SCA) tool suite that identifies project dependencies and checks if there are any known, publicly disclosed, vulnerabilities.  It consumes your SBOMs, continuously monitors every component for newly disclosed vulnerabilities, and gives you a portfolio-wide view of risk across your entire organization.
+Enter [Dependency-Track](https://dependencytrack.org/) a Software Composition Analysis (SCA) tool suite that identifies project dependencies and checks for any known, publicly disclosed vulnerabilities.  It consumes your SBOMs, continuously monitors every component for newly disclosed vulnerabilities, and gives you a portfolio-wide view of risk across your entire organization.
 
 Dependency-Track is an [OWASP Flagship project](https://owasp.org/projects/) and unlike traditional Software Composition Analysis (SCA) tools that perform point-in-time scans, Dependency-Track takes an SBOM-centric approach. You feed it SBOMs, and it continuously re-evaluates every component against multiple vulnerability intelligence sources.
 
@@ -31,7 +31,7 @@ The platform has an API-first design, making it ideal for CI/CD integration. Eve
 
 ## Deploy your own
 
-Dependency-Track licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) which means free to use, modify, and distribute in a commercial setting without royalties.  It is a highly permissive, enterprise-friendly license that allows you to incorporate the code into proprietary, closed-source products, provided you include the original license, copyright notices, and documentation of significant changes.
+Dependency-Track is licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) which means free to use, modify, and distribute in a commercial setting without royalties.  It is a highly permissive, enterprise-friendly license that allows you to incorporate the code into proprietary, closed-source products, provided you include the original license, copyright notices, and documentation of significant changes.
 
 The fastest way to stand up Dependency-Track is with Docker Compose.  For more details find the [official documentation here](https://docs.dependencytrack.org/) for alternative deployment.
 
@@ -40,7 +40,7 @@ The fastest way to stand up Dependency-Track is with Docker Compose.  For more d
     path="docs/content/posts/2026-02-18-dtrack/compose.yml"
     lang="yaml" >}}
 
-This container version is the `bundled` edition which simplify database deployment and management although I would not use this version in **production**.  It very good for small scale and testing purposes.  Bring it up with `docker compose up -d`.
+This container version is the `bundled` edition which simplifies database deployment and management although I would not use this version in **production**.  It is very good for small-scale and testing purposes.  Bring it up with `docker compose up -d`.
 
 On first launch, the API server will initialize the database and begin mirroring vulnerability data from the National Vulnerability Database (NVD) and other configured sources. This initial mirror can take **up to 30 minutes**.
 
@@ -50,7 +50,7 @@ Dependency-Track follows a three-tier architecture:
 
 - **API Server** (`dependencytrack/apiserver`): A Java-based backend that handles all business logic, vulnerability analysis, SBOM ingestion, and API endpoints.
 - **Frontend** (`dependencytrack/frontend`): A lightweight web-application that communicates with the API server.
-- **Database**: Options are **PostgreSQL**, **MSSQL** and **MySQL**; I prefer `postgres` personnally for no specific reason that I know a bit of `psql`
+- **Database**: Options are **PostgreSQL**, **MSSQL** and **MySQL**; I prefer `postgres` personally for no specific reason other than that I know a bit of `psql`
 
 ## Setting up your own
 
@@ -62,13 +62,13 @@ Navigate to **Administration > Analyzers** and enable the sources relevant to yo
 
 - **Internal Analyzer** (CPE-based matching against NVD): Enabled by default, covers OS-level and firmware components
 - **OSS Index** (Sonatype): Free, no API key required, excellent accuracy for application dependencies
-- **VulnDB**: Requires an account (free-tier available);  commercial service for Risk Based Security in third-party components
+- **VulnDB**: Requires an account (free-tier available); a commercial service for Risk Based Security in third-party components
 - **Snyk**: Requires a Snyk API token (free-tier available); provides comprehensive commercial-grade vulnerability data
 - **Trivy**: Additional source for container and OS package vulnerabilities (not tested)
 
 Navigate to **Administration > Vulnerability Sources** and enable the sources relevant to your stack:
 
-- **National Vulnerability Database**: Enable mirroring via API, Additionally download feeds and request your free API key
+- **National Vulnerability Database**: Enable mirroring via API, additionally download feeds and request your free API key
 - **GitHub Advisories**: Requires a GitHub Personal Access Token, provides high-quality curated advisories
 - **OSV** (Open Source Vulnerabilities): Aggregates advisories from multiple ecosystems
 
@@ -90,7 +90,7 @@ curl -X "POST" "https://dtrack.example.com/api/v1/bom" \
   -F "bom=@sbom.json"
 ```
 
-There are others cli such as [dtrack-cli](https://github.com/fjbarrena/dtrack-cli) which can help to upload `sbom.json` files.
+There are other CLIs such as [dtrack-cli](https://github.com/fjbarrena/dtrack-cli) which can help to upload `sbom.json` files.
 
 **From CI pipeline**: The [Dependency-Track GitHub Action](https://github.com/marketplace/actions/upload-bom-to-dependency-track) provides a clean integration:
 
