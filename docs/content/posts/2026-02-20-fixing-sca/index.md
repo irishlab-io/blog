@@ -1,5 +1,5 @@
 ---
-title: "The Robots Are Fixing My Dependencies and I'm Not Even Mad"
+title: "The Robots Are Fixing My Dependencies"
 date: 2026-02-20
 draft: false
 description: "A practical guide to implementing GitHub Dependabot for automated dependency updates across Python, GitHub Actions, and Docker ecosystems to reduce software component vulnerabilities"
