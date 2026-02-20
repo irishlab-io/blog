@@ -1,4 +1,4 @@
-FROM docker.io/ubuntu:xenial-20210114
+FROM ubuntu:xenial
 
 RUN apt-get update && apt-get install -y curl
 

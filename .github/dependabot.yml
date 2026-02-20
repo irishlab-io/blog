@@ -19,18 +19,6 @@ updates:
       - dependency-name: "*"
         update-types:
           - "version-update:semver-major"
-  - package-ecosystem: "docker-compose"
-    directory: "/src/docker"
-    schedule:
-      interval: "weekly"
-      day: "sunday"
-      time: "01:00"
-      timezone: "America/Toronto"
-    labels:
-      - "dependencies"
-      - "docker"
-    commit-message:
-      prefix: "build"
   - package-ecosystem: "pip"
     directory: "/src/packages"
     schedule:
