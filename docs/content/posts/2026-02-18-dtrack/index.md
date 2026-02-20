@@ -112,10 +112,6 @@ The main dashboard provides a bird's-eye view of your entire software portfolio.
 
 This is invaluable for security teams and management who need visibility without diving into individual project details.
 
-### Vulnerability Exploitability Exchange (VEX)
-
-Dependency-Track supports [CycloneDX VEX](https://cyclonedx.org/capabilities/vex/), allowing you to produce and consume machine-readable exploitability assessments. This is particularly useful for communicating vulnerability status to downstream consumers of your software.
-
 ## Policy Engine
 
 The policy engine operates on three dimensions:
@@ -137,7 +133,6 @@ The key takeaways:
 3. **Configure multiple vulnerability sources** for comprehensive coverage
 4. **Set up notifications** so your team learns about new vulnerabilities in real time
 5. **Define policies** to enforce security and licensing standards across your portfolio
-6. **Leverage the audit workflow** to triage findings and avoid duplicate work across teams
 
 In the next post, we'll look at practical strategies for automating the remediation side of the equation, closing the loop from detection to fix.
 
