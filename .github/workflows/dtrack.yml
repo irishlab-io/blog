@@ -29,9 +29,6 @@ jobs:
           - "3.10.11-slim-bullseye"
           - "3.10.11-slim-buster"
           - "3.10.11-slim"
-          - "3.10.11-windowsservercore-1809"
-          - "3.10.11-windowsservercore-ltsc2022"
-          - "3.10.11-windowsservercore"
     timeout-minutes: 5
 
     steps:
