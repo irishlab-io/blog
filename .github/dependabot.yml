@@ -1,19 +1,81 @@
 ---
 version: 2
 updates:
-- package-ecosystem: "github-actions"
-  directory: "/"
-  schedule:
-    interval: "daily"
-  commit-message:
-    prefix: ci
-  groups:
-    major:
-      applies-to: version-updates
-      update-types:
-        - "major"
-    minors-and-patches:
-      applies-to: version-updates
-      update-types:
-        - "minor"
-        - "patch"
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      time: "01:00"
+      timezone: "America/Toronto"
+    cooldown:
+      default-days: 7
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "build"
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
+  - package-ecosystem: "docker-compose"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      time: "01:00"
+      timezone: "America/Toronto"
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "build"
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      time: "01:00"
+      timezone: "America/Toronto"
+    cooldown:
+      default-days: 7
+    labels:
+      - "dependencies"
+      - "python"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    open-pull-requests-limit: 10
+    groups:
+      python-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      time: "01:00"
+      timezone: "America/Toronto"
+    cooldown:
+      default-days: 7
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "ci"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
