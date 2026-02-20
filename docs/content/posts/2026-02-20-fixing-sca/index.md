@@ -9,9 +9,7 @@ series: ["SBOM"]
 series_order: 3
 ---
 
-In the previous posts, we covered how to generate SBOMs with Syft, scan them with Grype, and feed them into Dependency-Track for continuous monitoring. That pipeline tells you *what's wrong*. But knowing about vulnerabilities and actually fixing them are two very different things. The dashboards are blinking red, the Dependency-Track policies are firing alerts and now someone has to go update all those dependencies. Manually.
-
-Or... not.
+In the previous posts, we covered how to generate SBOMs with Syft, scan them with Grype, and feed them into Dependency-Track for continuous monitoring. That pipeline tells you *what's wrong*. But knowing about vulnerabilities and actually fixing them are two very different things. The dashboards are blinking red, the Dependency-Track policies are firing alerts and now someone has to go update all those dependencies. Manually or... not.
 
 ## Enter Dependabot
 
