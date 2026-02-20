@@ -1,0 +1,19 @@
+---
+volumes:
+  dependency-track:
+
+services:
+  dtrack:
+    container_name: dependencytrack
+    image: docker.io/dependencytrack/bundled:4.13.6-alpine
+    deploy:
+      resources:
+        limits:
+          memory: 12288m
+        reservations:
+          memory: 8192m
+    ports:
+      - "8080:8080"
+    volumes:
+      - dependency-track:/data
+    restart: unless-stopped

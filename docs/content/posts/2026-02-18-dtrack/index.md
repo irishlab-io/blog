@@ -1,154 +1,152 @@
 ---
-title: "SBOM long term management"
+title: "SBOM Long-Term Management with OWASP Dependency-Track"
 date: 2026-02-18
-draft: true
-description: "A comprehensive guide to integrating Syft and Grype in your CI/CD pipeline to generate immutable SBOMs and upload them to your self-hosted OWASP Dependency Track instance"
-summary: "Learn how to leverage Syft for SBOM generation and Grype for vulnerability scanning, while integrating with OWASP Dependency Track for comprehensive supply chain security in your CI/CD pipeline"
-tags: ["security", "sbom", "devsecops", "ci-cd", "grype", "syft", "dependency-track", "owasp"]
+draft: false
+description: "A comprehensive guide to deploying and using OWASP Dependency-Track for long-term SBOM management, continuous vulnerability monitoring, and portfolio-wide risk analysis"
+summary: "Learn how to deploy OWASP Dependency-Track, ingest SBOMs from your CI/CD pipeline, and leverage its portfolio management capabilities for continuous vulnerability monitoring and supply chain risk reduction"
+tags: ["security", "sbom", "devsecops", "ci-cd", "dependency-track", "owasp", "vulnerability-management"]
 series: ["SBOM"]
 series_order: 2
 ---
 
-Software Bill of Materials (SBOM) has become a critical component of modern software supply chain security. With increasing regulatory requirements and security concerns, organizations need to maintain accurate inventories of their software components. In this post, I'll walk you through integrating Syft and Grype into your CI/CD pipeline to generate immutable SBOMs and upload them to a secure long-term storage location.
+Previously in this series, we explored how to generate SBOMs with Syft and scan them for vulnerabilities with Grype. That workflow is a solid foundation, but it leaves a critical question unanswered: where do all those `sbom.json` files go, and how do you keep track of vulnerabilities as they evolve over time?  What are your options :
 
-## Why SBOM Matters
+- Upload these to some form of storage like an S3 bucket ?
+- Append these to your packages in your artefact registry ?
+- Keep them left & right with your CI pipeline logs and outputs ?
 
-An SBOM is essentially an inventory of all components, libraries, and dependencies used in your software. Think of it as a "ingredients list" for your application. Key benefits include:
+## Dependency-Track
 
-- **Vulnerability Management**: Quickly identify which applications are affected when new vulnerabilities are discovered
-- **License Compliance**: Track open source licenses across your organization
-- **Supply Chain Security**: Understand your software's dependency tree
-- **Regulatory Compliance**: Meet requirements like US Executive Order 14028, Canadian Bill C-26, and many industry standards and best practices
+Enter [Dependency-Track](https://dependencytrack.org/) a Software Composition Analysis (SCA) tool suite that identifies project dependencies and checks if there are any known, publicly disclosed, vulnerabilities.  It consumes your SBOMs, continuously monitors every component for newly disclosed vulnerabilities, and gives you a portfolio-wide view of risk across your entire organization.
 
-The primary SBOM formats, recognized for ensuring software supply chain security and interoperability, are [CycloneDX](https://cyclonedx.org/), [SPDX](https://spdx.dev/), and [SWID Tags](https://csrc.nist.gov/projects/Software-Identification-SWID). These formats enable automated, machine-readable documentation of components, licenses, and vulnerabilities.
+Dependency-Track is an [OWASP Flagship project](https://owasp.org/projects/) and unlike traditional Software Composition Analysis (SCA) tools that perform point-in-time scans, Dependency-Track takes an SBOM-centric approach. You feed it SBOMs, and it continuously re-evaluates every component against multiple vulnerability intelligence sources.
 
-- **CycloneDX (OWASP)**: A lightweight, modern format designed specifically for application security, vulnerability tracking, and supply chain security. It is highly versatile, supporting software, services, and hardware, and is often used within DevOps build pipelines.  CycloneDX tends to be more focused on security, vulnerability management, and ease of use in CI/CD pipelines.
-- **SPDX (Linux Foundation)**: An open international standard (ISO/IEC 5962:2021) that originated for tracking software licenses but has evolved to include detailed component tracking, copyright, and security metadata.  SPDX is often favored for detailed legal compliance and intellectual property management.
-- SWID Tags (ISO/IEC 19770-2): These are not full, comprehensive SBOM documents like CycloneDX or SPDX, but rather tags that provide identity and version information for software components.
+At its core, Dependency-Track is:
 
-## The Toolchain
+- **SBOM warehouse**: It ingests, stores, and versions CycloneDX (and SPDX) BOMs for every project and version in your portfolio
+- **Continuous vulnerability monitor**: Components are re-analyzed daily against multiple vulnerability databases, so you learn about new CVEs without rescanning your artifacts
+- **Portfolio risk dashboard**: See risk metrics across all projects, identify which applications share a vulnerable component, and prioritize remediation where it matters most
 
-[Syft](https://github.com/anchore/syft) is a powerful CLI tool and library for generating SBOMs from container images and filesystems. It supports multiple formats.
-[Grype](https://github.com/anchore/grype) is a vulnerability scanner that works hand-in-hand with Syft. It can scan container images, filesystems, and SBOMs to identify known vulnerabilities from multiple databases.
+The platform has an API-first design, making it ideal for CI/CD integration. Every action available in the web UI is also exposed through a well-documented REST API.
 
-The quickest way to get up and running is to use Anchore's helper scripts.
+## Deploy your own
 
-```bash
-curl -sSfL https://get.anchore.io/syft | sudo sh -s -- -b /usr/local/bin
-curl -sSfL https://get.anchore.io/grype | sudo sh -s -- -b /usr/local/bin
-syft version
-grype version
-```
+Dependency-Track licensed under Apache 2.0 which means free to use, modify, and distribute in a commercial setting without royalties.  It is a highly permissive, enterprise-friendly license that allows you to incorporate the code into proprietary, closed-source products, provided you include the original license, copyright notices, and documentation of significant changes.
 
-**Syft:**
-
-To explore SBOMs, we'll use an obsolete, aging container. Container binaries are typically the final artifact that modern workflows promote between environments. Running `syft scan docker.io/python:3.10.11-alpine3.18` will scan and generate the associated container SBOM in the terminal, which is useful but not necessarily convenient. Still, we can see some interesting metadata from this container.
-
-```text
-  ~ ❯ syft scan docker.io/python:3.10.11-alpine3.18
- ✔ Loaded image          index.docker.io/library/python:3.10.11-alpine3.18
- ✔ Parsed image          sha256:bee261a96575c66a0d892947a6d7803348f49aa8734bc4a0ecb1df96c34d8134
- ✔ Cataloged contents    b42d5a5a34e11c7014e0bbb647f2b6970b2047043f19de43ce0d787a87091eb1
-   ├── ✔ Packages                        [56 packages]
-   ├── ✔ Executables                     [144 executables]
-   ├── ✔ File metadata                   [1,030 locations]
-   └── ✔ File digests                    [1,030 files]
-NAME                    VERSION           TYPE
-.python-rundeps         20230511.234154   apk
-Simple Launcher         1.1.0.14          binary  (+5 duplicates)
-alpine-baselayout       3.4.3-r1          apk
-alpine-baselayout-data  3.4.3-r1          apk
-alpine-keys             2.4-r1            apk
-apk-tools               2.14.0-r0         apk
-busybox                 1.36.0-r9         apk
-busybox-binsh           1.36.0-r9         apk
-ca-certificates         20230506-r0       apk
-ca-certificates-bundle  20230506-r0       apk
-cli                     UNKNOWN           binary
-cli-32                  UNKNOWN           binary
-cli-64                  UNKNOWN           binary
-and many more...
-```
-
-Generating a `sbom.json` is fun, but on its own it isn't that useful. Many compliance frameworks require some form of SBOM to be published as part of a software release, but that's only one of the many actionable outcomes. [Anchore](https://anchore.com/), the company behind Syft, also produces [Grype](https://github.com/anchore/grype), a vulnerability scanner. Essentially, it's a two-step process: 1) generate a `sbom.json`; 2) evaluate that `sbom.json` for vulnerabilities.
-
-Let's inspect our `sbom.json` file for vulnerabilities using `grype sbom:sbom.json`. CycloneDX is my preferred SBOM format, but this depends on your objectives.
-
-**Grype:**
-
-```text
-  ~ ❯ grype sbom:sbom.json
- ✔ Scanned for vulnerabilities     [119 vulnerability matches]
-   ├── by severity: 11 critical, 33 high, 66 medium, 9 low, 0 negligible
-   └── by status:   107 fixed, 12 not-fixed, 0 ignored
-NAME           INSTALLED  FIXED IN                                TYPE    VULNERABILITY        SEVERITY  EPSS           RISK
-libcrypto3     3.1.0-r4   3.1.1-r0                                apk     CVE-2023-2650        Medium    92.0% (99th)   52.9
-libssl3        3.1.0-r4   3.1.1-r0                                apk     CVE-2023-2650        Medium    92.0% (99th)   52.9
-python         3.10.11    3.6.16, 3.8.17, 3.9.17, 3.10.12, ...    binary  CVE-2007-4559        Medium    90.6% (99th)   60.2
-libcrypto3     3.1.0-r4   3.1.7-r0                                apk     CVE-2024-6119        High      5.7% (90th)    4.3
-and many more...
-56 packages from EOL distro "alpine 3.18.0" - vulnerability data may be incomplete or outdated; consider upgrading to a supported version
-```
-
-In the initial portion of its results output, Grype summarizes information on the scanned artifact and provides an overview of known vulnerabilities. In the case of a scanned image, the output includes the image digest, a unique hash that can be used as an identifier. The overview includes the number of packages, files, and executables found in the artifact. Generally speaking, CVEs are detected against packages, but the number of executables can also give you an idea of the attack surface of the scanned image or filesystem.
-
-Finally, this portion gives a count of the number of CVEs detected by severity and fixed status. Severity categorization sorts CVEs into four categories based on the [Common Vulnerability Scoring System (CVSS)](https://www.first.org/cvss/v4.0/user-guide). CVSS scores correspond to four categories:
-
-```text
-1. Critical (9.0-10.0)
-2. High (7.0-8.9)
-3. Medium (4.0-6.9)
-4. Low (0.1-3.9)
-```
-
-Grype also counts the number of CVEs by fixed status. If a CVE is marked as fixed, it can be resolved by updating to a newer version of the package. Our output suggests that 107 packages have fixes available and can be remediated with updates. It also identified that the `alpine 3.18.0` distro is end-of-life and should be upgraded as a whole.
-
-## CI Integration
-
-Now we have learned to generate and evaluate Software Bills of Material, which is fun, but at scale this is tedious and of limited value if done manually. Even with an army of interns, the pace at which new vulnerabilities appear makes this impractical. Therefore, automation it is. Let's look at an example using GitHub Actions workflows to achieve this.
-
-There are many ways to build a CI pipeline, but in a nutshell you want something like the following:
+The fastest way to stand up Dependency-Track is with Docker Compose.  For more details find the [official documentation here](https://docs.dependencytrack.org/) for alternative deployment.
 
 {{< github-content
     repo="irishlab-io/blog"
-    path=".github/workflows/sbom.yml"
+    path="docs/content/posts/2026-02-18-dtrack/compose.yml"
     lang="yaml" >}}
 
-This simple workflow generates and evaluates a container image for vulnerabilities, providing the feedback loop that can be orchestrated into your CI pipeline. Typically, this feedback loop should be an ascending ladder where the closer the code gets to the `main|master` branch, the lower the severity cutoff becomes.
+This container version is the `bundled` edition which simplify database deployment and management although I would not use this version in **production**.  It very good for small scale and testing purposes.  Bring it up with `docker compose up -d`.
 
-Finally, this workflow attaches the `sbom.json` as a build artifact, but it should really be uploaded to some form of medium- to long-term storage and follow a specific naming convention (don't end up with 10 million unorganized `sbom.json` files). In the near future, I will dive into various SBOM management options and share my favorite.
+On first launch, the API server will initialize the database and begin mirroring vulnerability data from the National Vulnerability Database (NVD) and other configured sources. This initial mirror can take **up to 30 minutes**.
 
-## Vulnerabilities Rotting
+The default credentials are `admin` / `admin`. Change them immediately on first login.
 
-Software development is a never-ending game of catching up when it comes to keeping your software free of vulnerabilities. The target moves, and eventually even the most secure software stack starts to crack as time goes on. This is why you should keep your SBOM stored somewhere for medium- to long-term use. On a regular basis, you should rescan the entirety of your SBOM output for newer vulnerabilities.
+Dependency-Track follows a three-tier architecture:
 
-Given that container sizes are not typically a problem (a few GB at most), it is much more convenient to scan a few kB `sbom.json` file than to pull all the required containers to scan. Furthermore, this regular scan is quick to perform, even as an organization scales to dozens of applications and more.
+- **API Server** (`dependencytrack/apiserver`): A Java-based backend that handles all business logic, vulnerability analysis, SBOM ingestion, and API endpoints.
+- **Frontend** (`dependencytrack/frontend`): A lightweight web-application that communicates with the API server.
+- **Database**: Options are **PostgreSQL**, **MSSQL** and **MySQL**; I prefer `postgres` personnally for no specific reason that I know a bit of `psql`
 
-## Now what ?!?
+## Setting up your own
 
-Well, you can check that box regarding regulation and compliance: you are generating the required SBOM artifact and can provide it as needed. Also, and this is where the fun really starts, you can build internal processes within your team and organization to triage and remediate these vulnerabilities. There are many strategies to consider when it's time to triage and fix vulnerabilities.
+After deployment, a few configuration steps will maximize the value you get from Dependency-Track:
 
-**Vulnerabilities origin:**
+**Configure vulnerability data sources:**
 
-Investigate where you are most vulnerable. Are the bulk of the vulnerabilities found in your SBOM related to aging libraries or a widespread issue tied to an obsolete framework? Are dev dependencies included in the final artifact shipped to production? Do you really need all of these libraries, or should you refactor sub-optimal code and find better-suited solutions?
+Navigate to **Administration > Analyzers** and enable the sources relevant to your stack:
 
-**Find better base image:**
+- **Internal Analyzer** (CPE-based matching against NVD): Enabled by default, covers OS-level and firmware components
+- **OSS Index** (Sonatype): Free, no API key required, excellent accuracy for application dependencies
+- **VulnDB**: Requires an account (free-tier available);  commercial service for Risk Based Security in third-party components
+- **Snyk**: Requires a Snyk API token (free-tier available); provides comprehensive commercial-grade vulnerability data
+- **Trivy**: Additional source for container and OS package vulnerabilities (not tested)
 
-Containers are convenient to ship, but do you really need the whole of `debian-trixie` to run a small Django web application? Maybe you could move to smaller footprint options (`slim` or `alpine` distributions). Why not go `distroless` or invest in a **golden image** such as those offered by [ChainGuard](https://www.chainguard.dev/)? A better base image will reduce the vulnerability count (often close to zero), but if you don't have a fast DevOps culture you might not be able to leverage these quickly. If your release cycles are counted in weeks, then **golden images** are mostly less useful given the "vulnerability rotting" that occurs.
+Navigate to **Administration > Vulnerability Sources** and enable the sources relevant to your stack:
 
-**Automate depenencies upgrade:**
+- **National Vulnerability Database**: Enable mirroring via API, Additionally download feeds and request your free API key
+- **GitHub Advisories**: Requires a GitHub Personal Access Token, provides high-quality curated advisories
+- **OSV** (Open Source Vulnerabilities): Aggregates advisories from multiple ecosystems
 
-Several tools exist to automate dependency upgrades using different mechanisms. The most common pattern involves PR-based automation where tools suggest a simple version bump "à la *n+1*". This can help but is not a catch-all solution, and there are flaws with this approach.
+The more sources you enable, the more comprehensive your vulnerability coverage becomes. At minimum, enable the Internal Analyzer, OSS Index, and GitHub Advisories.
+
+## Feed the platform
+
+**From the UI**: The simplest method is to navigate to a project, click **Upload BOM**, and select your CycloneDX JSON file. This is useful for testing but doesn't scale.
+
+**From a CLI**: The API accepts SBOM uploads via PUT or POST requests. Using the `autoCreate` parameter, projects are automatically created if they don't exist:
+
+```bash
+curl -X "POST" "https://dtrack.example.com/api/v1/bom" \
+  -H "Content-Type: multipart/form-data" \
+  -H "X-Api-Key: ${DTRACK_API_KEY}" \
+  -F "autoCreate=true" \
+  -F "projectName=my-application" \
+  -F "projectVersion=1.2.3" \
+  -F "bom=@sbom.json"
+```
+
+**From CI pipeline**: The [Dependency-Track GitHub Action](https://github.com/marketplace/actions/upload-bom-to-dependency-track) provides a clean integration:
+
+{{< github-content
+    repo="irishlab-io/blog"
+    path=".github/workflows/dtrack.yml"
+    lang="yaml" >}}
+
+This pairs naturally with the Syft + Grype workflow from the previous post. Generate the SBOM, scan it for immediate feedback in the pipeline, and **also** upload it to Dependency-Track for long-term monitoring.
+
+## Portfolio Management
+
+The main dashboard provides a bird's-eye view of your entire software portfolio. At a glance, you can see:
+
+- Total number of projects, components, and vulnerabilities
+- Risk score trends over time
+- Distribution of vulnerabilities by severity
+- Policy violation counts
+- Impact analysis and triage
+- Continuous monitoring
+
+This is invaluable for security teams and management who need visibility without diving into individual project details.
+
+### Vulnerability Exploitability Exchange (VEX)
+
+Dependency-Track supports [CycloneDX VEX](https://cyclonedx.org/capabilities/vex/), allowing you to produce and consume machine-readable exploitability assessments. This is particularly useful for communicating vulnerability status to downstream consumers of your software.
+
+## Policy Engine
+
+The policy engine operates on three dimensions:
+
+- **Security policies**: Flag components based on vulnerability severity, CVSS score, or EPSS probability
+- **License policies**: Enforce acceptable license usage across your portfolio
+- **Operational policies**: Detect outdated components, components with known end-of-life, or components from untrusted sources
+
+Policies can be scoped globally or to specific projects and tags, giving you fine-grained control.
 
 ## Wrapping Up
 
-In the end, generating a Software Bill of Material is fairly easy and straightforward. It should be part of your CI pipeline, and your team should automate processes around it to manage SBOMs for medium- to long-term use and run vulnerability scanners to find critical issues to address.
+If you are already generating SBOMs in your CI pipeline (and after the previous post, you should be), Dependency-Track is the natural next step. It transforms those static JSON files into a living, continuously monitored inventory of your software supply chain.
+
+The key takeaways:
+
+1. **Deploy Dependency-Track** alongside your existing infrastructure using Docker Compose or Kubernetes
+2. **Feed it SBOMs** from your CI pipeline using the REST API or GitHub Action
+3. **Configure multiple vulnerability sources** for comprehensive coverage
+4. **Set up notifications** so your team learns about new vulnerabilities in real time
+5. **Define policies** to enforce security and licensing standards across your portfolio
+6. **Leverage the audit workflow** to triage findings and avoid duplicate work across teams
+
+In the next post, we'll look at practical strategies for automating the remediation side of the equation, closing the loop from detection to fix.
 
 ---
 
 ## Resources
 
-- [CycloneDX Specification](https://cyclonedx.org/)
-- [Grype Documentation](https://github.com/anchore/grype)
-- [SPDX Specification](https://spdx.dev/)
-- [Syft Documentation](https://github.com/anchore/syft)
+- [OWASP Dependency-Track Documentation](https://docs.dependencytrack.org/)
+- [Dependency-Track GitHub Repository](https://github.com/DependencyTrack/dependency-track)
+- [Dependency-Track GitHub Action](https://github.com/marketplace/actions/upload-bom-to-dependency-track)
+- [CycloneDX VEX Specification](https://cyclonedx.org/capabilities/vex/)
+- [OWASP Dependency-Track Slack](https://dependencytrack.org/slack)

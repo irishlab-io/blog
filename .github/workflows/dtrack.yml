@@ -1,0 +1,43 @@
+---
+name: Manual - SBOM with Dependency-Track
+
+on: # yamllint disable-line rule:truthy
+  schedule:
+    - cron: '0 2 * * *' # Runs daily at 2:00 AM UTC
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+
+  sbom:
+    name: SBOM Management
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    steps:
+
+      - name: Generate SBOM with Syft
+        uses: anchore/sbom-action@62ad5284b8ced813296287a0b63906cb364b73ee # v0.22.0
+        with:
+          image: docker.io/python:3.10.11-alpine3.18
+          format: cyclonedx-json
+          artifact-name: 3.10.11-alpine3.18-sbom.json
+          output-file: ${{ github.workspace }}/3.10.11-alpine3.18-sbom.json
+
+      - name: Scan SBOM with Grype
+        uses: anchore/scan-action@7037fa011853d5a11690026fb85feee79f4c946c # v7.3.2
+        with:
+          sbom: "${{ github.workspace }}/3.10.11-alpine3.18-sbom.json"
+          fail-build: false # For demo purposes, we won't fail the build on vulnerabilities
+          severity-cutoff: critical
+
+      - name: Upload SBOM to Dependency-Track
+        uses: DependencyTrack/gh-upload-sbom@48feab3080ff9e8f51f4d21861d9fc914eb744f5 # v3
+        with:
+          serverhostname: "dtrack.example.com"
+          apikey: ${{ secrets.DTRACK_API_KEY }}
+          project: ${{ secrets.DTRACK_PROJECT_UUID }}
+          bomfilename: sbom.json
