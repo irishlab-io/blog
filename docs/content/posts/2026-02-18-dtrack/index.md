@@ -1,5 +1,5 @@
 ---
-title: "SBOM Long-Term Management with OWASP Dependency-Track"
+title: "So long and thanks for all the SBOMs"
 date: 2026-02-18
 draft: false
 description: "A comprehensive guide to deploying and using OWASP Dependency-Track for long-term SBOM management, continuous vulnerability monitoring, and portfolio-wide risk analysis"
