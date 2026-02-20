@@ -20,7 +20,7 @@ jobs:
     steps:
 
       - name: Generate SBOM with Syft
-        uses: anchore/sbom-action@62ad5284b8ced813296287a0b63906cb364b73ee # v0.22.0
+        uses: anchore/sbom-action@28d71544de8eaf1b958d335707167c5f783590ad # v0.22.2
         with:
           image: docker.io/python:3.10.11-alpine3.18
           format: cyclonedx-json
