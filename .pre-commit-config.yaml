@@ -18,14 +18,14 @@ repos:
       - id: identity
         name: "meta | pre-commit hooks"
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.13.7
+    rev: v4.13.9
     hooks:
       - id: commitizen
         name: "commitizen | validate commit messages"
         stages:
           - commit-msg
   - repo: https://github.com/gitguardian/ggshield
-    rev: v1.47.0
+    rev: v1.48.0
     hooks:
       - id: ggshield
         name: "security | scan for secrets"
