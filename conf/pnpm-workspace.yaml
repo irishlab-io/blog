@@ -1,0 +1,8 @@
+packages:
+  - slides/**
+
+catalog:
+  vue: ^3.5.13
+  "@slidev/cli": ^52.12.0
+  "@slidev/theme-default": latest
+  "@slidev/theme-seriph": latest

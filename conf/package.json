@@ -1,0 +1,25 @@
+{
+  "author": "Simon Harvey",
+  "dependencies": {
+    "slidev-workspace": "^0.9.3"
+  },
+  "description": "A workspace for managing multiple Slidev presentations",
+  "devDependencies": {
+    "playwright-chromium": "^1.56.1"
+  },
+  "keywords": [
+    "slidev",
+    "workspace",
+    "presentation",
+    "slides"
+  ],
+  "license": "MIT",
+  "name": "slidev-presentations",
+  "private": true,
+  "scripts": {
+    "build": "slidev-workspace build",
+    "export-og": "slidev-workspace export-og",
+    "preview": "slidev-workspace preview"
+  },
+  "version": "1.0.0"
+}

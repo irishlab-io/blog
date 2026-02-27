@@ -1,0 +1,9 @@
+baseUrl: /conf
+
+hero:
+  title: IrishLab Presentations
+  description: Slidev presentations by Simon Harvey
+
+sidebar:
+  title: "Presentations"
+  githubUrl: "https://github.com/irishlab-io/blog"

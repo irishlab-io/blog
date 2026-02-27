@@ -928,7 +928,7 @@ layout: center
 class: text-center
 ---
 
-# Merci ! 
+# Merci !
 
 <div class="text-lg mt-4 opacity-80">
 
