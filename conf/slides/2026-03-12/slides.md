@@ -930,19 +930,30 @@ class: text-center
 
 # Merci !
 
-<div class="text-lg mt-4 opacity-80">
+<div class="mt-8 grid grid-cols-2 gap-8">
 
-C'est SBOM mais il est bon ton SBOM ? ✅
+<div>
+  <carbon:logo-github class="text-4xl mb-2" />
+  <div class="text-sm">
+
+[irishlab-io/pyquiz](https://github.com/irishlab-io/)
+
+  </div>
+</div>
+
+<div>
+  <carbon:logo-linkedin class="text-4xl mb-2" />
+  <div class="text-sm">
+
+[simon-harvey](https://www.linkedin.com/in/simon-harvey-a0305029/)
+
+  </div>
+</div>
 
 </div>
 
-### Questions ?
+<div class="mt-12 text-2xl">
 
-<div class="mt-8">
-  <a href="https://www.linkedin.com/in/simon-harvey-a0305029/" target="_blank" class="slidev-icon-btn">
-    <carbon:logo-linkedin />
-  </a>
-  <a href="https://github.com/irish1986" target="_blank" class="slidev-icon-btn ml-4">
-    <carbon:logo-github />
-  </a>
+**Questions ?**
+
 </div>
