@@ -1,12 +1,12 @@
 ---
 theme: seriph
 background: https://cover.sli.dev
-title: "C'est SBOM mais il est bon ton SBOM ?"
+title: "It's SBOM, but is your SBOM good?"
 info: |
-  ## OWASP Montréal - Mars 2026
-  C'est SBOM mais il est bon ton SBOM ?
+  ## OWASP Montréal - March 2026
+  It's SBOM, but is your SBOM good?
 
-  Par Simon Harvey
+  By Simon Harvey
 class: text-center
 drawings:
   persist: false
@@ -18,10 +18,10 @@ contextMenu: false
 
 # OWASP Montréal
 
-## Mars 2026
+## March 2026
 
 <div class="text-lg mt-4 opacity-80">
-  C'est SBOM mais il est bon ton SBOM ?
+  It's SBOM, but is your SBOM good?
 </div>
 
 <div class="abs-br m-6 text-xl">
@@ -31,11 +31,11 @@ contextMenu: false
 </div>
 
 <!--
-Bienvenue à la conférence OWASP Montréal
+Welcome to the OWASP Montréal conference
 
-Merci à Cybereco de nous prêter le local ainsi qu'à Samuel et Jonathan du chapitre OWASP Montréal pour l'organisation
+Thanks to Cybereco for lending us the space and to Samuel and Jonathan from the OWASP Montréal chapter for organizing
 
-Aujourd'hui on parle de nomenclature logiciel plus fréquemment appelé Softwar Bill of Material (SBOM).
+Today we're talking about software nomenclature more commonly called Software Bill of Material (SBOM).
 -->
 
 ---
@@ -47,7 +47,7 @@ layoutClass: gap-8
 
 **Simon HARVEY**
 
-Conseiller principal en DevSecOps @ **Desjardins**
+Principal DevSecOps Advisor @ **Desjardins**
 
 <div class="flex justify-center mt-18">
   <img src="https://avatars.githubusercontent.com/u/13018674?v=4" class="w-40 h-40 rounded-full shadow-lg" alt="Simon Harvey" />
@@ -70,17 +70,17 @@ Conseiller principal en DevSecOps @ **Desjardins**
 
 <div class="flex items-center gap-3 mb-3">
   <carbon:security class="text-blue-400 text-lg flex-shrink-0" />
-  <span>Équipe de <strong>Sécurité Applicative</strong></span>
+  <span><strong>Application Security</strong> Team</span>
 </div>
 
 <div class="flex items-center gap-3 mb-3">
   <carbon:time class="text-blue-400 text-lg flex-shrink-0" />
-  <span>20 ans en aéronautique, défense et finances</span>
+  <span>20 years in aerospace, defense and finance</span>
 </div>
 
 <div class="flex items-center gap-3 mb-3">
   <carbon:earth class="text-blue-400 text-lg flex-shrink-0" />
-  <span>Canada, États-Unis, Mexique et Irlande du Nord</span>
+  <span>Canada, United States, Mexico and Northern Ireland</span>
 </div>
 
 <div class="flex items-center gap-3">
@@ -93,13 +93,13 @@ Conseiller principal en DevSecOps @ **Desjardins**
 </div>
 
 <!--
-Petite introduction rapide pour moi, je m'appelle Simon HARVEY et je suis conseiller principale en DevSecOps chez Desjardins.
+Quick introduction about me, my name is Simon HARVEY and I'm a Principal DevSecOps Advisor at Desjardins.
 
-Je fais parti de l'équipe de Sécurité Applicative et notre mandat est d'amélioer les pratiques et soutenir les équipes de développement logiciel.
+I'm part of the Application Security team and our mandate is to improve practices and support software development teams.
 
-Ça fait 20 ans que je suis dans les TI, au début de ma carrière plutôt dans l'aéronautique et la defense.
+I've been in IT for 20 years, early in my career mostly in aerospace and defense.
 
-Nous pouvez me trouver sur LinkedIn ou GitHub.
+You can find me on LinkedIn or GitHub.
 -->
 
 ---
@@ -111,31 +111,31 @@ Nous pouvez me trouver sur LinkedIn ou GitHub.
 <div class="flex items-start gap-4 p-3 rounded-lg bg-blue-500/10 border-l-3 border-blue-400">
   <div class="text-xl font-bold opacity-40">01</div>
   <div>
-    <div class="font-bold">Gastronomie vs SBOM</div>
-    <div class="text-sm opacity-60">Comprendre le concept</div>
+    <div class="font-bold">Gastronomy vs SBOM</div>
+    <div class="text-sm opacity-60">Understanding the concept</div>
   </div>
 </div>
 
 <div class="flex items-start gap-4 p-3 rounded-lg bg-blue-500/10 border-l-3 border-blue-400">
   <div class="text-xl font-bold opacity-40">02</div>
   <div>
-    <div class="font-bold">C'est quoi un SBOM ?</div>
-    <div class="text-sm opacity-60">Formats, réglementation et evenements</div>
+    <div class="font-bold">What is an SBOM?</div>
+    <div class="text-sm opacity-60">Formats, regulations and events</div>
   </div>
 </div>
 
 <div class="flex items-start gap-4 p-3 rounded-lg bg-green-500/10 border-l-3 border-green-400">
   <div class="text-xl font-bold opacity-40">03</div>
   <div>
-    <div class="font-bold">Générer et analyser</div>
-    <div class="text-sm opacity-60">Syft, Grype et l'intégration CI</div>
+    <div class="font-bold">Generate and Analyze</div>
+    <div class="text-sm opacity-60">Syft, Grype and CI integration</div>
   </div>
 </div>
 
 <div class="flex items-start gap-4 p-3 rounded-lg bg-purple-500/10 border-l-3 border-purple-400">
   <div class="text-xl font-bold opacity-40">04</div>
   <div>
-    <div class="font-bold">Conserver vos SBOMs </div>
+    <div class="font-bold">Store your SBOMs</div>
     <div class="text-sm opacity-60">OWASP Dependency-Track</div>
   </div>
 </div>
@@ -143,23 +143,23 @@ Nous pouvez me trouver sur LinkedIn ou GitHub.
 <div class="flex items-start gap-4 p-3 rounded-lg bg-orange-500/10 border-l-3 border-orange-400">
   <div class="text-xl font-bold opacity-40">05</div>
   <div>
-    <div class="font-bold">Commencer la remédiation</div>
-    <div class="text-sm opacity-60">Quoi faire et l'automatisation</div>
+    <div class="font-bold">Start Remediation</div>
+    <div class="text-sm opacity-60">What to do and automation</div>
   </div>
 </div>
 
 <div class="flex items-start gap-4 p-3 rounded-lg bg-teal-500/10 border-l-3 border-teal-400">
   <div class="text-xl font-bold opacity-40">06</div>
   <div>
-    <div class="font-bold">En résumé</div>
-    <div class="text-sm opacity-60">Le cyle de vie complète du SBOM</div>
+    <div class="font-bold">Summary</div>
+    <div class="text-sm opacity-60">The complete SBOM lifecycle</div>
   </div>
 </div>
 
 </div>
 
 <!--
-Petit survol de notre agenda, on se donne un 45-60min aujourd'hui pour parler de SBOM alors ça fait beaucoup de matière à couvrir.
+Quick overview of our agenda, we're planning 45-60min today to talk about SBOMs so that's a lot of material to cover.
 -->
 
 ---
@@ -167,45 +167,45 @@ layout: center
 class: text-center
 ---
 
-# Partie 1
+# Part 1
 
-## Nomenclature Logiciel
+## Software Nomenclature
 
 <div class="mt-8 text-sm opacity-60">
 
-Software Bill of Material ?
+Software Bill of Material?
 
 </div>
 
 ---
 
-# Gastronomie vs SBOM
+# Gastronomy vs SBOM
 
-Chaque plat est composé d'une **liste d'ingrédients** — pourquoi la connaître ?
+Every dish is made of an **ingredient list** — why know it?
 
 <div class="grid grid-cols-2 gap-6 mt-8">
 
 <div v-click class="flex items-start gap-4 p-4 rounded-lg bg-blue-500/10 border-l-3 border-blue-400">
   <div class="text-3xl flex-shrink-0">🍽️</div>
   <div>
-    <div class="font-bold text-blue-300">Préférences</div>
-    <div class="text-sm opacity-75 mt-1">Certains clients n'aiment pas certains aliments et veulent <strong>savoir</strong> ce qu'il y a dans chaque plat.</div>
+    <div class="font-bold text-blue-300">Preferences</div>
+    <div class="text-sm opacity-75 mt-1">Some customers don't like certain foods and want to <strong>know</strong> what's in each dish.</div>
   </div>
 </div>
 
 <div v-click class="flex items-start gap-4 p-4 rounded-lg bg-green-500/10 border-l-3 border-green-400">
   <div class="text-3xl flex-shrink-0">🥬</div>
   <div>
-    <div class="font-bold text-green-300">Fraîcheur</div>
-    <div class="text-sm opacity-75 mt-1">Des convives choisissent un endroit pour les techniques utilisées lors de la <strong>préparation</strong>.</div>
+    <div class="font-bold text-green-300">Freshness</div>
+    <div class="text-sm opacity-75 mt-1">Some diners choose a place for the techniques used during <strong>preparation</strong>.</div>
   </div>
 </div>
 
 <div v-click class="flex items-start gap-4 p-4 rounded-lg bg-purple-500/10 border-l-3 border-purple-400">
   <div class="text-3xl flex-shrink-0">🌱</div>
   <div>
-    <div class="font-bold text-purple-300">Convictions</div>
-    <div class="text-sm opacity-75 mt-1">Végéta(l|r)iens, religieuses ou éthiques — ils ont besoin de <strong>vérifier</strong> que le plat respecte leurs principes.</div>
+    <div class="font-bold text-purple-300">Beliefs</div>
+    <div class="text-sm opacity-75 mt-1">Vegetarians/vegans, religious or ethical — they need to <strong>verify</strong> the dish respects their principles.</div>
   </div>
 </div>
 
@@ -213,60 +213,60 @@ Chaque plat est composé d'une **liste d'ingrédients** — pourquoi la connaît
   <div class="text-3xl flex-shrink-0">🚨</div>
   <div>
     <div class="font-bold text-red-300">Allergies</div>
-    <div class="text-sm opacity-75 mt-1">Allergiques et intolérances — un ingrédient caché peut être <strong>mortel</strong>.</div>
+    <div class="text-sm opacity-75 mt-1">Allergies and intolerances — a hidden ingredient can be <strong>deadly</strong>.</div>
   </div>
 </div>
 
 </div>
 
 <!--
-Petit analogie entre la gastronomie et le SBOM.
+Small analogy between gastronomy and SBOM.
 -->
 
 ---
 
-# C'est quoi un SBOM ?
+# What is an SBOM?
 
-Un **Software Bill of Materials** — l'inventaire de tous les composantes et dépendances de votre logiciel.
+A **Software Bill of Materials** — the inventory of all components and dependencies of your software.
 
 <div class="grid grid-cols-1 gap-3 mt-8">
 
 <div v-click class="flex items-center gap-3 p-3 rounded-lg bg-blue-500/10 border-l-3 border-blue-400">
   <div class="text-xl flex-shrink-0">📜</div>
-  <div><strong class="text-blue-300">Conformité réglementaire</strong> — <a href="https://www.nist.gov/itl/executive-order-14028-improving-nations-cybersecurity">US EO 14028</a>, <a href="https://eur-lex.europa.eu/eli/reg/2024/2847/oj">EU Cyber Resilience Act</a>, <span class="line-through opacity-50">Canadian Bill C-26</span></div>
+  <div><strong class="text-blue-300">Regulatory compliance</strong> — <a href="https://www.nist.gov/itl/executive-order-14028-improving-nations-cybersecurity">US EO 14028</a>, <a href="https://eur-lex.europa.eu/eli/reg/2024/2847/oj">EU Cyber Resilience Act</a>, <span class="line-through opacity-50">Canadian Bill C-26</span></div>
 </div>
 
 <div v-click class="flex items-center gap-3 p-3 rounded-lg bg-green-500/10 border-l-3 border-green-400">
   <div class="text-xl flex-shrink-0">🔗</div>
-  <div><strong class="text-green-300">Chaîne d'approvisionnement</strong> — Comprendre ce qui est inclus dans nos produits</div>
+  <div><strong class="text-green-300">Supply chain</strong> — Understand what's included in our products</div>
 </div>
 
 <div v-click class="flex items-center gap-3 p-3 rounded-lg bg-orange-500/10 border-l-3 border-orange-400">
   <div class="text-xl flex-shrink-0">⚙️</div>
-  <div><strong class="text-orange-300">Risques opérationnels</strong> — Garder les libraries et modules à jour</div>
+  <div><strong class="text-orange-300">Operational risks</strong> — Keep libraries and modules up to date</div>
 </div>
 
 <div v-click class="flex items-center gap-3 p-3 rounded-lg bg-red-500/10 border-l-3 border-red-400">
   <div class="text-xl flex-shrink-0">🛡️</div>
-  <div><strong class="text-red-300">Vulnérabilités</strong> — Identifier rapidement quelles applications sont affectées</div>
+  <div><strong class="text-red-300">Vulnerabilities</strong> — Quickly identify which applications are affected</div>
 </div>
 
 <div v-click class="flex items-center gap-3 p-3 rounded-lg bg-purple-500/10 border-l-3 border-purple-400">
   <div class="text-xl flex-shrink-0">⚖️</div>
-  <div><strong class="text-purple-300">Licences</strong> — Permisibilité d'utiliser certaines dépendences dans certain contexte</div>
+  <div><strong class="text-purple-300">Licenses</strong> — Permissibility to use certain dependencies in certain contexts</div>
 </div>
 
 </div>
 
 <!--
-Expliquer c'est quoi un SBOM.
+Explain what an SBOM is.
 -->
 
 ---
 
-# Les formats SBOM
+# SBOM Formats
 
-Trois standards principaux pour décrire vos composantes logicielles.
+Three main standards to describe your software components.
 
 <div class="grid grid-cols-3 gap-6 mt-8">
 
@@ -274,10 +274,10 @@ Trois standards principaux pour décrire vos composantes logicielles.
   <div class="font-bold text-3xl text-green-300">CycloneDX</div>
   <div class="text-xs opacity-50 mb-3">OWASP</div>
   <ul class="text-sm opacity-75 space-y-1">
-    <li>Léger et moderne</li>
-    <li>Conçu pour la sécurité applicative</li>
-    <li>Idéal pour CI/CD</li>
-    <li>Supporte logiciels, services, matériel</li>
+    <li>Lightweight and modern</li>
+    <li>Designed for application security</li>
+    <li>Ideal for CI/CD</li>
+    <li>Supports software, services, hardware</li>
   </ul>
 </div>
 
@@ -285,9 +285,9 @@ Trois standards principaux pour décrire vos composantes logicielles.
   <div class="font-bold text-3xl  text-blue-300">SPDX</div>
   <div class="text-xs opacity-50 mb-3">Linux Foundation</div>
   <ul class="text-sm opacity-75 space-y-1">
-    <li>Standard ISO/IEC 5962:2021</li>
-    <li>Orienté licences & propriété intellectuelle</li>
-    <li>Conformité légale détaillée</li>
+    <li>ISO/IEC 5962:2021 standard</li>
+    <li>License & intellectual property oriented</li>
+    <li>Detailed legal compliance</li>
   </ul>
 </div>
 
@@ -295,23 +295,23 @@ Trois standards principaux pour décrire vos composantes logicielles.
   <div class="font-bold text-3xl text-orange-300">SWID Tags</div>
   <div class="text-xs opacity-50 mb-3">ISO/IEC 19770-2</div>
   <ul class="text-sm opacity-75 space-y-1">
-    <li>Tags d'identité & version</li>
-    <li>Pas un SBOM complet</li>
-    <li>Complémentaire aux autres formats</li>
+    <li>Identity & version tags</li>
+    <li>Not a complete SBOM</li>
+    <li>Complementary to other formats</li>
   </ul>
 </div>
 
 </div>
 
 <!--
-Pour la plupart d'entre vous, le format CycloneDX est le plus pratique mais selon le produits que vous batissez, vous pourriez être mener vers les autres formats.
+For most of you, the CycloneDX format is the most practical but depending on the product you're building, you might lean towards other formats.
 -->
 
 ---
 
-# La boîte à outils
+# The Toolbox
 
-La compagnie [Anchore](https://anchore.com/) produit deux logiciels plutôt pratique enlien avec les SBOMs.
+[Anchore](https://anchore.com/) produces two rather practical software related to SBOMs.
 
 <div class="grid grid-cols-2 gap-8 mt-8">
 <div>
@@ -322,11 +322,11 @@ La compagnie [Anchore](https://anchore.com/) produit deux logiciels plutôt prat
   <span class="text-2xl font-bold">Syft</span>
 </div>
 
-**Génération de SBOM**
+**SBOM Generation**
 
-- CLI pour conteneurs, systèmes, archives et autres
-- Couvre une douzaine d'écosystème (Alpine (apk), Debian (dpkg), Go, Python, Java, JavaScript, Rust, PHP, .NET, et plus)
-- Supporte plusieurs les formats (CycloneDX, SPDX, Syft JSON, et plus)
+- CLI for containers, filesystems, archives and more
+- Covers a dozen ecosystems (Alpine (apk), Debian (dpkg), Go, Python, Java, JavaScript, Rust, PHP, .NET, and more)
+- Supports multiple formats (CycloneDX, SPDX, Syft JSON, and more)
 
 ```bash
 curl -sSfL https://get.anchore.io/syft \
@@ -344,12 +344,12 @@ grype syft
   <span class="text-2xl font-bold">Grype</span>
 </div>
 
-**Scanner de vulnérabilités**
+**Vulnerability Scanner**
 
-- Balaie les images, filesystems et SBOMs pour des vulnérabilités connues
-- Multiples bases de données de CVEs
-- Priorise les découvertes et risques via CVE, CVSS, EPSS, KEV et plus
-- Base de donnée mise à jour automatiquement
+- Scans images, filesystems and SBOMs for known vulnerabilities
+- Multiple CVE databases
+- Prioritizes findings and risks via CVE, CVSS, EPSS, KEV and more
+- Automatically updated database
 
 ```bash
 curl -sSfL https://get.anchore.io/grype \
@@ -362,16 +362,16 @@ grype version
 </div>
 
 <!--
-Donc comme à l'habitude, je suis pas ici pour vendre quoi que se soit... Alors je vais parler d'outil open-source (Apache 2.0).
+So as usual, I'm not here to sell anything... So I'll talk about open-source tools (Apache 2.0).
 
-La compagnie Anchore propose deux logiciels pour générer et analyser des SBOM.
+Anchore offers two software for generating and analyzing SBOMs.
 -->
 
 ---
 
-# Démo | Syft
+# Demo | Syft
 
-Une petite démo sur l'utilisation de Syft.
+A quick demo on using Syft.
 
 <div class="mt-8">
 
@@ -410,16 +410,16 @@ syft scan docker.io/python:3.10.11-bullseye --output cyclonedx-json=sbom.json
 </div>
 
 <!--
-Démo en live.
+Live demo.
 
-Parler 30 sec de IBC.
+Talk 30 sec about IBC.
 -->
 
 ---
 
-# Démo | Grype
+# Demo | Grype
 
-Une petite démo sur l'utilisation de Grype.
+A quick demo on using Grype.
 
 <div class="mt-8">
 
@@ -476,14 +476,14 @@ libc-dev-bin      2.31-13+deb11u6        2.31-13+deb11u9        deb  CVE-2024-29
 </v-click>
 
 <!--
-Démo en live.
+Live demo.
 -->
 
 ---
 
-# Intégration CI/CD
+# CI/CD Integration
 
-Générer un SBOM dans un pipeline, c'est **3 petites étapes de plus** dans votre CI :
+Generating an SBOM in a pipeline is **3 small extra steps** in your CI:
 
 <div class="mt-8">
 
@@ -502,7 +502,7 @@ graph LR
 
 <div class="mt-6">
 
-Le seuil de blocage selon la criticité des CVE rencontrés se configure ainsi :
+The blocking threshold based on CVE criticality encountered is configured as follows:
 
 ```bash
 grype sbom:sbom.json --fail-on <-severity->
@@ -532,14 +532,14 @@ grype sbom:sbom.json --fail-on <-severity->
 </v-click>
 
 <!--
-Inclure la génération et analye de SBOM dans vos pipeline d'intégration.
+Include SBOM generation and analysis in your integration pipelines.
 -->
 
 ---
 
-# Les vulnérabilités
+# Vulnerabilities
 
-Quatre acronymes essentiels pour comprendre et prioriser les vulnérabilités :
+Four essential acronyms to understand and prioritize vulnerabilities:
 
 <div class="grid grid-cols-4 gap-4 mt-8">
 
@@ -547,10 +547,10 @@ Quatre acronymes essentiels pour comprendre et prioriser les vulnérabilités :
   <div class="font-bold text-xl text-blue-300 mb-2">CVE</div>
   <div class="text-xs opacity-50 mb-2">Common Vulnerabilities and Exposures</div>
   <div class="text-sm opacity-75">
-    <strong>Identifiant unique</strong> pour chaque vulnérabilité connue (ex: <code>CVE-2024-6119</code>). Géré par le NVD, c'est la <strong>carte d'identité</strong> d'une faille.
+    <strong>Unique identifier</strong> for each known vulnerability (ex: <code>CVE-2024-6119</code>). Managed by NVD, it's the <strong>ID card</strong> of a flaw.
   </div>
   <div class="mt-3 p-2 bg-blue-500/10 rounded text-xs opacity-60">
-    <strong>"C'est quoi cette faille ?"</strong>
+    <strong>"What is this flaw?"</strong>
   </div>
 </div>
 
@@ -558,7 +558,7 @@ Quatre acronymes essentiels pour comprendre et prioriser les vulnérabilités :
   <div class="font-bold text-xl text-orange-300 mb-2">CVSS</div>
   <div class="text-xs opacity-50 mb-2">Common Vulnerability Scoring System</div>
   <div class="text-sm opacity-75">
-    Score de <strong>0.0 à 10.0</strong> mesurant la sévérité technique. Évalue le vecteur d'attaque, la complexité et l'impact.
+    Score from <strong>0.0 to 10.0</strong> measuring technical severity. Evaluates attack vector, complexity and impact.
   </div>
   <div class="mt-3 grid grid-cols-2 gap-1 text-xs">
     <span class="px-1 rounded bg-red-600/30 text-red-300">Critical</span>
@@ -567,7 +567,7 @@ Quatre acronymes essentiels pour comprendre et prioriser les vulnérabilités :
     <span class="px-1 rounded bg-blue-500/30 text-blue-300">Low</span>
   </div>
   <div class="mt-2 p-2 bg-orange-500/10 rounded text-xs opacity-60">
-    <strong>"C'est grave comment ?"</strong>
+    <strong>"How serious is it?"</strong>
   </div>
 </div>
 
@@ -575,10 +575,10 @@ Quatre acronymes essentiels pour comprendre et prioriser les vulnérabilités :
   <div class="font-bold text-xl text-green-300 mb-2">EPSS</div>
   <div class="text-xs opacity-50 mb-2">Exploit Prediction Scoring System</div>
   <div class="text-sm opacity-75">
-    Probabilité (<strong>0 à 100%</strong>) qu'une CVE soit <strong>exploitée dans les 30 prochains jours</strong>. Basé sur des projections et des données de menaces réelles.
+    Probability (<strong>0 to 100%</strong>) that a CVE will be <strong>exploited in the next 30 days</strong>. Based on projections and real threat data.
   </div>
   <div class="mt-3 p-2 bg-green-500/10 rounded text-xs opacity-60">
-    <strong>"Est-ce qu'on va se faire attaquer ?"</strong>
+    <strong>"Will we get attacked?"</strong>
   </div>
 </div>
 
@@ -586,10 +586,10 @@ Quatre acronymes essentiels pour comprendre et prioriser les vulnérabilités :
   <div class="font-bold text-xl text-red-300 mb-2">KEV</div>
   <div class="text-xs opacity-50 mb-2">Known Exploited Vulnerabilities</div>
   <div class="text-sm opacity-75">
-    Catalogue de la <strong>CISA</strong> listant les CVEs <strong>activement exploitées</strong> dans la nature. Si votre CVE est dans le KEV, c'est une urgence.
+    <strong>CISA</strong> catalog listing CVEs <strong>actively exploited</strong> in the wild. If your CVE is in KEV, it's an emergency.
   </div>
   <div class="mt-3 p-2 bg-red-500/10 rounded text-xs opacity-60">
-    <strong>"Est-ce que c'est déjà exploité ?"</strong>
+    <strong>"Is it already being exploited?"</strong>
   </div>
 </div>
 
@@ -599,7 +599,7 @@ Quatre acronymes essentiels pour comprendre et prioriser les vulnérabilités :
 
 <div class="mt-6 p-3 bg-purple-500/10 rounded-lg text-sm text-center">
 
-**CVSS** donne la sévérité, **EPSS** estime la probabilité, **KEV** confirme l'exploitation — combinez les trois pour **prioriser efficacement**
+**CVSS** gives severity, **EPSS** estimates probability, **KEV** confirms exploitation — combine all three to **prioritize effectively**
 
 </div>
 
@@ -607,15 +607,15 @@ Quatre acronymes essentiels pour comprendre et prioriser les vulnérabilités :
 
 ---
 
-# Dégradation d'un artefact
+# Artifact Degradation
 
-Le logiciel **se dégrade avec le temps** — de nouvelles CVEs apparaissent constamment.
+Software **degrades over time** — new CVEs appear constantly.
 
 <div class="flex items-center justify-between mt-8 px-4">
 
 <v-click>
   <div class="text-center p-4 rounded-xl bg-green-500/20 border-2 border-green-400 w-40">
-    <div class="font-bold text-green-300">4L</div>
+    <div class="font-bold text-green-300">Day 0</div>
     <div class="text-2xl font-bold text-green-400 mt-1">4</div>
     <div class="text-xs opacity-60">CVEs</div>
   </div>
@@ -624,14 +624,14 @@ Le logiciel **se dégrade avec le temps** — de nouvelles CVEs apparaissent con
 
 <v-click>
   <div class="text-sm opacity-50 flex flex-col items-center">
-    <span class="text-xs">3 mois</span>
+    <span class="text-xs">3 months</span>
   </div>
 
 </v-click>
 
 <v-click>
   <div class="text-center p-4 rounded-xl bg-yellow-500/20 border-2 border-yellow-400 w-40">
-    <div class="font-bold text-yellow-300">2H-6M-4L</div>
+    <div class="font-bold text-yellow-300">Month 3</div>
     <div class="text-2xl font-bold text-yellow-400 mt-1">12</div>
     <div class="text-xs opacity-60">CVEs</div>
   </div>
@@ -640,14 +640,14 @@ Le logiciel **se dégrade avec le temps** — de nouvelles CVEs apparaissent con
 
 <v-click>
   <div class="text-sm opacity-50 flex flex-col items-center">
-    <span class="text-xs">6 mois</span>
+    <span class="text-xs">6 months</span>
   </div>
 
 </v-click>
 
 <v-click>
   <div class="text-center p-4 rounded-xl bg-orange-500/20 border-2 border-orange-400 w-40">
-    <div class="font-bold text-yellow-300">3C-H-M-L</div>
+    <div class="font-bold text-yellow-300">Month 9</div>
     <div class="text-2xl font-bold text-orange-400 mt-1">45</div>
     <div class="text-xs opacity-60">CVEs</div>
   </div>
@@ -656,14 +656,14 @@ Le logiciel **se dégrade avec le temps** — de nouvelles CVEs apparaissent con
 
 <v-click>
   <div class="text-sm opacity-50 flex flex-col items-center">
-    <span class="text-xs">12 mois</span>
+    <span class="text-xs">12 months</span>
   </div>
 
 </v-click>
 
 <v-click>
   <div class="text-center p-4 rounded-xl bg-red-500/20 border-2 border-red-400 w-40">
-    <div class="font-bold text-yellow-300">11C-H-M-L</div>
+    <div class="font-bold text-yellow-300">Year 1</div>
     <div class="text-2xl font-bold text-red-400 mt-1">119</div>
     <div class="text-xs opacity-60">CVEs</div>
   </div>
@@ -674,16 +674,16 @@ Le logiciel **se dégrade avec le temps** — de nouvelles CVEs apparaissent con
 <v-click>
 <div class="mt-8 p-3">
 
-- Re-balayer régulièrement vos produits pour de **nouvelles vulnérabilités**
-- Stockez vos SBOMs pour le balyage de **moyen à long terme**
-- À échelle, balayer des SBOMs est **beaucoup plus rapide** que scanner des artefacts complets
+- Regularly rescan your products for **new vulnerabilities**
+- Store your SBOMs for **medium to long term** scanning
+- At scale, scanning SBOMs is **much faster** than scanning full artifacts
 
 </div>
 
 </v-click>
 
 <!--
-Les vulnérabilités évoluent dans le temps.  C'est un combat sans fin.
+Vulnerabilities evolve over time. It's an endless battle.
 -->
 
 ---
@@ -691,68 +691,68 @@ layout: center
 class: text-center
 ---
 
-# Partie 2
+# Part 2
 
 ## OWASP Dependency-Track
 
 <div class="mt-8 text-sm opacity-60">
 
-De la génération ponctuelle au **monitoring continu**
+From one-time generation to **continuous monitoring**
 
 </div>
 
 ---
 
-# Le problème de stockage
+# The Storage Problem
 
-Où mettre tous ces SBOMs et comment les conserver ?
+Where to put all these SBOMs and how to store them?
 
 <div class="grid grid-cols-3 gap-4 mt-8">
 <div v-click class="p-4 rounded-lg bg-gray-500/10 border-l-3 border-gray-400 text-center opacity-50">
 
-### Stockage ?
+### Storage?
 📦
-<div class="text-sm mt-2">Passif sans de monitoring</div>
+<div class="text-sm mt-2">Passive without monitoring</div>
 
 </div>
 <div v-click class="p-4 rounded-lg bg-gray-500/10 border-l-3 border-gray-400 text-center opacity-50">
 
-### Registre ?
+### Registry?
 🗄️
-<div class="text-sm mt-2">Attaché au build, pas de vue d'ensemble</div>
+<div class="text-sm mt-2">Tied to build, no overview</div>
 
 </div>
 <div v-click class="p-4 rounded-lg bg-gray-500/10 border-l-3 border-gray-400 text-center opacity-50">
 
-### Logs ?
+### Logs?
 📋
-<div class="text-sm mt-2">Éphémère, dispersé et difficile à échelonner</div>
+<div class="text-sm mt-2">Ephemeral, scattered and hard to scale</div>
 
 </div>
 </div>
 
 <!--
-Comme expliquer plutot, on veut conserver nos SBOM afin de
+As explained earlier, we want to keep our SBOMs in order to
 
-Que se soit pour pouvoir les ré-évaluer périodiquement ou en lien avec un evenement (vulnérabilité médiatisée).
+Whether it's to be able to re-evaluate them periodically or in connection with an event (publicized vulnerability).
 -->
 
 ---
 
 # OWASP Dependency-Track
 
-Un **OWASP Flagship Project** peut se déploiement rapide via `Docker Compose` :
+An **OWASP Flagship Project** that can be quickly deployed via `Docker Compose`:
 
 <div class="grid grid-cols-2 gap-6 mt-12">
 
 <v-click>
 <div class="text-sm self-center">
 
-- **Entrepôt SBOM**
-- **Tableau de bord**
-- **Gestion de politique**
-- **Monitoring continu**
-- **API-driven et Automatisation**
+- **SBOM Repository**
+- **Dashboard**
+- **Policy Management**
+- **Continuous Monitoring**
+- **API-driven and Automation**
 - **Apache 2.0**
 
 </div>
@@ -788,18 +788,18 @@ services:
 </div>
 
 <!--
-Si vous souhaitez tester OWASP Dependency Track, il y a plusieurs options d'hébergemement (docker, k8s, helm).
+If you want to test OWASP Dependency Track, there are several hosting options (docker, k8s, helm).
 
-Pour le backend, il y a plusieurs options de base de donnée (postgres, mssql, etc...)
+For the backend, there are several database options (postgres, mssql, etc...)
 
-C'est un service plutot simple à stand up qui peut aider à centraliser les différents processus autour des SBOMs.
+It's a fairly simple service to stand up that can help centralize different processes around SBOMs.
 -->
 
 ---
 
-# Démo | OWASP D-Track
+# Demo | OWASP D-Track
 
-Une petite démo sur l'utilisation de Dependency Track.
+A quick demo on using Dependency Track.
 
 <div class="grid grid-cols-2 gap-8 mt-8">
 
@@ -809,10 +809,10 @@ Une petite démo sur l'utilisation de Dependency Track.
 ### Portfolio
 
 
-- Vue global, par collection ou par projet
-- Infos des projets, composantes et, vulnérabilités
-- Tendances de score de risque
-- Analyse d'impact
+- Global view, by collection or by project
+- Project, component, and vulnerability info
+- Risk score trends
+- Impact analysis
 
 
 </div>
@@ -820,12 +820,12 @@ Une petite démo sur l'utilisation de Dependency Track.
 <v-clicks>
 <div>
 
-### Moteur de politiques
+### Policy Engine
 
 
-- **Sécurité** : CVE, CVSS, EPSS, etc ...
-- **Licences** : Strong Copyleft ou Risky License
-- **Opérationnel** : Sources fiables, EOL, MAJ, etc ...
+- **Security**: CVE, CVSS, EPSS, etc...
+- **Licenses**: Strong Copyleft or Risky License
+- **Operational**: Trusted sources, EOL, updates, etc...
 
 
 </div>
@@ -848,9 +848,9 @@ dtrack-cli --server ${DEPENDENCYTRACK_URL} \
 <!--
 https://dependencytrack.local.irishlab.io/
 
-Projet Dependency Check  12.2.0 comme exemple
+Dependency Check 12.2.0 project as example
 
-Montrer un exemple avec API
+Show an API example
 -->
 
 ---
@@ -858,27 +858,27 @@ layout: center
 class: text-center
 ---
 
-# Partie 3
+# Part 3
 
-## La remédiation
+## Remediation
 
 <div class="mt-8 text-sm opacity-60">
 
-Détecter c'est bien; **corriger** c'est mieux.
+Detecting is good; **fixing** is better.
 
 </div>
 
 ---
 
-# Exemple de projet fictivement réel
+# Example of a Fictionally Real Project
 
-[**Insecure Bank Corporation**](https://github.com/irishlab-io/ibc) — une application Django volontairement vulnérable pour fins éducatives.
+[**Insecure Bank Corporation**](https://github.com/irishlab-io/ibc) — a deliberately vulnerable Django application for educational purposes.
 
 <div class="mt-8">
 
-- Une web application **Django 4.2.4** en **Python 3.10**
-- Plusieurs dépendances vulnérables (PyYAML 5.3.1, etc.)
-- Image conteneur lourde `python:3.10.11-bullseye`
+- A **Django 4.2.4** web application in **Python 3.10**
+- Several vulnerable dependencies (PyYAML 5.3.1, etc.)
+- Heavy container image `python:3.10.11-bullseye`
 
 </div>
 
@@ -895,7 +895,7 @@ make talk
 
 <div class="mt-12 p-3 bg-orange-500/10 rounded-lg text-sm text-center">
 
-Les dashboards clignotent en rouge — **quelqu'un** doit corriger toutes ces dépendances.
+The dashboards are flashing red — **someone** needs to fix all these dependencies.
 
 </div>
 
@@ -903,120 +903,120 @@ Les dashboards clignotent en rouge — **quelqu'un** doit corriger toutes ces d�
 
 ---
 
-# Stratégies de remédiation
+# Remediation Strategies
 
-Au-delà de l'automatisation, quelques réflexions :
+Beyond automation, a few thoughts:
 
 <div class="mt-10">
 
 <div v-click class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4 mb-3">
   <div class="p-3 rounded-lg bg-red-500/10 border-l-3 border-red-400">
-    <div class="font-bold text-red-300">1. Bibliothèques vieillissantes</div>
-    <div class="text-xs opacity-60 mt-1">Dépendances Python obsolètes avec CVEs connues</div>
+    <div class="font-bold text-red-300">1. Aging Libraries</div>
+    <div class="text-xs opacity-60 mt-1">Obsolete Python dependencies with known CVEs</div>
   </div>
   <div class="text-xl opacity-50">→</div>
   <div class="p-3 rounded-lg bg-green-500/10 border-l-3 border-green-400">
     <div class="font-bold text-green-300">1. <code>pyproject.toml</code> upgrade</div>
-    <div class="text-xs opacity-60 mt-1">Mettre à jour les dépendances directes</div>
+    <div class="text-xs opacity-60 mt-1">Update direct dependencies</div>
   </div>
 </div>
 
 <div v-click class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4 mb-3">
   <div class="p-3 rounded-lg bg-red-500/10 border-l-3 border-red-400">
-    <div class="font-bold text-red-300">2. Image <code>full</code></div>
-    <div class="text-xs opacity-60 mt-1">Embarque des centaines de paquets vulnérables et non nécessaire</div>
+    <div class="font-bold text-red-300">2. <code>full</code> Image</div>
+    <div class="text-xs opacity-60 mt-1">Includes hundreds of vulnerable and unnecessary packages</div>
   </div>
   <div class="text-xl opacity-50">→</div>
   <div class="p-3 rounded-lg bg-green-500/10 border-l-3 border-green-400">
-    <div class="font-bold text-green-300">2. Image <code>alpine</code></div>
-    <div class="text-xs opacity-60 mt-1">Image minimale, surface d'attaque réduite</div>
+    <div class="font-bold text-green-300">2. <code>alpine</code> Image</div>
+    <div class="text-xs opacity-60 mt-1">Minimal image, reduced attack surface</div>
   </div>
 </div>
 
 <div v-click class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4 mb-3">
   <div class="p-3 rounded-lg bg-red-500/10 border-l-3 border-red-400">
-    <div class="font-bold text-red-300">3. Dépendances de dev incluses</div>
-    <div class="text-xs opacity-60 mt-1">Outils de test et debug embarqués en production</div>
+    <div class="font-bold text-red-300">3. Dev Dependencies Included</div>
+    <div class="text-xs opacity-60 mt-1">Test and debug tools bundled in production</div>
   </div>
   <div class="text-xl opacity-50">→</div>
   <div class="p-3 rounded-lg bg-green-500/10 border-l-3 border-green-400">
-    <div class="font-bold text-green-300">3. Bibliothèques superflues</div>
-    <div class="text-xs opacity-60 mt-1">Packages installés mais jamais utilisés</div>
+    <div class="font-bold text-green-300">3. Superfluous Libraries</div>
+    <div class="text-xs opacity-60 mt-1">Packages installed but never used</div>
   </div>
 </div>
 
 <div v-click class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4 mb-3">
   <div class="p-3 rounded-lg bg-red-500/10 border-l-3 border-red-400">
-    <div class="font-bold text-red-300">4. Imagie généraliste</div>
+    <div class="font-bold text-red-300">4. Generic Image</div>
     <div class="text-xs opacity-60 mt-1">DockerHub, Quay, GHCR, etc...</div>
   </div>
   <div class="text-xl opacity-50">→</div>
   <div class="p-3 rounded-lg bg-green-500/10 border-l-3 border-green-400">
-    <div class="font-bold text-green-300">4. Zéro CVE Image</div>
-    <div class="text-xs opacity-60 mt-1">Docker Harden Image, Chainguard, Golden Image, etc...</div>
+    <div class="font-bold text-green-300">4. Zero CVE Image</div>
+    <div class="text-xs opacity-60 mt-1">Docker Hardened Image, Chainguard, Golden Image, etc...</div>
   </div>
 </div>
 
 <div v-click class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4">
   <div class="p-3 rounded-lg bg-red-500/10 border-l-3 border-red-400">
-    <div class="font-bold text-red-300">5. Ce qui reste</div>
-    <div class="text-xs opacity-60 mt-1">Vulnérabilités sans correctif disponible</div>
+    <div class="font-bold text-red-300">5. What Remains</div>
+    <div class="text-xs opacity-60 mt-1">Vulnerabilities with no fix available</div>
   </div>
   <div class="text-xl opacity-50">→</div>
   <div class="p-3 rounded-lg bg-green-500/10 border-l-3 border-green-400">
-    <div class="font-bold text-green-300">5. Gestion de risque</div>
-    <div class="text-xs opacity-60 mt-1">Évaluer le risque et l'impact</div>
+    <div class="font-bold text-green-300">5. Risk Management</div>
+    <div class="text-xs opacity-60 mt-1">Assess risk and impact</div>
   </div>
 </div>
 
 </div>
 
 <!--
-Démo dans IBC sur comment évolue le niveau de risque d'un projet via D-Track.
+Demo in IBC on how the risk level of a project evolves via D-Track.
 -->
 
 ---
 
 # Key Takeaways
 
-Les points essentiels à retenir.
+Essential points to remember.
 
 <div class="grid grid-cols-3 gap-4 mt-8">
 
 <div v-click class="p-4 rounded-lg bg-blue-500/10 border-l-3 border-blue-400">
   <div class="text-2xl mb-2">📦</div>
-  <div class="font-bold text-blue-300 mb-1">Générez des SBOMs</div>
-  <div class="text-sm opacity-75">Intégrez <strong>Syft</strong> dans votre CI — chaque build produit son inventaire</div>
+  <div class="font-bold text-blue-300 mb-1">Generate SBOMs</div>
+  <div class="text-sm opacity-75">Integrate <strong>Syft</strong> into your CI — each build produces its inventory</div>
 </div>
 
 <div v-click class="p-4 rounded-lg bg-red-500/10 border-l-3 border-red-400">
   <div class="text-2xl mb-2">🔍</div>
-  <div class="font-bold text-red-300 mb-1">Scannez tôt, scannez souvent</div>
-  <div class="text-sm opacity-75"><strong>Grype</strong> bloque les CVEs critiques avant qu'elles n'atteignent la production</div>
+  <div class="font-bold text-red-300 mb-1">Scan Early, Scan Often</div>
+  <div class="text-sm opacity-75"><strong>Grype</strong> blocks critical CVEs before they reach production</div>
 </div>
 
 <div v-click class="p-4 rounded-lg bg-green-500/10 border-l-3 border-green-400">
   <div class="text-2xl mb-2">🏗️</div>
-  <div class="font-bold text-green-300 mb-1">Monitoring continu</div>
-  <div class="text-sm opacity-75"><strong>Dependency-Track</strong> surveille vos SBOMs 24/7 — pas juste au build</div>
+  <div class="font-bold text-green-300 mb-1">Continuous Monitoring</div>
+  <div class="text-sm opacity-75"><strong>Dependency-Track</strong> monitors your SBOMs 24/7 — not just at build time</div>
 </div>
 
 <div v-click class="p-4 rounded-lg bg-orange-500/10 border-l-3 border-orange-400">
   <div class="text-2xl mb-2">🔔</div>
-  <div class="font-bold text-orange-300 mb-1">Politiques & alertes</div>
-  <div class="text-sm opacity-75">Définissez vos seuils de tolérance — le pipeline décide, pas l'humain</div>
+  <div class="font-bold text-orange-300 mb-1">Policies & Alerts</div>
+  <div class="text-sm opacity-75">Define your tolerance thresholds — the pipeline decides, not humans</div>
 </div>
 
 <div v-click class="p-4 rounded-lg bg-purple-500/10 border-l-3 border-purple-400">
   <div class="text-2xl mb-2">🤖</div>
-  <div class="font-bold text-purple-300 mb-1">Automatisez la correction</div>
-  <div class="text-sm opacity-75"><strong>Dependabot</strong> + auto-merge = moins de friction, plus de vélocité</div>
+  <div class="font-bold text-purple-300 mb-1">Automate Fixes</div>
+  <div class="text-sm opacity-75"><strong>Dependabot</strong> + auto-merge = less friction, more velocity</div>
 </div>
 
 <div v-click class="p-4 rounded-lg bg-teal-500/10 border-l-3 border-teal-400">
   <div class="text-2xl mb-2">🔄</div>
-  <div class="font-bold text-teal-300 mb-1">Bouclez la boucle</div>
-  <div class="text-sm opacity-75"><strong>Détecter → Suivre → Corriger</strong> — la sécurité est un cycle, pas un événement</div>
+  <div class="font-bold text-teal-300 mb-1">Close the Loop</div>
+  <div class="text-sm opacity-75"><strong>Detect → Track → Fix</strong> — security is a cycle, not an event</div>
 </div>
 
 </div>
@@ -1025,12 +1025,13 @@ Les points essentiels à retenir.
 
 # Ressources
 
-Liens utiles pour aller plus loin.
+Useful links to go further.
 
 <div class="grid grid-cols-2 gap-8 mt-8">
 <div>
 
 ### Outils
+### Tools
 - [Syft](https://github.com/anchore/syft) — SBOM generation
 - [Grype](https://github.com/anchore/grype) — Vulnerability scanner
 - [Dependency-Track](https://dependencytrack.org/) — SBOM management
@@ -1061,7 +1062,7 @@ layout: center
 class: text-center
 ---
 
-# Merci !
+# Thank You!
 
 <div class="mt-8 grid grid-cols-2 gap-8">
 
@@ -1087,6 +1088,6 @@ class: text-center
 
 <div class="mt-12 text-2xl">
 
-**Questions ?**
+**Questions?**
 
 </div>
