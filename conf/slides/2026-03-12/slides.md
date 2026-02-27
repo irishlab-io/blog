@@ -31,12 +31,14 @@ contextMenu: false
 </div>
 
 <!--
-Bienvenue à la conférence OWASP Montréal.
-Aujourd'hui on parle de SBOM, de Dependency-Track et d'automatisation.
+Bienvenue à la conférence OWASP Montréal
+
+Merci à Cybereco de nous prêter le local ainsi qu'à Samuel et Jonathan du chapitre OWASP Montréal pour l'organisation
+
+Aujourd'hui on parle de nomenclature logiciel plus fréquemment appelé Softwar Bill of Material (SBOM).
 -->
 
 ---
-transition: fade-out
 layout: two-cols
 layoutClass: gap-8
 ---
@@ -91,19 +93,22 @@ Conseiller principal en DevSecOps @ **Desjardins**
 </div>
 
 <!--
-Quick intro - I've spent most of my career in highly regulated industries.
-Today I bring that perspective to application security at Desjardins.
+Petite introduction rapide pour moi, je m'appelle Simon HARVEY et je suis conseiller principale en DevSecOps chez Desjardins.
+
+Je fais parti de l'équipe de Sécurité Applicative et notre mandat est d'amélioer les pratiques et soutenir les équipes de développement logiciel.
+
+Ça fait 20 ans que je suis dans les TI, au début de ma carrière plutôt dans l'aéronautique et la defense.
+
+Nous pouvez me trouver sur LinkedIn ou GitHub.
 -->
 
----
-transition: slide-up
 ---
 
 # Agenda
 
-<div class="grid grid-cols-2 gap-x-8 gap-y-4 mt-10">
+<div class="grid grid-cols-2 gap-x-8 gap-y-4 mt-8">
 
-<div class="flex items-start gap-4 p-3 rounded-lg bg-blue-500/5 border-l-3 border-blue-400">
+<div class="flex items-start gap-4 p-3 rounded-lg bg-blue-500/10 border-l-3 border-blue-400">
   <div class="text-xl font-bold opacity-40">01</div>
   <div>
     <div class="font-bold">Gastronomie vs SBOM</div>
@@ -111,7 +116,7 @@ transition: slide-up
   </div>
 </div>
 
-<div class="flex items-start gap-4 p-3 rounded-lg bg-blue-500/5 border-l-3 border-blue-400">
+<div class="flex items-start gap-4 p-3 rounded-lg bg-blue-500/10 border-l-3 border-blue-400">
   <div class="text-xl font-bold opacity-40">02</div>
   <div>
     <div class="font-bold">C'est quoi un SBOM ?</div>
@@ -119,7 +124,7 @@ transition: slide-up
   </div>
 </div>
 
-<div class="flex items-start gap-4 p-3 rounded-lg bg-green-500/5 border-l-3 border-green-400">
+<div class="flex items-start gap-4 p-3 rounded-lg bg-green-500/10 border-l-3 border-green-400">
   <div class="text-xl font-bold opacity-40">03</div>
   <div>
     <div class="font-bold">Générer et analyser</div>
@@ -127,7 +132,7 @@ transition: slide-up
   </div>
 </div>
 
-<div class="flex items-start gap-4 p-3 rounded-lg bg-purple-500/5 border-l-3 border-purple-400">
+<div class="flex items-start gap-4 p-3 rounded-lg bg-purple-500/10 border-l-3 border-purple-400">
   <div class="text-xl font-bold opacity-40">04</div>
   <div>
     <div class="font-bold">Conserver vos SBOMs </div>
@@ -135,7 +140,7 @@ transition: slide-up
   </div>
 </div>
 
-<div class="flex items-start gap-4 p-3 rounded-lg bg-orange-500/5 border-l-3 border-orange-400">
+<div class="flex items-start gap-4 p-3 rounded-lg bg-orange-500/10 border-l-3 border-orange-400">
   <div class="text-xl font-bold opacity-40">05</div>
   <div>
     <div class="font-bold">Commencer la remédiation</div>
@@ -143,7 +148,7 @@ transition: slide-up
   </div>
 </div>
 
-<div class="flex items-start gap-4 p-3 rounded-lg bg-teal-500/5 border-l-3 border-teal-400">
+<div class="flex items-start gap-4 p-3 rounded-lg bg-teal-500/10 border-l-3 border-teal-400">
   <div class="text-xl font-bold opacity-40">06</div>
   <div>
     <div class="font-bold">En résumé</div>
@@ -152,6 +157,10 @@ transition: slide-up
 </div>
 
 </div>
+
+<!--
+Petit survol de notre agenda, on se donne un 45-60min aujourd'hui pour parler de SBOM alors ça fait beaucoup de matière à couvrir.
+-->
 
 ---
 layout: center
@@ -180,7 +189,7 @@ Chaque plat est composé d'une **liste d'ingrédients** — pourquoi la connaît
   <div class="text-3xl flex-shrink-0">🍽️</div>
   <div>
     <div class="font-bold text-blue-300">Préférences</div>
-    <div class="text-sm opacity-75 mt-1">Certains clients n'aiment pas les anchois et veulent <strong>savoir</strong> ce qu'il y a dans chaque plat.</div>
+    <div class="text-sm opacity-75 mt-1">Certains clients n'aiment pas certains aliments et veulent <strong>savoir</strong> ce qu'il y a dans chaque plat.</div>
   </div>
 </div>
 
@@ -196,7 +205,7 @@ Chaque plat est composé d'une **liste d'ingrédients** — pourquoi la connaît
   <div class="text-3xl flex-shrink-0">🌱</div>
   <div>
     <div class="font-bold text-purple-300">Convictions</div>
-    <div class="text-sm opacity-75 mt-1">Végétaliens, halal ou casher — ils ont besoin de <strong>vérifier</strong> que le plat respecte leurs principes.</div>
+    <div class="text-sm opacity-75 mt-1">Végéta(l|r)iens, religieuses ou éthiques — ils ont besoin de <strong>vérifier</strong> que le plat respecte leurs principes.</div>
   </div>
 </div>
 
@@ -204,26 +213,23 @@ Chaque plat est composé d'une **liste d'ingrédients** — pourquoi la connaît
   <div class="text-3xl flex-shrink-0">🚨</div>
   <div>
     <div class="font-bold text-red-300">Allergies</div>
-    <div class="text-sm opacity-75 mt-1">Allergiques aux arachides — un ingrédient caché peut être <strong>mortel</strong>.</div>
+    <div class="text-sm opacity-75 mt-1">Allergiques et intolérances — un ingrédient caché peut être <strong>mortel</strong>.</div>
   </div>
 </div>
 
 </div>
 
 <!--
-The food metaphor makes SBOM accessible to non-technical audiences.
-Preferences = tech choices, beliefs = license compliance, allergies = CVEs that can kill your app.
+Petit analogie entre la gastronomie et le SBOM.
 -->
 
----
-transition: fade-out
 ---
 
 # C'est quoi un SBOM ?
 
 Un **Software Bill of Materials** — l'inventaire de tous les composantes et dépendances de votre logiciel.
 
-<div class="grid grid-cols-1 gap-3 mt-16">
+<div class="grid grid-cols-1 gap-3 mt-8">
 
 <div v-click class="flex items-center gap-3 p-3 rounded-lg bg-blue-500/10 border-l-3 border-blue-400">
   <div class="text-xl flex-shrink-0">📜</div>
@@ -247,21 +253,22 @@ Un **Software Bill of Materials** — l'inventaire de tous les composantes et d�
 
 <div v-click class="flex items-center gap-3 p-3 rounded-lg bg-purple-500/10 border-l-3 border-purple-400">
   <div class="text-xl flex-shrink-0">⚖️</div>
-  <div><strong class="text-purple-300">Licences</strong> — Suivre les licences open source</div>
+  <div><strong class="text-purple-300">Licences</strong> — Permisibilité d'utiliser certaines dépendences dans certain contexte</div>
 </div>
 
 </div>
 
 <!--
-An SBOM is essentially an ingredients list for your software.
-Just like food labels, you need to know what's inside.
+Expliquer c'est quoi un SBOM.
 -->
 
 ---
 
 # Les formats SBOM
 
-<div class="grid grid-cols-3 gap-6 mt-10">
+Trois standards principaux pour décrire vos composantes logicielles.
+
+<div class="grid grid-cols-3 gap-6 mt-8">
 
 <div v-click class="p-5 rounded-lg bg-green-500/10 border-l-3 border-green-400">
   <div class="font-bold text-3xl text-green-300">CycloneDX</div>
@@ -296,15 +303,20 @@ Just like food labels, you need to know what's inside.
 
 </div>
 
+<!--
+Pour la plupart d'entre vous, le format CycloneDX est le plus pratique mais selon le produits que vous batissez, vous pourriez être mener vers les autres formats.
+-->
+
 ---
 
 # La boîte à outils
 
 La compagnie [Anchore](https://anchore.com/) produit deux logiciels plutôt pratique enlien avec les SBOMs.
 
-<div class="grid grid-cols-2 gap-8 mt-14">
+<div class="grid grid-cols-2 gap-8 mt-8">
 <div>
 
+<v-click>
 <div class="flex items-center justify-center gap-3 mb-4">
   <img src="https://user-images.githubusercontent.com/5199289/136844524-1527b09f-c5cb-4aa9-be54-5aa92a6086c1.png" class="h-12" alt="Syft" />
   <span class="text-2xl font-bold">Syft</span>
@@ -322,9 +334,11 @@ curl -sSfL https://get.anchore.io/syft \
 grype syft
 ```
 
+</v-click>
 </div>
 <div>
 
+<v-click>
 <div class="flex items-center justify-center gap-3 mb-4">
   <img src="https://user-images.githubusercontent.com/5199289/136855393-d0a9eef9-ccf1-4e2b-9d7c-7aad16a567e5.png" class="h-12" alt="Grype" />
   <span class="text-2xl font-bold">Grype</span>
@@ -343,8 +357,15 @@ curl -sSfL https://get.anchore.io/grype \
 grype version
 ```
 
+</v-click>
 </div>
 </div>
+
+<!--
+Donc comme à l'habitude, je suis pas ici pour vendre quoi que se soit... Alors je vais parler d'outil open-source (Apache 2.0).
+
+La compagnie Anchore propose deux logiciels pour générer et analyser des SBOM.
+-->
 
 ---
 
@@ -352,7 +373,7 @@ grype version
 
 Une petite démo sur l'utilisation de Syft.
 
-<div class="mt-12">
+<div class="mt-8">
 
 ```bash
 syft scan docker.io/python:3.10.11-bullseye
@@ -388,6 +409,12 @@ syft scan docker.io/python:3.10.11-bullseye --output cyclonedx-json=sbom.json
 
 </div>
 
+<!--
+Démo en live.
+
+Parler 30 sec de IBC.
+-->
+
 ---
 
 # Démo | Grype
@@ -404,7 +431,7 @@ grype docker.io/python:3.10.11-bullseye
 
 <div class="mt-4">
 
-```bash {all|1-3|4-11|12-15|16}
+```bash {all|1-3|4-11|12}
  ✔ Scanned for vulnerabilities     [3104 vulnerability matches]
    ├── by severity: 224 critical, 1840 high, 3128 medium, 177 low, 1084 negligible (719 unknown)
    └── by status:   4123 fixed, 3049 not-fixed, 4068 ignored (1 dropped)
@@ -448,13 +475,17 @@ libc-dev-bin      2.31-13+deb11u6        2.31-13+deb11u9        deb  CVE-2024-29
 
 </v-click>
 
+<!--
+Démo en live.
+-->
+
 ---
 
 # Intégration CI/CD
 
 Générer un SBOM dans un pipeline, c'est **3 petites étapes de plus** dans votre CI :
 
-<div class="mt-12">
+<div class="mt-8">
 
 ```mermaid {scale: 0.95}
 graph LR
@@ -500,13 +531,17 @@ grype sbom:sbom.json --fail-on <-severity->
 
 </v-click>
 
+<!--
+Inclure la génération et analye de SBOM dans vos pipeline d'intégration.
+-->
+
 ---
 
 # Les vulnérabilités
 
 Quatre acronymes essentiels pour comprendre et prioriser les vulnérabilités :
 
-<div class="grid grid-cols-4 gap-4 mt-4">
+<div class="grid grid-cols-4 gap-4 mt-8">
 
 <div v-click class="p-4 rounded-lg bg-blue-500/10 border-l-3 border-blue-400">
   <div class="font-bold text-xl text-blue-300 mb-2">CVE</div>
@@ -576,53 +611,80 @@ Quatre acronymes essentiels pour comprendre et prioriser les vulnérabilités :
 
 Le logiciel **se dégrade avec le temps** — de nouvelles CVEs apparaissent constamment.
 
-<div class="flex items-center justify-between mt-10 px-4">
+<div class="flex items-center justify-between mt-8 px-4">
 
+<v-click>
   <div class="text-center p-4 rounded-xl bg-green-500/20 border-2 border-green-400 w-40">
     <div class="font-bold text-green-300">4L</div>
     <div class="text-2xl font-bold text-green-400 mt-1">4</div>
     <div class="text-xs opacity-60">CVEs</div>
   </div>
 
+</v-click>
+
+<v-click>
   <div class="text-sm opacity-50 flex flex-col items-center">
     <span class="text-xs">3 mois</span>
   </div>
 
+</v-click>
+
+<v-click>
   <div class="text-center p-4 rounded-xl bg-yellow-500/20 border-2 border-yellow-400 w-40">
     <div class="font-bold text-yellow-300">2H-6M-4L</div>
     <div class="text-2xl font-bold text-yellow-400 mt-1">12</div>
     <div class="text-xs opacity-60">CVEs</div>
   </div>
 
+</v-click>
+
+<v-click>
   <div class="text-sm opacity-50 flex flex-col items-center">
     <span class="text-xs">6 mois</span>
   </div>
 
+</v-click>
+
+<v-click>
   <div class="text-center p-4 rounded-xl bg-orange-500/20 border-2 border-orange-400 w-40">
     <div class="font-bold text-yellow-300">3C-H-M-L</div>
     <div class="text-2xl font-bold text-orange-400 mt-1">45</div>
     <div class="text-xs opacity-60">CVEs</div>
   </div>
 
+</v-click>
+
+<v-click>
   <div class="text-sm opacity-50 flex flex-col items-center">
     <span class="text-xs">12 mois</span>
   </div>
 
+</v-click>
+
+<v-click>
   <div class="text-center p-4 rounded-xl bg-red-500/20 border-2 border-red-400 w-40">
     <div class="font-bold text-yellow-300">11C-H-M-L</div>
     <div class="text-2xl font-bold text-red-400 mt-1">119</div>
     <div class="text-xs opacity-60">CVEs</div>
   </div>
 
+</v-click>
 </div>
 
-<div v-clicks class="mt-16 p-3">
+<v-click>
+<div class="mt-8 p-3">
 
 - Re-balayer régulièrement vos produits pour de **nouvelles vulnérabilités**
 - Stockez vos SBOMs pour le balyage de **moyen à long terme**
 - À échelle, balayer des SBOMs est **beaucoup plus rapide** que scanner des artefacts complets
 
 </div>
+
+</v-click>
+
+<!--
+Les vulnérabilités évoluent dans le temps.  C'est un combat sans fin.
+-->
 
 ---
 layout: center
@@ -645,30 +707,35 @@ De la génération ponctuelle au **monitoring continu**
 
 Où mettre tous ces SBOMs et comment les conserver ?
 
-<div class="grid grid-cols-3 gap-4 mt-24">
-<div v-click class="p-4 border rounded-lg text-center opacity-50">
+<div class="grid grid-cols-3 gap-4 mt-8">
+<div v-click class="p-4 rounded-lg bg-gray-500/10 border-l-3 border-gray-400 text-center opacity-50">
 
-### S3 Bucket ?
+### Stockage ?
 📦
-<div class="text-sm mt-2">Stockage passif, pas de monitoring</div>
+<div class="text-sm mt-2">Passif sans de monitoring</div>
 
 </div>
-<div v-click class="p-4 border rounded-lg text-center opacity-50">
+<div v-click class="p-4 rounded-lg bg-gray-500/10 border-l-3 border-gray-400 text-center opacity-50">
 
-### Artifact Registry ?
+### Registre ?
 🗄️
 <div class="text-sm mt-2">Attaché au build, pas de vue d'ensemble</div>
 
 </div>
-<div v-click class="p-4 border rounded-lg text-center opacity-50">
+<div v-click class="p-4 rounded-lg bg-gray-500/10 border-l-3 border-gray-400 text-center opacity-50">
 
 ### Logs ?
 📋
-<div class="text-sm mt-2">Éphémère, dispersé</div>
+<div class="text-sm mt-2">Éphémère, dispersé et difficile à échelonner</div>
 
 </div>
 </div>
 
+<!--
+Comme expliquer plutot, on veut conserver nos SBOM afin de
+
+Que se soit pour pouvoir les ré-évaluer périodiquement ou en lien avec un evenement (vulnérabilité médiatisée).
+-->
 
 ---
 
@@ -676,8 +743,10 @@ Où mettre tous ces SBOMs et comment les conserver ?
 
 Un **OWASP Flagship Project** peut se déploiement rapide via `Docker Compose` :
 
-<div class="grid grid-cols-2 gap-6 mt-4">
-<div class="text-sm mt-22">
+<div class="grid grid-cols-2 gap-6 mt-12">
+
+<v-click>
+<div class="text-sm self-center">
 
 - **Entrepôt SBOM**
 - **Tableau de bord**
@@ -687,10 +756,16 @@ Un **OWASP Flagship Project** peut se déploiement rapide via `Docker Compose` :
 - **Apache 2.0**
 
 </div>
-<div class="text-sm mt-4">
+
+</v-click>
+
+<v-click>
+<div class="text-sm">
 
 ```yaml
 ---
+# compose.yml
+# docker compose up
 services:
   dtrack:
     container_name: dependencytrack
@@ -709,7 +784,16 @@ services:
 ```
 
 </div>
+</v-click>
 </div>
+
+<!--
+Si vous souhaitez tester OWASP Dependency Track, il y a plusieurs options d'hébergemement (docker, k8s, helm).
+
+Pour le backend, il y a plusieurs options de base de donnée (postgres, mssql, etc...)
+
+C'est un service plutot simple à stand up qui peut aider à centraliser les différents processus autour des SBOMs.
+-->
 
 ---
 
@@ -717,46 +801,57 @@ services:
 
 Une petite démo sur l'utilisation de Dependency Track.
 
-<div class="mt-12">
-
-```bash
-dtrack-cli --server ${DEPENDENCYTRACK_SERVER} \
-  --api-key ${DEPENDENCYTRACK_TOKEN}  \
-  --project-name "A-demo-test" --project-version "0.0.1" \
-  --bom-path sbom.json --auto-create true
-```
-
-</div>
-
-<div class="grid grid-cols-2 gap-8 mt-12">
-<div>
-
-### Dashboard Portfolio
+<div class="grid grid-cols-2 gap-8 mt-8">
 
 <v-clicks>
+<div>
+
+### Portfolio
+
 
 - Vue global, par collection ou par projet
 - Infos des projets, composantes et, vulnérabilités
 - Tendances de score de risque
 - Analyse d'impact
 
-</v-clicks>
 
 </div>
+</v-clicks>
+<v-clicks>
 <div>
 
 ### Moteur de politiques
 
-<v-clicks>
 
 - **Sécurité** : CVE, CVSS, EPSS, etc ...
 - **Licences** : Strong Copyleft ou Risky License
 - **Opérationnel** : Sources fiables, EOL, MAJ, etc ...
 
-</v-clicks>
 
 </div>
+</v-clicks>
 </div>
+
+<v-clicks>
+<div class="mt-8">
+
+```bash
+dtrack-cli --server ${DEPENDENCYTRACK_URL} \
+  --api-key ${DEPENDENCYTRACK_TOKEN}  \
+  --project-name "A-demo-test" --project-version "0.0.1" \
+  --bom-path sbom.json --auto-create true
+```
+
+</div>
+</v-clicks>
+
+<!--
+https://dependencytrack.local.irishlab.io/
+
+Projet Dependency Check  12.2.0 comme exemple
+
+Montrer un exemple avec API
+-->
 
 ---
 layout: center
@@ -779,26 +874,21 @@ Détecter c'est bien; **corriger** c'est mieux.
 
 [**Insecure Bank Corporation**](https://github.com/irishlab-io/ibc) — une application Django volontairement vulnérable pour fins éducatives.
 
-<div class="mt-18">
-<div>
+<div class="mt-8">
 
 - Une web application **Django 4.2.4** en **Python 3.10**
 - Plusieurs dépendances vulnérables (PyYAML 5.3.1, etc.)
 - Image conteneur lourde `python:3.10.11-bullseye`
 
 </div>
-</div>
-
 
 <div class="mt-6">
-<div>
 
 ```bash
 zi ibc
 make talk
 ```
 
-</div>
 </div>
 
 <v-click>
@@ -817,40 +907,81 @@ Les dashboards clignotent en rouge — **quelqu'un** doit corriger toutes ces d�
 
 Au-delà de l'automatisation, quelques réflexions :
 
-<div class="grid grid-cols-2 gap-8 mt-4">
-<div>
+<div class="mt-10">
 
-### Investiguer l'origine
+<div v-click class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4 mb-3">
+  <div class="p-3 rounded-lg bg-red-500/10 border-l-3 border-red-400">
+    <div class="font-bold text-red-300">1. Bibliothèques vieillissantes</div>
+    <div class="text-xs opacity-60 mt-1">Dépendances Python obsolètes avec CVEs connues</div>
+  </div>
+  <div class="text-xl opacity-50">→</div>
+  <div class="p-3 rounded-lg bg-green-500/10 border-l-3 border-green-400">
+    <div class="font-bold text-green-300">1. <code>pyproject.toml</code> upgrade</div>
+    <div class="text-xs opacity-60 mt-1">Mettre à jour les dépendances directes</div>
+  </div>
+</div>
 
-1. Bibliothèques vieillissantes
-2. Image de base
-3. Dépendences de développement incluses
-4. Bibliothèques superflues
-5. Ce qui reste
+<div v-click class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4 mb-3">
+  <div class="p-3 rounded-lg bg-red-500/10 border-l-3 border-red-400">
+    <div class="font-bold text-red-300">2. Image <code>full</code></div>
+    <div class="text-xs opacity-60 mt-1">Embarque des centaines de paquets vulnérables et non nécessaire</div>
+  </div>
+  <div class="text-xl opacity-50">→</div>
+  <div class="p-3 rounded-lg bg-green-500/10 border-l-3 border-green-400">
+    <div class="font-bold text-green-300">2. Image <code>alpine</code></div>
+    <div class="text-xs opacity-60 mt-1">Image minimale, surface d'attaque réduite</div>
+  </div>
+</div>
 
+<div v-click class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4 mb-3">
+  <div class="p-3 rounded-lg bg-red-500/10 border-l-3 border-red-400">
+    <div class="font-bold text-red-300">3. Dépendances de dev incluses</div>
+    <div class="text-xs opacity-60 mt-1">Outils de test et debug embarqués en production</div>
+  </div>
+  <div class="text-xl opacity-50">→</div>
+  <div class="p-3 rounded-lg bg-green-500/10 border-l-3 border-green-400">
+    <div class="font-bold text-green-300">3. Bibliothèques superflues</div>
+    <div class="text-xs opacity-60 mt-1">Packages installés mais jamais utilisés</div>
+  </div>
+</div>
+
+<div v-click class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4 mb-3">
+  <div class="p-3 rounded-lg bg-red-500/10 border-l-3 border-red-400">
+    <div class="font-bold text-red-300">4. Imagie généraliste</div>
+    <div class="text-xs opacity-60 mt-1">DockerHub, Quay, GHCR, etc...</div>
+  </div>
+  <div class="text-xl opacity-50">→</div>
+  <div class="p-3 rounded-lg bg-green-500/10 border-l-3 border-green-400">
+    <div class="font-bold text-green-300">4. Zéro CVE Image</div>
+    <div class="text-xs opacity-60 mt-1">Docker Harden Image, Chainguard, Golden Image, etc...</div>
+  </div>
+</div>
+
+<div v-click class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4">
+  <div class="p-3 rounded-lg bg-red-500/10 border-l-3 border-red-400">
+    <div class="font-bold text-red-300">5. Ce qui reste</div>
+    <div class="text-xs opacity-60 mt-1">Vulnérabilités sans correctif disponible</div>
+  </div>
+  <div class="text-xl opacity-50">→</div>
+  <div class="p-3 rounded-lg bg-green-500/10 border-l-3 border-green-400">
+    <div class="font-bold text-green-300">5. Gestion de risque</div>
+    <div class="text-xs opacity-60 mt-1">Évaluer le risque et l'impact</div>
+  </div>
+</div>
 
 </div>
-<div>
 
-### Réduire la surface
-<v-clicks>
-
-1. `pyproject.toml` upgrade
-2. `alpine` image
-3. Docker Harden Image
-4. `Dokerfile` oupsie
-5. Ce qui reste
-
-</v-clicks>
-
-</div>
-</div>
+<!--
+Démo dans IBC sur comment évolue le niveau de risque d'un projet via D-Track.
+-->
 
 ---
 
 # Key Takeaways
 
-<div class="grid grid-cols-3 gap-4 mt-6">
+Les points essentiels à retenir.
+
+<div class="grid grid-cols-3 gap-4 mt-8">
 
 <div v-click class="p-4 rounded-lg bg-blue-500/10 border-l-3 border-blue-400">
   <div class="text-2xl mb-2">📦</div>
@@ -894,7 +1025,9 @@ Au-delà de l'automatisation, quelques réflexions :
 
 # Ressources
 
-<div class="grid grid-cols-2 gap-8 mt-4">
+Liens utiles pour aller plus loin.
+
+<div class="grid grid-cols-2 gap-8 mt-8">
 <div>
 
 ### Outils
