@@ -331,7 +331,7 @@ La compagnie [Anchore](https://anchore.com/) produit deux logiciels plutôt prat
 ```bash
 curl -sSfL https://get.anchore.io/syft \
   | sudo sh -s -- -b /usr/local/bin
-grype syft
+syft version
 ```
 
 </v-click>
