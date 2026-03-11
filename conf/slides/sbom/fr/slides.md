@@ -31,6 +31,8 @@ contextMenu: false
 </div>
 
 <!--
+TIMER !
+
 Bienvenue à la conférence OWASP Montréal
 
 Merci à Cybereco de nous prêter le local ainsi qu'à Samuel et Jonathan du chapitre OWASP Montréal pour l'organisation
@@ -624,7 +626,7 @@ Le logiciel **se dégrade avec le temps** — de nouvelles CVEs apparaissent con
 
 <v-click>
   <div class="text-sm opacity-50 flex flex-col items-center">
-    <span class="text-xs">3 mois</span>
+    <span class="text-xs">3 semaines</span>
   </div>
 
 </v-click>
@@ -640,7 +642,7 @@ Le logiciel **se dégrade avec le temps** — de nouvelles CVEs apparaissent con
 
 <v-click>
   <div class="text-sm opacity-50 flex flex-col items-center">
-    <span class="text-xs">6 mois</span>
+    <span class="text-xs">9 semaines</span>
   </div>
 
 </v-click>
@@ -656,7 +658,7 @@ Le logiciel **se dégrade avec le temps** — de nouvelles CVEs apparaissent con
 
 <v-click>
   <div class="text-sm opacity-50 flex flex-col items-center">
-    <span class="text-xs">12 mois</span>
+    <span class="text-xs">3 mois</span>
   </div>
 
 </v-click>
