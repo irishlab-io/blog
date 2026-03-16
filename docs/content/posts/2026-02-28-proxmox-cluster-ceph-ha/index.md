@@ -1,7 +1,7 @@
 ---
 title: "Building a Proxmox Cluster with Ceph Storage and High Availability"
 date: 2026-02-28
-draft: false
+draft: true
 description: "A step-by-step guide to setting up multiple Proxmox VE nodes, configuring Ceph distributed storage, clustering them together, and enabling high availability for your VMs"
 summary: "Learn how to build a production-grade homelab or small business cluster using Proxmox VE, Ceph storage, and high availability - with clear explanations of the concepts along the way"
 tags: ["proxmox", "ceph", "high-availability", "clustering", "homelab", "storage", "virtualization"]
