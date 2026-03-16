@@ -1,7 +1,7 @@
 ---
 title: "Renovate: The Dependency Update Bot You Didn't Know You Needed"
 date: 2026-02-28
-draft: false
+draft: true
 description: "A practical guide to Renovate, a powerful open-source alternative to Dependabot for automating dependency and configuration updates across any tech stack"
 summary: "Discover how Renovate goes beyond Dependabot with rich preset configurations, monorepo support, platform-agnostic design, and fine-grained update scheduling to keep your project dependencies fresh and secure"
 tags: ["security", "dependabot", "renovate", "devsecops", "ci-cd", "github", "dependency-management", "automation"]
