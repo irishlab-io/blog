@@ -39,19 +39,25 @@ repos:
         name: "general | check JSON files"
       - id: check-toml
         name: "general | check TOML files"
+      - id: check-xml
+        name: "general | check XML files"
+      - id: check-yaml
+        name: "general | check YAML files"
       - id: end-of-file-fixer
         name: "general | fix end of file"
+      - id: forbid-new-submodules
+        name: "git | forbid new submodules"
       - id: mixed-line-ending
         name: "general | fix line ending"
         args:
           - --fix=auto
-      - id: trailing-whitespace
-        name: "general | remove trailing whitespace"
       - id: pretty-format-json
         name: "general | prettify JSON files"
         args:
           - --autofix
           - --no-ensure-ascii
+      - id: trailing-whitespace
+        name: "general | remove trailing whitespace"
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.48.0
     hooks:
@@ -75,11 +81,15 @@ repos:
         args:
           - -c
           - .config/.yaml-lint.yml
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.11
+    hooks:
+      - id: actionlint
+        name: "gh-action | lint: run actionlint"
   - repo: local
     hooks:
       - id: pin-github-action
-        name: "security | gh-action: pinned sha"
-        verbose: true
+        name: "gh-action | lint: pinned sha"
         files: ^\.github/workflows/[^/]+\.ya?ml$
         entry: "pin-github-action ."
         args:
@@ -88,3 +98,5 @@ repos:
         language: node
         additional_dependencies:
           - pin-github-action@3.4.0
+        stages:
+          - manual
