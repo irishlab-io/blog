@@ -1,7 +1,7 @@
 ---
 title: "Setting Up Terraform on an Existing Proxmox Cluster"
 date: 2026-02-28
-draft: false
+draft: true
 description: "A step-by-step guide to configuring Terraform to manage virtual machines and resources on a Proxmox VE cluster that is already up and running"
 summary: "Learn how to connect Terraform to your existing Proxmox cluster: create API credentials, configure the provider, manage state, and provision your first VM with Infrastructure as Code"
 tags: ["terraform", "proxmox", "iac", "homelab", "infrastructure"]
