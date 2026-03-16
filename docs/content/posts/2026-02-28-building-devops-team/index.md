@@ -1,7 +1,7 @@
 ---
 title: "Building an Efficient DevOps Team"
 date: 2026-02-28
-draft: false
+draft: true
 description: "A practical guide to structuring a high-performing DevOps team, from defining vision and mission to establishing a clear team hierarchy and a well-scoped service offering"
 summary: "Learn how to build an efficient DevOps team by crafting a compelling vision and mission, defining a team hierarchy that scales, and designing a service offering that delivers real value to engineering teams"
 tags: ["devops", "team", "leadership", "culture", "platform-engineering", "devsecops"]
