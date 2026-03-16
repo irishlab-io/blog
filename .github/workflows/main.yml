@@ -28,7 +28,11 @@ jobs:
     secrets:
       GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
 
-  deploy:
+  hugo-deploy:
+    needs:
+      - pre-commit
+      - secret
+    name: Deploy to GitHub Pages
     uses: irishlab-io/.github/.github/workflows/reusable-hugo-ghpages.yml@main
     with:
       hugo-version: "latest"
@@ -36,3 +40,7 @@ jobs:
       publish-dir: "./docs/public"
       hugo-args: "--minify"
       submodules: "true"
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
