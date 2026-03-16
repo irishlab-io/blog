@@ -36,11 +36,7 @@ jobs:
     uses: irishlab-io/.github/.github/workflows/reusable-hugo-ghpages.yml@main
     with:
       hugo-dir: "./docs"
-      hugo-version: "latest"
-      hugo-extended: true
       publish-dir: "./docs/public"
-      hugo-args: "--minify"
-      submodules: "true"
     permissions:
       contents: read
       pages: write
