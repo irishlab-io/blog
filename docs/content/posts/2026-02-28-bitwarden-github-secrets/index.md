@@ -1,7 +1,7 @@
 ---
 title: "Centralized Secret Management with Bitwarden and GitHub"
 date: 2026-02-28
-draft: false
+draft: true
 description: "A practical guide to integrating Bitwarden Secrets Manager into a GitHub organization to load and sync secrets across all repositories or individual ones from a centralized vault"
 summary: "Learn how to use Bitwarden Secrets Manager as a single source of truth for GitHub Actions secrets, injecting them at runtime or syncing them across your entire organization with a simple workflow"
 tags: ["security", "devsecops", "github", "github-actions", "secrets", "bitwarden", "ci-cd"]
