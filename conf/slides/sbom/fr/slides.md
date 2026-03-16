@@ -31,6 +31,8 @@ contextMenu: false
 </div>
 
 <!--
+TIMER !
+
 Bienvenue à la conférence OWASP Montréal
 
 Merci à Cybereco de nous prêter le local ainsi qu'à Samuel et Jonathan du chapitre OWASP Montréal pour l'organisation
@@ -331,7 +333,7 @@ La compagnie [Anchore](https://anchore.com/) produit deux logiciels plutôt prat
 ```bash
 curl -sSfL https://get.anchore.io/syft \
   | sudo sh -s -- -b /usr/local/bin
-grype syft
+syft version
 ```
 
 </v-click>
@@ -624,7 +626,7 @@ Le logiciel **se dégrade avec le temps** — de nouvelles CVEs apparaissent con
 
 <v-click>
   <div class="text-sm opacity-50 flex flex-col items-center">
-    <span class="text-xs">3 mois</span>
+    <span class="text-xs">3 semaines</span>
   </div>
 
 </v-click>
@@ -640,7 +642,7 @@ Le logiciel **se dégrade avec le temps** — de nouvelles CVEs apparaissent con
 
 <v-click>
   <div class="text-sm opacity-50 flex flex-col items-center">
-    <span class="text-xs">6 mois</span>
+    <span class="text-xs">9 semaines</span>
   </div>
 
 </v-click>
@@ -656,7 +658,7 @@ Le logiciel **se dégrade avec le temps** — de nouvelles CVEs apparaissent con
 
 <v-click>
   <div class="text-sm opacity-50 flex flex-col items-center">
-    <span class="text-xs">12 mois</span>
+    <span class="text-xs">3 mois</span>
   </div>
 
 </v-click>
@@ -977,47 +979,136 @@ Démo dans IBC sur comment évolue le niveau de risque d'un projet via D-Track.
 
 ---
 
-# Key Takeaways
+# Automatisation les mises à jour
+
+Automatisez la création de PR pour garder vos dépendances à jour.
+
+<div class="grid grid-cols-2 gap-6 mt-8">
+
+<div v-click class="p-5 rounded-lg bg-blue-500/10 border-l-3 border-blue-400">
+  <div class="flex items-center gap-3 mb-2">
+    <img src="https://avatars.githubusercontent.com/u/27347476?s=200&v=4" class="w-10 h-10 rounded" alt="Dependabot" />
+    <div class="font-bold text-2xl text-blue-300">Dependabot</div>
+  </div>
+  <div class="text-xs opacity-50 mb-3">GitHub</div>
+  <ul class="text-sm opacity-75 space-y-1">
+    <li>Intégré nativement à GitHub</li>
+    <li>Supporte 15+ écosystèmes</li>
+    <li>Alertes de sécurité automatiques</li>
+    <li>Configuration simple via <code>.github/dependabot.yml</code></li>
+    <li>Groupement de PRs disponible</li>
+  </ul>
+</div>
+
+<div v-click class="p-5 rounded-lg bg-teal-500/10 border-l-3 border-teal-400">
+  <div class="flex items-center gap-3 mb-2">
+    <img src="https://avatars.githubusercontent.com/u/38656520?s=200&v=4" class="w-10 h-10 rounded" alt="Renovate" />
+    <div class="font-bold text-2xl text-teal-300">Renovate Bot</div>
+  </div>
+  <div class="text-xs opacity-50 mb-3">Mend.io</div>
+  <ul class="text-sm opacity-75 space-y-1">
+    <li>Multi-plateforme (GitHub, GitLab, Bitbucket, etc...)</li>
+    <li>Configuration très flexible et granulaire</li>
+    <li>Auto-merge avec règles personnalisées</li>
+    <li>Support des monorepos avancé</li>
+    <li>Dashboards et rapports détaillés</li>
+  </ul>
+</div>
+
+</div>
+
+<div v-click class="mt-6 p-4 rounded-lg bg-purple-500/10 border-l-3 border-purple-400">
+  <div class="font-bold text-purple-300 mb-2">D'autres outils</div>
+  <div class="grid grid-cols-4 gap-2 text-sm opacity-75">
+    <span>• Black Duck</span>
+    <span>• Checkmarx</span>
+    <span>• Cycode</span>
+    <span>• FOSSA</span>
+    <span>• Semgrep</span>
+    <span>• Snyk</span>
+    <span>• Trivy</span>
+    <span>• WizCode</span>
+  </div>
+</div>
+
+<!--
+Dependabot est la solution native de GitHub, très simple à configurer.
+Renovate offre plus de flexibilité et fonctionne sur plusieurs plateformes.
+Les deux peuvent créer automatiquement des PRs de mise à jour de dépendances.
+-->
+
+---
+
+# <code>tl;dr</code>
 
 Les points essentiels à retenir.
 
 <div class="grid grid-cols-3 gap-4 mt-8">
 
 <div v-click class="p-4 rounded-lg bg-blue-500/10 border-l-3 border-blue-400">
-  <div class="text-2xl mb-2">📦</div>
   <div class="font-bold text-blue-300 mb-1">Générez des SBOMs</div>
   <div class="text-sm opacity-75">Intégrez <strong>Syft</strong> dans votre CI — chaque build produit son inventaire</div>
 </div>
 
 <div v-click class="p-4 rounded-lg bg-red-500/10 border-l-3 border-red-400">
-  <div class="text-2xl mb-2">🔍</div>
   <div class="font-bold text-red-300 mb-1">Scannez tôt, scannez souvent</div>
   <div class="text-sm opacity-75"><strong>Grype</strong> bloque les CVEs critiques avant qu'elles n'atteignent la production</div>
 </div>
 
 <div v-click class="p-4 rounded-lg bg-green-500/10 border-l-3 border-green-400">
-  <div class="text-2xl mb-2">🏗️</div>
   <div class="font-bold text-green-300 mb-1">Monitoring continu</div>
   <div class="text-sm opacity-75"><strong>Dependency-Track</strong> surveille vos SBOMs 24/7 — pas juste au build</div>
 </div>
 
 <div v-click class="p-4 rounded-lg bg-orange-500/10 border-l-3 border-orange-400">
-  <div class="text-2xl mb-2">🔔</div>
   <div class="font-bold text-orange-300 mb-1">Politiques & alertes</div>
   <div class="text-sm opacity-75">Définissez vos seuils de tolérance — le pipeline décide, pas l'humain</div>
 </div>
 
 <div v-click class="p-4 rounded-lg bg-purple-500/10 border-l-3 border-purple-400">
-  <div class="text-2xl mb-2">🤖</div>
   <div class="font-bold text-purple-300 mb-1">Automatisez la correction</div>
-  <div class="text-sm opacity-75"><strong>Dependabot</strong> + auto-merge = moins de friction, plus de vélocité</div>
+  <div class="text-sm opacity-75">Avec des outils ou structurer des playbooks pour vos équipes internes</div>
 </div>
 
 <div v-click class="p-4 rounded-lg bg-teal-500/10 border-l-3 border-teal-400">
-  <div class="text-2xl mb-2">🔄</div>
   <div class="font-bold text-teal-300 mb-1">Bouclez la boucle</div>
   <div class="text-sm opacity-75"><strong>Détecter → Suivre → Corriger</strong> — la sécurité est un cycle, pas un événement</div>
 </div>
+
+</div>
+
+---
+layout: center
+class: text-center
+---
+
+# Merci !
+
+<div class="mt-8 grid grid-cols-2 gap-8">
+
+<div>
+  <carbon:logo-github class="text-4xl mb-2" />
+  <div class="text-sm">
+
+[irishlab-io](https://github.com/irishlab-io/)
+
+  </div>
+</div>
+
+<div>
+  <carbon:logo-linkedin class="text-4xl mb-2" />
+  <div class="text-sm">
+
+[simon-harvey](https://www.linkedin.com/in/simon-harvey-a0305029/)
+
+  </div>
+</div>
+
+</div>
+
+<div class="mt-12 text-2xl">
+
+**Questions ?**
 
 </div>
 
@@ -1052,41 +1143,8 @@ Liens utiles pour aller plus loin.
 
 ### Blog & Code
 
-🌐 [irishlab.io](https://irishlab.io) · <carbon:logo-github /> [irishlab-io/blog](https://github.com/irishlab-io/blog)
-
+<div class="flex justify-center items-center gap-2">
+  🌐 <a href="https://irishlab.io">irishlab.io</a> · <carbon:logo-github /> <a href="https://github.com/irishlab-io/blog">irishlab-io/blog</a>
 </div>
-
----
-layout: center
-class: text-center
----
-
-# Merci !
-
-<div class="mt-8 grid grid-cols-2 gap-8">
-
-<div>
-  <carbon:logo-github class="text-4xl mb-2" />
-  <div class="text-sm">
-
-[irishlab-io/pyquiz](https://github.com/irishlab-io/)
-
-  </div>
-</div>
-
-<div>
-  <carbon:logo-linkedin class="text-4xl mb-2" />
-  <div class="text-sm">
-
-[simon-harvey](https://www.linkedin.com/in/simon-harvey-a0305029/)
-
-  </div>
-</div>
-
-</div>
-
-<div class="mt-12 text-2xl">
-
-**Questions ?**
 
 </div>

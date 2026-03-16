@@ -1,105 +1,55 @@
 ---
 name: CI - Cron
+run-name: Continuous Integration on ${{ github.head_ref || github.ref_name }} by ${{ github.actor }}
 
 on: # yamllint disable-line rule:truthy
   schedule:
-    - cron: "22 22 * * *"
+    - cron: '32 6 * * *' # set random cron
+  workflow_dispatch:
 
 concurrency:
-  group: ${{ github.ref }}-${{ github.workflow }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
 jobs:
 
+  gh-pin-actions:
+    name: Call GH Pin Actions
+    permissions:
+      contents: read
+    uses: irishlab-io/.github/.github/workflows/reusable-gh-pin-actions.yml@main
+    with:
+      allowlist: "${{ github.repository_owner }}/"
+
   pre-commit:
-    name: Pre-Commit
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-      - name: Run Pre-Commit Checks
-        uses: j178/prek-action@0bb87d7f00b0c99306c8bcb8b8beba1eb581c037 # v1.1.1
-        env:
-          SKIP: "ggshield,pin-github-action"
+    name: Call Prek
+    uses: irishlab-io/.github/.github/workflows/reusable-prek.yml@main
+    with:
+      skips: "actionlint,ggshield,pin-github-action"
 
   secret:
     needs:
+      - gh-pin-actions
       - pre-commit
-    name: Secret Scanning
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    name: Call Git Guardian
+    uses: irishlab-io/.github/.github/workflows/reusable-gitguardian.yml@main
+    secrets:
+      GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-      - name: GitGuardian scan
-        id: ggshield_scan
-        uses: GitGuardian/ggshield/actions/secret@ca3f7d65b17b7c3dcbec98b870299754adf7ff0e # v1.48.0
-        env:
-          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
-          GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
-          GITHUB_PULL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
-
-  build-deploy:
+  hugo-deploy:
     needs:
       - pre-commit
       - secret
-    name: GH Pages Build and Deploy
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
-
-    env:
-      HUGO_CACHEDIR: /tmp/hugo_cache
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
+    name: Call Deploy to GitHub Pages
+    uses: irishlab-io/.github/.github/workflows/reusable-hugo-ghpages.yml@main
+    with:
+      hugo-dir: "./docs"
+      hugo-version: "latest"
+      hugo-extended: true
+      publish-dir: "./docs/public"
+      hugo-args: "--minify"
+      submodules: "true"
     permissions:
       contents: read
       pages: write
       id-token: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          submodules: true
-          fetch-depth: 0
-
-      - name: Setup Hugo
-        id: setup
-        uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3.0.0
-        with:
-          hugo-version: "latest"
-          extended: true
-
-      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        with:
-          path: ${{ env.HUGO_CACHEDIR }} # <- Use the same env variable just right here
-          key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-hugomod-
-
-      - name: Build
-        id: build
-        run: |
-          cd docs/
-          hugo --minify
-        shell: bash
-
-      - name: Upload artifact
-        id: upload
-        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
-        with:
-          path: ./docs/public
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
