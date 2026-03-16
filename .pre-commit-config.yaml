@@ -68,7 +68,6 @@ repos:
           - .config/.markdown-lint.yml
         exclude: |
           (?x)
-          ^.github/instructions/.*|
           conf/slides/.*|
           ^CHANGELOG.md|
           ^docs/legacy.*||
