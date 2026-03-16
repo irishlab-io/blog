@@ -32,9 +32,10 @@ jobs:
     needs:
       - pre-commit
       - secret
-    name: Deploy to GitHub Pages
+    name: Call Deploy to GitHub Pages
     uses: irishlab-io/.github/.github/workflows/reusable-hugo-ghpages.yml@main
     with:
+      hugo-dir: "./docs"
       hugo-version: "latest"
       hugo-extended: true
       publish-dir: "./docs/public"

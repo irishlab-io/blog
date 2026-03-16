@@ -29,17 +29,27 @@ jobs:
 
   secret:
     needs:
+      - gh-pin-actions
       - pre-commit
     name: Call Git Guardian
     uses: irishlab-io/.github/.github/workflows/reusable-gitguardian.yml@main
     secrets:
       GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
 
-  deploy:
+  hugo-deploy:
+    needs:
+      - pre-commit
+      - secret
+    name: Call Deploy to GitHub Pages
     uses: irishlab-io/.github/.github/workflows/reusable-hugo-ghpages.yml@main
     with:
+      hugo-dir: "./docs"
       hugo-version: "latest"
       hugo-extended: true
       publish-dir: "./docs/public"
       hugo-args: "--minify"
       submodules: "true"
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
