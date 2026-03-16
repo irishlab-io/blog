@@ -1,7 +1,7 @@
 ---
 title: "Deploying a Talos Linux Kubernetes Cluster with a Shared Control-Plane VIP"
 date: 2026-03-16
-draft: false
+draft: true
 description: "Step-by-step guide to building a small Talos Linux cluster with 3 control-plane nodes, a shared API VIP, and 1 worker node"
 summary: "Build a practical Talos Linux 1.12 cluster with a highly available control plane, a shared VIP, static node networking, and a simple post-bootstrap CNI install"
 tags: ["talos", "kubernetes", "homelab", "sidero", "infrastructure", "cluster"]
