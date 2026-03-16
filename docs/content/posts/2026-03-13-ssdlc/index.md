@@ -1,7 +1,7 @@
 ---
 title: "Secure Software Development Lifecycle: From Theory to Practice"
 date: 2026-03-13
-draft: false
+draft: true
 description: "A practical guide to understanding the Secure Software Development Lifecycle (SSDLC) and how to embed security at every phase of software delivery in your organization"
 summary: "Security can't be an afterthought bolted on at the end of a release cycle. The Secure Software Development Lifecycle (SSDLC) is the framework that embeds security thinking, tooling, and accountability into every phase of software delivery — from requirements through retirement."
 tags: ["security", "devsecops", "ssdlc", "sdlc", "appsec", "development-workflow", "organization"]
