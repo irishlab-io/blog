@@ -1,7 +1,7 @@
 ---
 title: "Proxmox Backup Server: Installation, Configuration, and Best Practices"
 date: 2026-03-17
-draft: false
+draft: true
 description: "A comprehensive guide to installing Proxmox Backup Server, configuring datastores, managing users and permissions, setting up networking with VLANs, and applying production best practices for a secure and reliable backup infrastructure"
 summary: "Learn how to deploy Proxmox Backup Server from scratch, set up dedicated backup storage, enforce least-privilege access control, isolate backup traffic with VLANs, and apply the hardening and monitoring practices that make backups trustworthy in a homelab or small business environment."
 tags: ["proxmox", "backup", "homelab", "infrastructure", "storage", "networking", "vlan", "security", "best-practices"]

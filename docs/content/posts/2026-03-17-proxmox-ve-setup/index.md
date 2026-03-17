@@ -1,7 +1,7 @@
 ---
 title: "Proxmox VE: Installation, Best Practices, Clustering, and High Availability"
 date: 2026-03-17
-draft: false
+draft: true
 description: "A comprehensive guide to installing Proxmox Virtual Environment on bare-metal nodes, applying security and networking best practices, building a cluster, and enabling high availability"
 summary: "From bare-metal to production-grade virtualisation: this guide walks through Proxmox VE installation, user and account management, VLAN networking, cluster formation, HA configuration, and the operational recommendations that separate a hobbyist setup from a resilient homelab or small-business infrastructure."
 tags: ["proxmox", "homelab", "virtualization", "clustering", "high-availability", "networking", "vlan", "security", "linux", "infrastructure"]
