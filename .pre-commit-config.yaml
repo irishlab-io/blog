@@ -59,7 +59,7 @@ repos:
       - id: trailing-whitespace
         name: "general | remove trailing whitespace"
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.48.0
+    rev: v0.49.0
     hooks:
       - id: markdownlint
         name: "md | lint: run markdownlint-cli"
