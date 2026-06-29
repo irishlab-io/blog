@@ -331,7 +331,7 @@ For most of you, the CycloneDX format is the most practical but depending on the
 ```bash
 curl -sSfL https://get.anchore.io/syft \
   | sudo sh -s -- -b /usr/local/bin
-grype syft
+syft version
 ```
 
 </v-click>
