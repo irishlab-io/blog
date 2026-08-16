@@ -1,5 +1,14 @@
 # Mythos / Project Glasswing — Talk Outline
 
+Rebuild your DevSecOps strategy in the era of AI
+
+Early April 2026, an AI model was "too dangerous to release to the public". Not GPT-2 — also once called too dangerous. This time it's Anthropic's Claude Mythos. And yet, just few months later, it's being rolled out to everyone.
+
+So which is it — too dangerous, or not? In the era of frontier AI model whom claim can surpasses all but the most skilled humans at finding and exploiting software vulnerabilities how to rebuild your DevSecOps strategy.
+
+In this session, we will go over the risk generated from this new threat and how to prepare an organization for it.
+
+
 ## 1. Hook
 
 About two months ago, an AI model was "too dangerous to release to the public". Not GPT-2 — also once called too dangerous. This time it's Anthropic's Claude **Mythos**. And yet, just two months later, it's being rolled out to everyone.
