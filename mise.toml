@@ -1,0 +1,6 @@
+# Tool versions for local development and CI (jdx/mise-action).
+# Single source of truth: bump versions here, not in workflows.
+[tools]
+hugo-extended = "0.167.0"
+node = "26.13.0"
+pnpm = "10.34.9"
