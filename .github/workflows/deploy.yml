@@ -1,0 +1,107 @@
+---
+name: CI - Deploy
+run-name: Deploy ${{ github.ref_name }} to GitHub Pages by ${{ github.actor }}
+
+on: # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+  workflow_dispatch:
+
+permissions: {}
+
+# One deployment at a time; never cancel a deployment that is already running.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+
+  prek:
+    name: Prek
+    permissions:
+      contents: read
+    uses: irishlab-io/.github/.github/workflows/reusable-prek.yml@main
+    with:
+      skips: "ggshield"
+
+  gitguardian:
+    name: GitGuardian
+    permissions:
+      contents: read
+    uses: irishlab-io/.github/.github/workflows/reusable-gitguardian.yml@main
+    secrets:
+      GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+
+  # Each build-* job uploads an artifact named site-<part>, laid out relative to
+  # the site root (e.g. a Slidev build would contain conf/...). To add a part,
+  # add a build-<part> job and list it under package.needs.
+  build-hugo:
+    name: Build Hugo site
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+
+      - name: Install tools from mise.toml
+        uses: jdx/mise-action@6612f0ef07ed2a736cd1e00a94a065522dd41195 # v5.2.5
+        with:
+          install_args: hugo-extended
+
+      - name: Build Hugo site
+        run: hugo --source docs --minify --destination "${RUNNER_TEMP}/site"
+
+      - name: Upload site artifact
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: site-hugo
+          path: ${{ runner.temp }}/site
+          if-no-files-found: error
+          retention-days: 1
+
+  package:
+    name: Package Pages artifact
+    needs:
+      - build-hugo
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions: {}
+    steps:
+      - name: Download site artifacts
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: site-*
+          merge-multiple: true
+          path: ${{ runner.temp }}/site
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: ${{ runner.temp }}/site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs:
+      - prek
+      - gitguardian
+      - package
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
