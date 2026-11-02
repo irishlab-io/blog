@@ -1,55 +1,106 @@
 ---
-name: CI - Cron
-run-name: Continuous Integration on ${{ github.head_ref || github.ref_name }} by ${{ github.actor }}
+name: CI - Weekly Audit
+run-name: Weekly audit of ${{ github.ref_name }} by ${{ github.actor }}
 
+# Audit only: nothing is deployed from here (deploys run from deploy.yml).
 on: # yamllint disable-line rule:truthy
   schedule:
-    - cron: '32 6 * * *' # set random cron
+    - cron: '32 6 * * 1' # Mondays 06:32 UTC
   workflow_dispatch:
 
+permissions: {}
+
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
 
-  gh-pin-actions:
-    name: Call GH Pin Actions
+  pin-actions:
+    name: Pinned actions
     permissions:
       contents: read
     uses: irishlab-io/.github/.github/workflows/reusable-gh-pin-actions.yml@main
     with:
-      allowlist: "${{ github.repository_owner }}/"
+      allowlist: "irishlab-io/"
 
-  pre-commit:
-    name: Call Prek
-    uses: irishlab-io/.github/.github/workflows/reusable-prek.yml@main
-    with:
-      skips: "actionlint,ggshield,pin-github-action"
-
-  secret:
-    needs:
-      - gh-pin-actions
-      - pre-commit
-    name: Call Git Guardian
+  gitguardian:
+    name: GitGuardian
+    permissions:
+      contents: read
     uses: irishlab-io/.github/.github/workflows/reusable-gitguardian.yml@main
     secrets:
       GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
 
-  hugo-deploy:
-    needs:
-      - pre-commit
-      - secret
-    name: Call Deploy to GitHub Pages
-    uses: irishlab-io/.github/.github/workflows/reusable-hugo-ghpages.yml@main
-    with:
-      hugo-dir: "./docs"
-      hugo-version: "latest"
-      hugo-extended: true
-      publish-dir: "./docs/public"
-      hugo-args: "--minify"
-      submodules: "true"
+  prek:
+    name: Prek
     permissions:
       contents: read
-      pages: write
-      id-token: write
+    uses: irishlab-io/.github/.github/workflows/reusable-prek.yml@main
+    with:
+      skips: "ggshield"
+
+  links:
+    name: Build and check links
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    env:
+      SITE_DIR: ${{ github.workspace }}/_site
+      # Absolute links to the site itself are checked against the build output.
+      LYCHEE_COMMON: >-
+        --no-progress
+        --root-dir '${{ github.workspace }}/_site'
+        --index-files index.html
+        --remap '^https?://(www\.)?irishlab\.io/ file://${{ github.workspace }}/_site/'
+        --exclude 'website_qr\.png$'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+
+      - name: Install tools from mise.toml
+        uses: jdx/mise-action@6612f0ef07ed2a736cd1e00a94a065522dd41195 # v5.2.5
+        with:
+          install_args: hugo-extended
+
+      - name: Build Hugo site
+        run: hugo --source docs --minify --destination "${SITE_DIR}"
+
+      # Blocking: every link inside the site must resolve to a built file.
+      # website_qr.png is excluded because the logo is configured as
+      # "../assets/img/website_qr.png" (rendered "/../assets/..."), which
+      # browsers normalise but lychee does not; drop the exclude once the
+      # logo path in docs/config is fixed.
+      - name: Check internal links
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          args: >-
+            ${{ env.LYCHEE_COMMON }}
+            --offline
+            '${{ env.SITE_DIR }}/**/*.html'
+          output: lychee/internal.md
+
+      # Non-blocking: third-party sites rate-limit, block bots and go down,
+      # so failures are reported in the job summary and as a warning only.
+      - name: Check external links
+        id: external
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          args: >-
+            ${{ env.LYCHEE_COMMON }}
+            --accept '200..=299,429'
+            --max-retries 3
+            --retry-wait-time 5
+            --timeout 30
+            --max-concurrency 16
+            '${{ env.SITE_DIR }}/**/*.html'
+          output: lychee/external.md
+          fail: false
+
+      - name: Warn on broken external links
+        if: steps.external.outputs.exit_code != '0'
+        run: echo "::warning title=External links::lychee found broken external links; see the job summary."
