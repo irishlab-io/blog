@@ -2,29 +2,62 @@
 name: CI - Pull Request
 run-name: Continuous Integration for PR-${{ github.event.pull_request.number }} by ${{ github.actor }}
 
+# No paths-ignore: these jobs are meant to be required checks, and a skipped
+# workflow would leave required checks pending forever.
 on: # yamllint disable-line rule:truthy
   pull_request:
     branches:
       - main
-    paths-ignore:
-      - 'README.md'
+
+permissions: {}
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 jobs:
 
-  pre-commit:
-    name: Call Prek
+  prek:
+    name: Prek
+    permissions:
+      contents: read
     uses: irishlab-io/.github/.github/workflows/reusable-prek.yml@main
     with:
-      skips: "actionlint,ggshield,pin-github-action"
+      skips: "ggshield"
 
-  secret:
-    needs:
-      - pre-commit
-    name: Call Git Guardian
+  gitguardian:
+    name: GitGuardian
+    permissions:
+      contents: read
     uses: irishlab-io/.github/.github/workflows/reusable-gitguardian.yml@main
     secrets:
       GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+
+  pin-actions:
+    name: Pinned actions
+    permissions:
+      contents: read
+    uses: irishlab-io/.github/.github/workflows/reusable-gh-pin-actions.yml@main
+    with:
+      allowlist: "irishlab-io/"
+
+  build-hugo:
+    name: Build Hugo site
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+
+      - name: Install tools from mise.toml
+        uses: jdx/mise-action@6612f0ef07ed2a736cd1e00a94a065522dd41195 # v5.2.5
+        with:
+          install_args: hugo-extended
+
+      - name: Build Hugo site
+        run: hugo --source docs --minify --destination "${RUNNER_TEMP}/site"
